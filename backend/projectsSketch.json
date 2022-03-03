@@ -1,0 +1,49 @@
+{
+    "data": [
+        {
+            "_id": num,
+            "title": "", //title of project
+            "deadline": "",
+            "description": "", //Short description of the project
+            "tags": [
+                {
+                    "title": "",
+                    "color": ""
+                }
+            ],
+            "labels": [
+                {
+                    "title": "",
+                    "color": ""
+                }
+            ],
+            "columns": [
+                {
+                    "title": "",
+                    "tasks": [
+                        {
+                            "title": "",
+                            "description": "",
+                            "deadline": "",
+                            "labels": [
+                                {
+                                    "title": "",
+                                    "color": ""
+                                }
+                            ],
+                            "Status": "",
+                            "assigned": [
+                                {
+                                    "_id": num,
+                                    "name": "",
+                                    "role": "",
+                                    "initials": ""
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

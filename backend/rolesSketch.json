@@ -1,0 +1,10 @@
+{
+    "data":[
+        {
+            "_id": num,
+            "title": "", //Title of the role
+            "color": "", //color of the role 
+            "__v": 0 //Version from mongoose
+        }
+    ]
+}

@@ -1,0 +1,21 @@
+{
+    "data": [
+        {
+            "_id": num, //Id of user
+            "name": "", //Full name of the user
+            "roles": [
+                {
+                    "roleName": "",
+                    "roleId":num
+                }
+            ], //All the roles of the user their main role is the first in the array
+            "email": "", //email of user is used to login
+            "password": "", //Hashed password for login
+            "avatar": "", //Link to image
+            "created_at": "", //Date and time for when the user was created
+            "last_updated_at": "", //Date and time for when the user was updated last
+            "initials":"", //Initials used to display on tasks
+            "__v": "" //Version nr created by mongoose
+        }
+    ]
+}
