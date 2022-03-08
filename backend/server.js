@@ -17,8 +17,9 @@ const projectTemplatesRoute = require("./routes/projectTemplates");
 // middleware defitions 
 
 // Handle CORS errors
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET, HEAD, OPTIONS, POST, PUT, DELETE"); //allowed methods
   res.header("Access-Control-Allow-Headers", "auth-token, Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
@@ -27,9 +28,12 @@ app.use(function(req, res, next) {
 app.use(express.json());
 
 //connect to the MongoDB using Mongoose ODM 
-mongoose.connect (
-  process.env.DBHOST,  { useUnifiedTopology: true, useNewUrlParser: true } 
-).catch(error => console.log("Error connecting to MongoDB: " + error));
+mongoose.connect(
+  process.env.DBHOST, { useUnifiedTopology: true, useNewUrlParser: true
+  }.then(() => {
+    console.log("Connected to the DB");
+  })
+  ).catch(error => console.log("Error connecting to MongoDB: " + error));
 
 mongoose.connection.once('open', () => console.log('Connected succesfully to MongoDB'));
 
@@ -43,9 +47,9 @@ app.use("/api/project-templates", projectTemplatesRoute); //authentication route
 
 
 //start up server 
-const PORT = process.env.PORT || 4000; 
-app.listen(PORT, function () { 
-  console.log("Server is running on port:  " + PORT); 
+const PORT = process.env.PORT || 4000;
+app.listen(PORT, function () {
+  console.log("Server is running on port:  " + PORT);
 });
 
 module.exports = app; //export app for testing

@@ -41,6 +41,7 @@ build/Release
 node_modules/
 jspm_packages/
 
+
 # TypeScript v1 declaration files
 typings/
 
@@ -106,3 +107,6 @@ dist
 .tern-port
 
 .env
+
+# all package-lock.json
+.package-lock.json
