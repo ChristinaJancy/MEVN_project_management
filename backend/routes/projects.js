@@ -5,9 +5,9 @@ const { verifyToken } = require("../validation")
 module.exports = router;
 
 
-router.post("/", verifyToken, (req, res) => {
-    data = req.body;
-    game.insertMany(data)
-        .then(data => { res.send(data); })
+router.get("/", verifyToken, (req, res) => {
+    schema.find()
+        .then(data => { res.send(mapArr(data)); })
         .catch(err => { res.status(500).send({ message: err.message }) })
+
 });
