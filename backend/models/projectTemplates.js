@@ -8,4 +8,4 @@ let objectSchema = new schema({
     name: {type: String}
 });
 
-module.exports = mongoose.model("schema", objectSchema);
+module.exports = mongoose.model("projectTemplate", objectSchema);
