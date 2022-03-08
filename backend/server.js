@@ -30,9 +30,7 @@ app.use(express.json());
 //connect to the MongoDB using Mongoose ODM 
 mongoose.connect(
   process.env.DBHOST, { useUnifiedTopology: true, useNewUrlParser: true
-  }.then(() => {
-    console.log("Connected to the DB");
-  })
+  }
   ).catch(error => console.log("Error connecting to MongoDB: " + error));
 
 mongoose.connection.once('open', () => console.log('Connected succesfully to MongoDB'));
