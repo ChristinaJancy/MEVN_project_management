@@ -7,14 +7,14 @@ const app = express();
 require('dotenv-flow').config();
 
 //import routes and validation
-const authRoutes = require("./routes/auth");
+const usersRoute = require("./routes/users");
+const rolesRoute = require("./routes/roles");
+const projectsRoute = require("./routes/projects");
+const projectTagsRoute = require("./routes/projectTags");
+const projectTemplatesRoute = require("./routes/projectTemplates");
+
 
 // middleware defitions 
-// parse requests of content-type - application/json 
-app.use(bodyParser.json());
-
-// parse requests of content-type - application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: true }));
 
 // Handle CORS errors
 app.use(function(req, res, next) {
@@ -23,6 +23,8 @@ app.use(function(req, res, next) {
   next();
 });
 
+//parse request of content type JSO
+app.use(express.json());
 
 //connect to the MongoDB using Mongoose ODM 
 mongoose.connect (
@@ -32,13 +34,13 @@ mongoose.connect (
 mongoose.connection.once('open', () => console.log('Connected succesfully to MongoDB'));
 
 //routes definition 
-//Welcome route 
-app.get("/api/welcome", (req,res) => { 
-  res.status(200).send({message: "Welcome to the MEN-REST-API"});
-}); 
-
 // authentication routes to secure the API endpoints 
-app.use("/api/user", authRoutes); //authentication routes (register, login)
+app.use("/api/users", usersRoute); //authentication routes (register, login)
+app.use("/api/roles", rolesRoute); //authentication routes (register, login)
+app.use("/api/projects", projectsRoute); //authentication routes (register, login)
+app.use("/api/project-tags", projectTagsRoute); //authentication routes (register, login)
+app.use("/api/project-templates", projectTemplatesRoute); //authentication routes (register, login)
+
 
 //start up server 
 const PORT = process.env.PORT || 4000; 
