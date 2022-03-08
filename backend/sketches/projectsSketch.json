@@ -1,7 +1,7 @@
 {
     "data": [
         {
-            "_id": num,
+            "_id": Num,
             "title": "", //title of project
             "deadline": "",
             "description": "", //Short description of the project
@@ -31,7 +31,7 @@
                                     "color": ""
                                 }
                             ],
-                            "Status": "",
+                            "status": "",
                             "assigned": [
                                 {
                                     "_id": num,
