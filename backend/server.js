@@ -37,11 +37,11 @@ mongoose.connection.once('open', () => console.log('Connected succesfully to Mon
 
 //routes definition 
 // authentication routes to secure the API endpoints 
-app.use("/api/users", usersRoute); //authentication routes (register, login)
-app.use("/api/roles", rolesRoute); //authentication routes (register, login)
-app.use("/api/projects", projectsRoute); //authentication routes (register, login)
-app.use("/api/project-tags", projectTagsRoute); //authentication routes (register, login)
-app.use("/api/project-templates", projectTemplatesRoute); //authentication routes (register, login)
+app.use("/api/users", usersRoute);
+app.use("/api/roles", rolesRoute); 
+app.use("/api/projects", projectsRoute); 
+app.use("/api/project-tags", projectTagsRoute); 
+app.use("/api/project-templates", projectTemplatesRoute); 
 
 
 //start up server 
@@ -50,4 +50,4 @@ app.listen(PORT, function () {
   console.log("Server is running on port:  " + PORT);
 });
 
-module.exports = app; //export app for testing
+module.exports = app;
