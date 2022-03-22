@@ -4,8 +4,6 @@ const router = require('express').Router();
 const User = require('../models/users');
 const { registerValidation, loginValidation, verifyToken } = require('../validation');
 
-
-
 router.post("/register", async (req, res) => {
 
     //validate user inputs (name, email, password)
@@ -26,7 +24,7 @@ router.post("/register", async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const password = await bcrypt.hash(req.body.password, salt);
 
-    //create user o bject and save it in Mongo (via try-catch)
+    //create user object and save it in Mongo (via try-catch)
     const user = new User({
         name: req.body.name,
         email: req.body.email,
@@ -68,8 +66,7 @@ router.post("/login", async (req, res) => {
     }
 
     //create authentication token with username and id
-    const token = jwt.sign
-        (
+    const token = jwt.sign(
             //payload data
             {
                 name: user.name,
