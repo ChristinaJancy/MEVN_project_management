@@ -19,7 +19,7 @@ router.get("/:id", verifyToken, (req, res) => {
 
 router.post("/", verifyToken, async (req,res) => {
     const tag = new schema({
-        title: req.body.title,
+        name: req.body.name,
         color: req.body.color
     })
     try { 
