@@ -39,7 +39,7 @@
               name="email"
               type="email"
               autocomplete="email"
-              required=""
+              required="true"
               class="
                 appearance-none
                 rounded-none
@@ -68,7 +68,7 @@
               name="password"
               type="password"
               autocomplete="current-password"
-              required=""
+              required="true"
               class="
                 appearance-none
                 rounded-none
