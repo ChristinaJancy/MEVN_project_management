@@ -35,9 +35,8 @@ router.post("/register", async (req, res) => {
         avatarPicture: req.body.avatarPicture,
         initials: initials,
         roles: req.body.roles
-       
     });
- //     try to save user in database (via try-catch)
+    //try to save user in database (via try-catch)
     try { 
         const savedUser = await user.save(); //save user
         res.json({ message: "New user created.😊", newUser : savedUser});
