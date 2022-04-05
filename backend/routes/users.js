@@ -24,11 +24,18 @@ router.post("/register", async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const password = await bcrypt.hash(req.body.password, salt);
 
+    //generate initials
+    const initials = req.body.name.split(' ').map(name => name[0]).join('');
+    
     //create user object and save it in Mongo (via try-catch)
     const user = new User({
         name: req.body.name,
         email: req.body.email,
-        password
+        password: password,
+        avatarPicture: req.body.avatarPicture,
+        initials: initials,
+        roles: req.body.roles
+       
     });
  //     try to save user in database (via try-catch)
     try { 
@@ -89,3 +96,4 @@ router.get("/", verifyToken, (req, res) => {
 });
 
 module.exports = router;
+
