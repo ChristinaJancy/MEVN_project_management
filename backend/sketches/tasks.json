@@ -1,0 +1,20 @@
+{
+    "data": [
+        {
+            "title": "",
+            "description": "",
+            "deadline": "",
+            "tags": [
+                {
+                    "ref": "id"
+                }
+            ],
+            "status": "",
+            "assigned": [
+                {
+                    "ref": "id"
+                }
+            ]
+        }
+    ]
+}

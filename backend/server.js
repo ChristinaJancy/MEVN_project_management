@@ -10,6 +10,7 @@ require('dotenv-flow').config();
 const usersRoute = require("./routes/users");
 const rolesRoute = require("./routes/roles");
 const projectsRoute = require("./routes/projects");
+const tasksRoute = require("./routes/tasks");
 const projectTagsRoute = require("./routes/projectTags");
 const projectTemplatesRoute = require("./routes/projectTemplates");
 
@@ -40,6 +41,7 @@ mongoose.connection.once('open', () => console.log('Connected succesfully to Mon
 app.use("/api/users", usersRoute);
 app.use("/api/roles", rolesRoute); 
 app.use("/api/projects", projectsRoute); 
+app.use("/api/tasks", tasksRoute);
 app.use("/api/project-tags", projectTagsRoute); 
 app.use("/api/project-templates", projectTemplatesRoute); 
 
