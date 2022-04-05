@@ -1,3 +1,7 @@
+// Tailwind font family used in their UI examples 
+//https://tailwindui.com/documentation#optional-add-the-inter-font-family
+const defaultTheme = require('tailwindcss/defaultTheme')
+
 module.exports = {
   content: [
     "./src/index.html",
@@ -350,22 +354,8 @@ module.exports = {
       DEFAULT: '1',
     },
     fontFamily: {
-      sans: [
-        'ui-sans-serif',
-        'system-ui',
-        '-apple-system',
-        'BlinkMacSystemFont',
-        '"Segoe UI"',
-        'Roboto',
-        '"Helvetica Neue"',
-        'Arial',
-        '"Noto Sans"',
-        'sans-serif',
-        '"Apple Color Emoji"',
-        '"Segoe UI Emoji"',
-        '"Segoe UI Symbol"',
-        '"Noto Color Emoji"',
-      ],
+
+      sans: ['Inter var', ...defaultTheme.fontFamily.sans],
       serif: ['ui-serif', 'Georgia', 'Cambria', '"Times New Roman"', 'Times', 'serif'],
       mono: [
         'ui-monospace',

@@ -19,13 +19,13 @@
           alt="Workflow"
         />
         <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
-          Sign in to your account
+          Sign up to MEVN project tool
         </h2>
         <p class="mt-2 text-center text-sm text-gray-600">
           Or
           {{ " " }}
           <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">
-            create a new user
+          sign in to an existing user
           </a>
         </p>
       </div>
@@ -111,15 +111,6 @@
               Remember me
             </label>
           </div>
-
-          <div class="text-sm">
-            <a
-              href="#"
-              class="font-medium text-indigo-600 hover:text-indigo-500"
-            >
-              Forgot your password?
-            </a>
-          </div>
         </div>
 
         <div>
@@ -152,7 +143,7 @@
                 aria-hidden="true"
               />
             </span>
-            Login
+            Sign up
           </button>
         </div>
       </form>

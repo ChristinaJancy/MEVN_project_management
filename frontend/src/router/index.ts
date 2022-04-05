@@ -21,12 +21,13 @@ const routes: Array<RouteRecordRaw> = [
         name: 'Login',
         component: () => import(/* webpackChunkName: "Login" */ '../views/LoginView.vue')
     }
-
 ];
 
+// navigation guard to check for logged in users
 
 const router = createRouter({
     history: createWebHistory(),
     routes,
 });
+
 export default router;
