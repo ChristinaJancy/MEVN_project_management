@@ -27,10 +27,13 @@ const getUsers = () => {
                 avatarPicture: 'img',
             })
         }
-        debugger
         fetch("http://localhost:4000/api/users/register",
             requestOptions
         )
+            .then(data => {
+                console.log("data:", data);
+                router.push({ path: "/", replace: true })
+            })
     }
 
     const user = ref({})

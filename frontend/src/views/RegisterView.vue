@@ -29,7 +29,8 @@
           </a>
         </p>
       </div>
-      <form class="mt-8 space-y-6" method="POST">
+      <!-- <form class="mt-8 space-y-6" action="/" method="POST"> -->
+            <div class="mt-8 space-y-6">
         <input type="hidden" name="remember" value="true" />
         <div class="rounded-md shadow-sm -space-y-px">
           <div>
@@ -179,7 +180,7 @@
             Sign up
           </button>
         </div>
-      </form>
+      </div>
     </div>
   </div>
 </template>
