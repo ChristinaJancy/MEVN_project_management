@@ -4,6 +4,7 @@ const router = require('express').Router();
 const User = require('../models/users');
 const { registerValidation, loginValidation, verifyToken } = require('../validation');
 
+
 router.post("/register", async (req, res) => {
 
     //validate user inputs (name, email, password)
