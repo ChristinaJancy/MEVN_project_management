@@ -26,7 +26,7 @@ router.post("/register", async (req, res) => {
     const password = await bcrypt.hash(req.body.password, salt);
 
     //generate initials
-    const initials = req.body.name.split(' ').map(name => name[0]).join('');
+    const initials = req.body.name.toUpperCase().split(' ').map(name => name[0]).join('');
     
     //create user object and save it in Mongo (via try-catch)
     const user = new User({

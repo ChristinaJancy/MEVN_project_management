@@ -3,26 +3,7 @@
         {
             "name": "Kanban",
             "description":"", 
-            "columns": [
-                {
-                    "title": "ToDo",
-                    "tasks": [
-                        {}
-                    ]
-                },
-                {
-                    "title": "Doing",
-                    "tasks": [
-                        {}
-                    ]
-                },
-                {
-                    "title": "Done",
-                    "tasks": [
-                        {}
-                    ]
-                }
-            ]
+            "columns": ["id"]
         }
     ]
 }
