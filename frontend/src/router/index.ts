@@ -3,8 +3,8 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 const routes: Array<RouteRecordRaw> = [
     {
         path: '/',
-        name: 'Home',
-        component: () => import(/* webpackChunkName: "Home" */ '../views/HomeView.vue')
+        name: 'Dashboard',
+        component: () => import(/* webpackChunkName: "Home" */ '../views/DashboardView.vue')
     },
     {
         path: '/about',
@@ -14,12 +14,14 @@ const routes: Array<RouteRecordRaw> = [
     {
         path: '/register',
         name: 'Register',
-        component: () => import(/* webpackChunkName: "Register" */ '../views/RegisterView.vue')
+        component: () => import(/* webpackChunkName: "Register" */ '../views/RegisterView.vue'),
+        meta: { layout: "empty" }
     },
     {
         path: '/login',
         name: 'Login',
-        component: () => import(/* webpackChunkName: "Login" */ '../views/LoginView.vue')
+        component: () => import(/* webpackChunkName: "Login" */ '../views/LoginView.vue'),
+        meta: { layout: "empty" }
     }
 ];
 
