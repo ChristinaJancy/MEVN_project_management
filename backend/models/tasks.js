@@ -24,4 +24,4 @@ let objectSchema = new Schema(
 )
 
 objectSchema.plugin(autopopulate);
-module.exports = mongoose.model("tasks", objectSchema);
+module.exports = mongoose.model("task", objectSchema);

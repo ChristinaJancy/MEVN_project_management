@@ -9,3 +9,25 @@ router.get("/", verifyToken, (req, res) => {
         .then(data => { res.send(data); })
         .catch(err => { res.status(500).send({ message: err.message }) })
 });
+
+router.get("/:id", verifyToken, (req, res) => {
+    const id = req.params.id
+    schema.findById(id)
+        .then(data => { res.send(data); })
+        .catch(err => { res.status(500).send({ message: err.message }) })
+});
+
+router.post("/", verifyToken, async (req, res) => {
+    const template = new schema({
+        name: req.body.name,
+        description: req.body.description,
+        columns: req.body.columns
+    })
+
+    try {
+        const savedTemplate = await template.save()
+        res.json({ message: "New project template created.😊", newtemplate: savedTemplate })
+    } catch (error) {
+        res.status(400).json({ error });
+    }
+});

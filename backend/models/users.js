@@ -16,7 +16,6 @@ let objectSchema = new Schema(
             type: Schema.Types.ObjectId,
             ref: 'role',
             autopopulate: true
-            //autopopulate: {select: ['name', 'color']}
         }],
     }
 )

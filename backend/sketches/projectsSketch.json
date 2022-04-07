@@ -9,12 +9,7 @@
                  "ref-id"
             ],
             "columns": [
-                {
-                    "title": "",
-                    "tasks": [
-                        "ref-id"
-                    ]
-                }
+                "ref-id"
             ]
         }
     ]
