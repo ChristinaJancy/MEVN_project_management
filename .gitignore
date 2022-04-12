@@ -111,3 +111,5 @@ dist
 # all package-lock.json
 .package-lock.json
 package-lock.json
+frontend/package-lock.json
+backend/package-lock.json
