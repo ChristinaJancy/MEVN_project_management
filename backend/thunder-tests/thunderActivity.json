@@ -1,0 +1,59 @@
+[
+  {
+    "_id": "04ee904b-21bb-4918-8a41-e738db9ad9a7",
+    "colId": "history",
+    "containerId": "",
+    "name": "localhost:4000/api/users/register",
+    "url": "localhost:4000/api/users/register",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-04-05T10:21:00.233Z",
+    "modified": "2022-04-05T10:23:41.117Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n    \"email\": \"email\",\n    \"password\": \"password\",\n    \"name\": \"name\",\n    \"avatarPicture\": \"avatarPicture\",\n    \"roles\": [\"user\"]\n}\n",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "84b0f3d8-12b0-4b93-b17c-9a3a0b19347b",
+    "colId": "history",
+    "containerId": "",
+    "name": "localhost:4000/api/users/login",
+    "url": "localhost:4000/api/projects/:id",
+    "method": "GET",
+    "sortNum": 0,
+    "created": "2022-04-05T10:26:41.896Z",
+    "modified": "2022-04-07T09:21:13.260Z",
+    "headers": [
+      {
+        "name": "auth-token",
+        "value": ""
+      }
+    ],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "8d9ac0c1-4916-4718-9043-2c3dbe953cc7",
+    "colId": "history",
+    "containerId": "",
+    "name": "localhost:4000/api/users/login",
+    "url": "localhost:4000/api/users/login",
+    "method": "POST",
+    "sortNum": 0,
+    "created": "2022-04-05T10:27:38.250Z",
+    "modified": "2022-04-05T10:27:38.250Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n    \"email\": \"email\",\n    \"password\": \"password\"\n}\n",
+      "form": []
+    },
+    "tests": []
+  }
+]

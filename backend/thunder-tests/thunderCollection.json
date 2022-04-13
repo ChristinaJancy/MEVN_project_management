@@ -1,0 +1,51 @@
+[
+  {
+    "_id": "3ae5de68-e9e5-4ac3-b284-fedb351a7eaf",
+    "colName": "User",
+    "created": "2022-04-05T10:24:55.116Z",
+    "sortNum": 10000,
+    "folders": []
+  },
+  {
+    "_id": "ff038054-45f5-48b6-a2a9-2105ff3c076f",
+    "colName": "Task",
+    "created": "2022-04-05T10:37:38.926Z",
+    "sortNum": 20000,
+    "folders": []
+  },
+  {
+    "_id": "5cdd9b69-e5ea-425c-a5ef-329035b6a592",
+    "colName": "Roles",
+    "created": "2022-04-05T10:43:42.760Z",
+    "sortNum": 30000,
+    "folders": []
+  },
+  {
+    "_id": "6d3ec7ad-bc0e-4152-a6fe-59b70d52b050",
+    "colName": "Project tags",
+    "created": "2022-04-05T10:46:25.674Z",
+    "sortNum": 40000,
+    "folders": []
+  },
+  {
+    "_id": "3114d8e0-ee7f-4602-8589-a83e7ecd660e",
+    "colName": "Project templates",
+    "created": "2022-04-07T08:50:35.101Z",
+    "sortNum": 50000,
+    "folders": []
+  },
+  {
+    "_id": "35df9da3-da62-40ac-9399-00cd1108bcaf",
+    "colName": "Columns",
+    "created": "2022-04-07T08:54:05.237Z",
+    "sortNum": 60000,
+    "folders": []
+  },
+  {
+    "_id": "6aa485c0-bf78-46de-9c5c-6a052d64bb94",
+    "colName": "Projects",
+    "created": "2022-04-07T09:20:41.789Z",
+    "sortNum": 70000,
+    "folders": []
+  }
+]

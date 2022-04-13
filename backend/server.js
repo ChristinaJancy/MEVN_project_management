@@ -12,7 +12,8 @@ const rolesRoute = require("./routes/roles");
 const projectsRoute = require("./routes/projects");
 const tasksRoute = require("./routes/tasks");
 const projectTagsRoute = require("./routes/projectTags");
-const columnRoute = require("./routes/columns");
+const column = require("./routes/columns");
+const columnRoute = column.router;
 const projectTemplatesRoute = require("./routes/projectTemplates");
 
 

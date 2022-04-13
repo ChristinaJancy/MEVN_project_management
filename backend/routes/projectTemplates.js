@@ -31,3 +31,14 @@ router.post("/", verifyToken, async (req, res) => {
         res.status(400).json({ error });
     }
 });
+
+//Delete project template by id
+router.delete("/:id", verifyToken, async (req, res) => {
+    const id = req.params.id
+    try {
+        const deleted = await schema.findByIdAndRemove(id)
+        res.json({ message: "Project template deleted.😊", deleted })
+    } catch (error) {
+        res.status(500).json({ error })
+    }
+});

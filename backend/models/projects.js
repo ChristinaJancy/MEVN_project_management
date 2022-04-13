@@ -4,18 +4,23 @@ const autopopulate = require("mongoose-autopopulate");
 
 //Mongoose schema for structuring data
 let objectSchema = new Schema({
-    title: {type: String, required: true},
-    deadline: {type: Date, required: true},
-    description: {type: String, required: true},
+    title: { type: String, required: true },
+    deadline: { type: Date, required: true },
+    description: { type: String, required: true },
     tags: [{
         type: Schema.Types.ObjectId,
-        ref: 'tag',
+        ref: 'projectTag',
         autopopulate: true
     }],
     columns: [{
         type: Schema.Types.ObjectId,
         ref: 'column',
         autopopulate: true
+    }],
+    assigned: [{ 
+        type: Schema.Types.ObjectId, 
+        ref: 'user', 
+        autopopulate: true 
     }]
 });
 

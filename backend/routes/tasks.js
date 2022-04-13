@@ -35,3 +35,15 @@ router.post("/", verifyToken, async (req,res) => {
         res.status(400).json({ error });
     }
 })
+
+//Delete task by id
+router.delete("/:id", verifyToken, async (req, res) => {
+    const id = req.params.id
+    try {
+        const deleted = await schema.findByIdAndRemove(id)
+        res.json({ message: "Task deleted.😊", deleted })
+    } catch (error) {
+        res.status(500).json({ error })
+    }
+})
+

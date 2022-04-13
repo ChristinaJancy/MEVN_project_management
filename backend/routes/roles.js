@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const schema = require("../models/roles")
+const user = require("../models/users")
 const { verifyToken } = require("../validation")
 
 module.exports = router;
@@ -27,5 +28,17 @@ router.post("/", verifyToken, async (req,res) => {
         res.json({ message: "New role created.😊", newtag : savedTag});
     } catch (error) { //if error, return error
         res.status(400).json({ error });
+    }
+})
+
+// delete role by id and remove role from all users
+router.delete("/:id", verifyToken, async (req, res) => {
+    const id = req.params.id
+    try {
+        const deleted = await schema.findByIdAndRemove(id)
+        await user.updateMany({ roles: id }, { $pull: { roles: id } })
+        res.json({ message: "Role deleted.😊", deleted })
+    } catch (error) {
+        res.status(500).json({ error })
     }
 })

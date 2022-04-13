@@ -1,0 +1,583 @@
+[
+  {
+    "_id": "f2f2a99a-dc2d-4dca-9b98-96a190fb92b9",
+    "colId": "3ae5de68-e9e5-4ac3-b284-fedb351a7eaf",
+    "containerId": "",
+    "name": "Register user",
+    "url": "localhost:4000/api/users/register",
+    "method": "POST",
+    "sortNum": 10000,
+    "created": "2022-04-05T10:21:00.233Z",
+    "modified": "2022-04-12T09:14:41.215Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n    \"email\": \"tester\",\n    \"password\": \"tester\",\n    \"name\": \"new user\",\n    \"avatarPicture\": \"avatarPicture\"\n}\n",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "057e17ce-f6d8-43e9-b1b4-9b0cd5cce467",
+    "colId": "ff038054-45f5-48b6-a2a9-2105ff3c076f",
+    "containerId": "",
+    "name": "Get all tasks",
+    "url": "localhost:4000/api/tasks",
+    "method": "GET",
+    "sortNum": 5000,
+    "created": "2022-04-05T10:26:41.896Z",
+    "modified": "2022-04-05T10:37:44.294Z",
+    "headers": [
+      {
+        "name": "auth-token",
+        "value": ""
+      }
+    ],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "088c57ab-4454-460e-b278-b858cd4cb8b8",
+    "colId": "3ae5de68-e9e5-4ac3-b284-fedb351a7eaf",
+    "containerId": "",
+    "name": "Get all users",
+    "url": "localhost:4000/api/users",
+    "method": "GET",
+    "sortNum": 30000,
+    "created": "2022-04-05T10:26:41.896Z",
+    "modified": "2022-04-12T09:26:50.656Z",
+    "headers": [
+      {
+        "name": "auth-token",
+        "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoibmV3IHVzZXIiLCJpZCI6IjYyNGMxZmU1ZjRmOGJhNDU3N2RlMTkzZiIsImlhdCI6MTY0OTc1NDM1MSwiZXhwIjoxNjQ5ODQwNzUxfQ.p4HzeCSJeQtX3_ZFPA5HYu_iNeNYUG3wfN9EsntV3zw"
+      }
+    ],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "0d965961-ffa0-466d-9f6a-afac6476ae0d",
+    "colId": "5cdd9b69-e5ea-425c-a5ef-329035b6a592",
+    "containerId": "",
+    "name": "Get all roles",
+    "url": "localhost:4000/api/roles",
+    "method": "GET",
+    "sortNum": 30000,
+    "created": "2022-04-05T10:26:41.896Z",
+    "modified": "2022-04-12T09:06:01.848Z",
+    "headers": [
+      {
+        "name": "auth-token",
+        "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoibmV3IHVzZXIiLCJpZCI6IjYyNGMxZmU1ZjRmOGJhNDU3N2RlMTkzZiIsImlhdCI6MTY0OTc1NDM1MSwiZXhwIjoxNjQ5ODQwNzUxfQ.p4HzeCSJeQtX3_ZFPA5HYu_iNeNYUG3wfN9EsntV3zw"
+      }
+    ],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "27c34cb7-717d-4cce-921b-55a4ee629561",
+    "colId": "5cdd9b69-e5ea-425c-a5ef-329035b6a592",
+    "containerId": "",
+    "name": "Create new role",
+    "url": "localhost:4000/api/roles",
+    "method": "POST",
+    "sortNum": 20000,
+    "created": "2022-04-05T10:26:41.896Z",
+    "modified": "2022-04-12T09:06:16.969Z",
+    "headers": [
+      {
+        "name": "auth-token",
+        "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoibmV3IHVzZXIiLCJpZCI6IjYyNGMxZmU1ZjRmOGJhNDU3N2RlMTkzZiIsImlhdCI6MTY0OTc1NDM1MSwiZXhwIjoxNjQ5ODQwNzUxfQ.p4HzeCSJeQtX3_ZFPA5HYu_iNeNYUG3wfN9EsntV3zw"
+      }
+    ],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n    \"title\": \"title\",\n    \"color\": \"#333\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "2d17d830-54d4-4251-ab9e-83b1f5e870df",
+    "colId": "6d3ec7ad-bc0e-4152-a6fe-59b70d52b050",
+    "containerId": "",
+    "name": "Get all project tags",
+    "url": "localhost:4000/api/project-tags",
+    "method": "GET",
+    "sortNum": 20000,
+    "created": "2022-04-05T10:26:41.896Z",
+    "modified": "2022-04-05T10:46:47.770Z",
+    "headers": [
+      {
+        "name": "auth-token",
+        "value": ""
+      }
+    ],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "7ffed366-f42a-4ca5-951c-7d60dd36caad",
+    "colId": "ff038054-45f5-48b6-a2a9-2105ff3c076f",
+    "containerId": "",
+    "name": "Create new task",
+    "url": "localhost:4000/api/tasks",
+    "method": "POST",
+    "sortNum": 20000,
+    "created": "2022-04-05T10:26:41.896Z",
+    "modified": "2022-04-13T10:20:23.783Z",
+    "headers": [
+      {
+        "name": "auth-token",
+        "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoibmV3IHVzZXIiLCJpZCI6IjYyNGMxZmU1ZjRmOGJhNDU3N2RlMTkzZiIsImlhdCI6MTY0OTgzNzI5MSwiZXhwIjoxNjQ5OTIzNjkxfQ.BsXO0FlJxUeK1jvw4g6mDR3ygpZR6g8bIarLoinDnTs"
+      }
+    ],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n    \"name\": \"New task 2\",\n    \"description\": \"description\",\n    \"deadline\": \"2022-01-21\",\n    \"assigned\": [],\n    \"tags\": []\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "8d7cfcbd-b777-4e40-a424-c862b1ff7b60",
+    "colId": "5cdd9b69-e5ea-425c-a5ef-329035b6a592",
+    "containerId": "",
+    "name": "Get one role with id",
+    "url": "localhost:4000/api/roles/:id",
+    "method": "GET",
+    "sortNum": 40000,
+    "created": "2022-04-05T10:26:41.896Z",
+    "modified": "2022-04-05T10:45:18.670Z",
+    "headers": [
+      {
+        "name": "auth-token",
+        "value": ""
+      }
+    ],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "a82417e8-210e-4ad1-ac7f-bc21dea5a037",
+    "colId": "ff038054-45f5-48b6-a2a9-2105ff3c076f",
+    "containerId": "",
+    "name": "Get one task with id",
+    "url": "localhost:4000/api/tasks/:id",
+    "method": "GET",
+    "sortNum": 10000,
+    "created": "2022-04-05T10:26:41.896Z",
+    "modified": "2022-04-05T10:37:38.928Z",
+    "headers": [
+      {
+        "name": "auth-token",
+        "value": ""
+      }
+    ],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "ba8064c2-3b1c-4691-a282-dd015e261aa3",
+    "colId": "3ae5de68-e9e5-4ac3-b284-fedb351a7eaf",
+    "containerId": "",
+    "name": "login",
+    "url": "localhost:4000/api/users/login",
+    "method": "POST",
+    "sortNum": 20000,
+    "created": "2022-04-05T10:26:41.896Z",
+    "modified": "2022-04-05T10:55:01.444Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n    \"email\": \"new@user.com\",\n    \"password\": \"123456\"\n}\n",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "c3c7c9ea-81b7-4abb-9723-1c23fc0d601e",
+    "colId": "6d3ec7ad-bc0e-4152-a6fe-59b70d52b050",
+    "containerId": "",
+    "name": "Get one project tag with id",
+    "url": "localhost:4000/api/project-tags/:id",
+    "method": "GET",
+    "sortNum": 10000,
+    "created": "2022-04-05T10:26:41.896Z",
+    "modified": "2022-04-05T10:46:25.675Z",
+    "headers": [
+      {
+        "name": "auth-token",
+        "value": ""
+      }
+    ],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "c8ab24fb-bc41-4fa3-aca2-a93fa38818cc",
+    "colId": "6d3ec7ad-bc0e-4152-a6fe-59b70d52b050",
+    "containerId": "",
+    "name": "Create new project tag",
+    "url": "localhost:4000/api/project-tags",
+    "method": "POST",
+    "sortNum": 30000,
+    "created": "2022-04-05T10:26:41.896Z",
+    "modified": "2022-04-05T10:47:22.778Z",
+    "headers": [
+      {
+        "name": "auth-token",
+        "value": ""
+      }
+    ],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n    \"name\": \"name\",\n    \"color\": \"Hex color\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "32667b60-e4dc-45b4-9aae-8a8ed30830a7",
+    "colId": "3114d8e0-ee7f-4602-8589-a83e7ecd660e",
+    "containerId": "",
+    "name": "Get all project tamplates",
+    "url": "localhost:4000/api/project-templates",
+    "method": "GET",
+    "sortNum": 10000,
+    "created": "2022-04-05T10:26:41.896Z",
+    "modified": "2022-04-07T08:50:35.104Z",
+    "headers": [
+      {
+        "name": "auth-token",
+        "value": ""
+      }
+    ],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "a63a33fa-7229-428a-aef3-57c89fe0813a",
+    "colId": "3114d8e0-ee7f-4602-8589-a83e7ecd660e",
+    "containerId": "",
+    "name": "Create new project tamplate",
+    "url": "localhost:4000/api/project-templates",
+    "method": "POST",
+    "sortNum": 20000,
+    "created": "2022-04-05T10:26:41.896Z",
+    "modified": "2022-04-07T08:52:30.430Z",
+    "headers": [
+      {
+        "name": "auth-token",
+        "value": ""
+      }
+    ],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n    \"name\": \"name\",\n    \"description\": \"description\",\n    \"columns\": [\"name1\",\"name2\"]\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "e6ae8505-19a8-4627-bd87-7f3c6a0b3208",
+    "colId": "3114d8e0-ee7f-4602-8589-a83e7ecd660e",
+    "containerId": "",
+    "name": "Get project template with id",
+    "url": "localhost:4000/api/project-templates/:id",
+    "method": "GET",
+    "sortNum": 30000,
+    "created": "2022-04-05T10:26:41.896Z",
+    "modified": "2022-04-07T08:53:19.765Z",
+    "headers": [
+      {
+        "name": "auth-token",
+        "value": ""
+      }
+    ],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "e202551d-18cf-44ba-b32c-fa439e4ca041",
+    "colId": "35df9da3-da62-40ac-9399-00cd1108bcaf",
+    "containerId": "",
+    "name": "Get column with id",
+    "url": "localhost:4000/api/columns/62554fe999b2de83d48ab648",
+    "method": "GET",
+    "sortNum": 10000,
+    "created": "2022-04-05T10:26:41.896Z",
+    "modified": "2022-04-12T10:10:06.413Z",
+    "headers": [
+      {
+        "name": "auth-token",
+        "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoibmV3IHVzZXIiLCJpZCI6IjYyNGMxZmU1ZjRmOGJhNDU3N2RlMTkzZiIsImlhdCI6MTY0OTc1NDM1MSwiZXhwIjoxNjQ5ODQwNzUxfQ.p4HzeCSJeQtX3_ZFPA5HYu_iNeNYUG3wfN9EsntV3zw"
+      }
+    ],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "b7356b74-acf1-49d7-9429-5ec102205394",
+    "colId": "35df9da3-da62-40ac-9399-00cd1108bcaf",
+    "containerId": "",
+    "name": "Get all columns",
+    "url": "localhost:4000/api/columns",
+    "method": "GET",
+    "sortNum": 20000,
+    "created": "2022-04-05T10:26:41.896Z",
+    "modified": "2022-04-07T08:54:42.398Z",
+    "headers": [
+      {
+        "name": "auth-token",
+        "value": ""
+      }
+    ],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "06813cb8-2b0d-4866-8e2b-e4b678f3239d",
+    "colId": "35df9da3-da62-40ac-9399-00cd1108bcaf",
+    "containerId": "",
+    "name": "Create new column",
+    "url": "localhost:4000/api/columns",
+    "method": "POST",
+    "sortNum": 30000,
+    "created": "2022-04-05T10:26:41.896Z",
+    "modified": "2022-04-13T10:21:00.907Z",
+    "headers": [
+      {
+        "name": "auth-token",
+        "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoibmV3IHVzZXIiLCJpZCI6IjYyNGMxZmU1ZjRmOGJhNDU3N2RlMTkzZiIsImlhdCI6MTY0OTgzNzI5MSwiZXhwIjoxNjQ5OTIzNjkxfQ.BsXO0FlJxUeK1jvw4g6mDR3ygpZR6g8bIarLoinDnTs"
+      }
+    ],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n    \"title\": \"title 2\",\n    \"tasks\": [\"6256a3e4ff8bca77b09e8555\", \"6256a3e7c3b2ccd3146fcd8d\"]\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "fbeb0fc9-1428-477e-b7bb-3cb4e38ce431",
+    "colId": "6aa485c0-bf78-46de-9c5c-6a052d64bb94",
+    "containerId": "",
+    "name": "Create new project",
+    "url": "localhost:4000/api/projects",
+    "method": "POST",
+    "sortNum": 10000,
+    "created": "2022-04-05T10:26:41.896Z",
+    "modified": "2022-04-13T10:21:27.894Z",
+    "headers": [
+      {
+        "name": "auth-token",
+        "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoibmV3IHVzZXIiLCJpZCI6IjYyNGMxZmU1ZjRmOGJhNDU3N2RlMTkzZiIsImlhdCI6MTY0OTgzNzI5MSwiZXhwIjoxNjQ5OTIzNjkxfQ.BsXO0FlJxUeK1jvw4g6mDR3ygpZR6g8bIarLoinDnTs"
+      }
+    ],
+    "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n    \"title\": \"title\",\n    \"deadline\": \"01-01-2000\",\n    \"description\": \"description\",\n    \"columns\": [\"6256a406c04276a1d9d17cbc\", \"6256a40c3a7dd76cf54ee442\"]\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "1e927feb-28c6-4e24-a351-b8b9b0ddf905",
+    "colId": "6aa485c0-bf78-46de-9c5c-6a052d64bb94",
+    "containerId": "",
+    "name": "Get all projects",
+    "url": "localhost:4000/api/projects",
+    "method": "GET",
+    "sortNum": 20000,
+    "created": "2022-04-05T10:26:41.896Z",
+    "modified": "2022-04-07T09:21:05.363Z",
+    "headers": [
+      {
+        "name": "auth-token",
+        "value": ""
+      }
+    ],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "43b42b13-7ea0-4120-92b7-2ea7d7e01c76",
+    "colId": "6aa485c0-bf78-46de-9c5c-6a052d64bb94",
+    "containerId": "",
+    "name": "Get project with id",
+    "url": "localhost:4000/api/projects/:id",
+    "method": "GET",
+    "sortNum": 30000,
+    "created": "2022-04-05T10:26:41.896Z",
+    "modified": "2022-04-07T09:21:26.622Z",
+    "headers": [
+      {
+        "name": "auth-token",
+        "value": ""
+      }
+    ],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "b9f8e343-a1d5-477b-a2af-84c1a3b3cf98",
+    "colId": "5cdd9b69-e5ea-425c-a5ef-329035b6a592",
+    "containerId": "",
+    "name": "Delete role",
+    "url": "localhost:4000/api/roles/:id",
+    "method": "DELETE",
+    "sortNum": 50000,
+    "created": "2022-04-12T09:16:17.924Z",
+    "modified": "2022-04-12T09:29:38.011Z",
+    "headers": [
+      {
+        "name": "auth-token",
+        "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoibmV3IHVzZXIiLCJpZCI6IjYyNGMxZmU1ZjRmOGJhNDU3N2RlMTkzZiIsImlhdCI6MTY0OTc1NDM1MSwiZXhwIjoxNjQ5ODQwNzUxfQ.p4HzeCSJeQtX3_ZFPA5HYu_iNeNYUG3wfN9EsntV3zw"
+      }
+    ],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "5fe41ad9-4b25-4382-a56a-10fa77402f8c",
+    "colId": "6d3ec7ad-bc0e-4152-a6fe-59b70d52b050",
+    "containerId": "",
+    "name": "Delete tag",
+    "url": "localhost:4000/api/project-tags/6239b2542405c2aa912571b6",
+    "method": "DELETE",
+    "sortNum": 15000,
+    "created": "2022-04-12T09:43:10.275Z",
+    "modified": "2022-04-12T09:44:51.733Z",
+    "headers": [
+      {
+        "name": "auth-token",
+        "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoibmV3IHVzZXIiLCJpZCI6IjYyNGMxZmU1ZjRmOGJhNDU3N2RlMTkzZiIsImlhdCI6MTY0OTc1NDM1MSwiZXhwIjoxNjQ5ODQwNzUxfQ.p4HzeCSJeQtX3_ZFPA5HYu_iNeNYUG3wfN9EsntV3zw"
+      }
+    ],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "c41f6753-a37f-4eb1-b9cb-a104959a3f43",
+    "colId": "35df9da3-da62-40ac-9399-00cd1108bcaf",
+    "containerId": "",
+    "name": "Delete column",
+    "url": "localhost:4000/api/columns/62568873b9c0704e4834ce6e",
+    "method": "DELETE",
+    "sortNum": 15000,
+    "created": "2022-04-12T10:10:27.531Z",
+    "modified": "2022-04-13T08:23:19.990Z",
+    "headers": [
+      {
+        "name": "auth-token",
+        "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoibmV3IHVzZXIiLCJpZCI6IjYyNGMxZmU1ZjRmOGJhNDU3N2RlMTkzZiIsImlhdCI6MTY0OTgzNzI5MSwiZXhwIjoxNjQ5OTIzNjkxfQ.BsXO0FlJxUeK1jvw4g6mDR3ygpZR6g8bIarLoinDnTs"
+      }
+    ],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "a34deb10-7efc-42cd-a457-f1ea0569a9c6",
+    "colId": "6aa485c0-bf78-46de-9c5c-6a052d64bb94",
+    "containerId": "",
+    "name": "Delete project",
+    "url": "localhost:4000/api/projects/6256a42758da83106e0c608e",
+    "method": "DELETE",
+    "sortNum": 40000,
+    "created": "2022-04-13T08:32:18.998Z",
+    "modified": "2022-04-13T10:21:51.997Z",
+    "headers": [
+      {
+        "name": "auth-token",
+        "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoibmV3IHVzZXIiLCJpZCI6IjYyNGMxZmU1ZjRmOGJhNDU3N2RlMTkzZiIsImlhdCI6MTY0OTgzNzI5MSwiZXhwIjoxNjQ5OTIzNjkxfQ.BsXO0FlJxUeK1jvw4g6mDR3ygpZR6g8bIarLoinDnTs"
+      }
+    ],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "6f7ca58c-45af-4a3c-8ecd-33b17519d233",
+    "colId": "3114d8e0-ee7f-4602-8589-a83e7ecd660e",
+    "containerId": "",
+    "name": "Delete project template",
+    "url": "localhost:4000/api/project-templates/:id",
+    "method": "DELETE",
+    "sortNum": 40000,
+    "created": "2022-04-13T10:26:14.208Z",
+    "modified": "2022-04-13T10:26:31.394Z",
+    "headers": [
+      {
+        "name": "auth-token",
+        "value": ""
+      }
+    ],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "1faff2cc-b2bb-481d-9aea-347851624f3f",
+    "colId": "ff038054-45f5-48b6-a2a9-2105ff3c076f",
+    "containerId": "",
+    "name": "Delete task",
+    "url": "localhost:4000/api/tasks/:id",
+    "method": "DELETE",
+    "sortNum": 15000,
+    "created": "2022-04-13T10:26:45.726Z",
+    "modified": "2022-04-13T10:26:59.934Z",
+    "headers": [
+      {
+        "name": "auth-token",
+        "value": ""
+      }
+    ],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "cdb34d6b-86e1-40c0-988a-245c1d873641",
+    "colId": "3ae5de68-e9e5-4ac3-b284-fedb351a7eaf",
+    "containerId": "",
+    "name": "Get user with id",
+    "url": "localhost:4000/api/users/:id",
+    "method": "GET",
+    "sortNum": 40000,
+    "created": "2022-04-13T10:27:46.930Z",
+    "modified": "2022-04-13T10:28:11.224Z",
+    "headers": [
+      {
+        "name": "auth-token",
+        "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoibmV3IHVzZXIiLCJpZCI6IjYyNGMxZmU1ZjRmOGJhNDU3N2RlMTkzZiIsImlhdCI6MTY0OTc1NDM1MSwiZXhwIjoxNjQ5ODQwNzUxfQ.p4HzeCSJeQtX3_ZFPA5HYu_iNeNYUG3wfN9EsntV3zw"
+      }
+    ],
+    "params": [],
+    "tests": []
+  },
+  {
+    "_id": "29a06b6b-e40a-464d-93e3-678cc7c07691",
+    "colId": "3ae5de68-e9e5-4ac3-b284-fedb351a7eaf",
+    "containerId": "",
+    "name": "Delete user",
+    "url": "localhost:4000/api/users/:id",
+    "method": "DELETE",
+    "sortNum": 50000,
+    "created": "2022-04-13T10:28:15.115Z",
+    "modified": "2022-04-13T10:28:30.585Z",
+    "headers": [
+      {
+        "name": "auth-token",
+        "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoibmV3IHVzZXIiLCJpZCI6IjYyNGMxZmU1ZjRmOGJhNDU3N2RlMTkzZiIsImlhdCI6MTY0OTc1NDM1MSwiZXhwIjoxNjQ5ODQwNzUxfQ.p4HzeCSJeQtX3_ZFPA5HYu_iNeNYUG3wfN9EsntV3zw"
+      }
+    ],
+    "params": [],
+    "tests": []
+  }
+]

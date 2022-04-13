@@ -1,9 +1,10 @@
 // setup router for /columns
 const router = require("express").Router();
 const schema = require("../models/columns")
+const tasks = require("../models/tasks")
 const { verifyToken } = require("../validation")
 
-module.exports = router;
+
 
 // Get all columns
 router.get("/", verifyToken, (req, res) => {
@@ -33,3 +34,39 @@ router.post("/", verifyToken, async (req, res) => {
         res.status(400).json({ error });
     }
 });
+
+
+// Function to delete a column and all tasks in it
+const deleteColumn = async (id, column, tasks) => {
+    try {
+        let taskIds = [];
+        let task;
+        await column.findById(id).then(data => {
+            task = data.tasks
+            if (task.length > 0) {
+                for (let i = 0; i < task.length; i++) {
+                    taskIds.push(task[i]._id)
+                }
+            }
+        })
+        const deleted = await column.findByIdAndRemove(id)
+        const deletedTasks = await tasks.deleteMany({ _id: { $in: taskIds } })
+        return { deleted, deletedTasks }
+    } catch (error) {
+        return { error }
+    }
+}
+
+//Delete column by id and all tasks in column
+router.delete("/:id", verifyToken, async (req, res) => {
+    const id = req.params.id
+    await deleteColumn(id, schema, tasks).then(data => {
+        if (data.error) {
+            res.status(500).send({ message: data.error.message })
+        } else {
+            res.json({ message: "Column deleted.😢", deleted: data.deleted, deletedTasks: data.deletedTasks })
+        }
+    })
+})
+
+module.exports = { deleteColumn, router}

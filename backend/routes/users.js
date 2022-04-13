@@ -2,6 +2,8 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const router = require('express').Router();
 const User = require('../models/users');
+const tasks = require('../models/tasks');
+const projects = require('../models/projects');
 const { registerValidation, loginValidation, verifyToken } = require('../validation');
 
 
@@ -28,6 +30,8 @@ router.post("/register", async (req, res) => {
     //generate initials
     const initials = req.body.name.toUpperCase().split(' ').map(name => name[0]).join('');
     
+    const role = ["62554108c76611700f3d804d"]
+
     //create user object and save it in Mongo (via try-catch)
     const user = new User({
         name: req.body.name,
@@ -35,7 +39,7 @@ router.post("/register", async (req, res) => {
         password: password,
         avatarPicture: req.body.avatarPicture,
         initials: initials,
-        roles: req.body.roles
+        roles: role
     });
     //try to save user in database (via try-catch)
     try { 
@@ -94,6 +98,27 @@ router.get("/", verifyToken, (req, res) => {
         .then(data => { res.send(data); })
         .catch(err => { res.status(500).send({ message: err.message }) })
 });
+
+//get user by id
+router.get("/:id", verifyToken, (req, res) => {
+    User.findById(req.params.id)
+        .then(data => { res.send(data); })
+        .catch(err => { res.status(500).send({ message: err.message }) })
+});
+
+
+//Delete user by id and remove user from all tasks and projects
+router.delete("/:id", verifyToken, async (req, res) => {
+    const id = req.params.id
+    try {
+        const deleted = await User.findByIdAndRemove(id)
+        await tasks.updateMany({ assigned: id }, { $pull : { assigned: id }})
+        await projects.updateMany({ assigned: id }, { $pull : { assigned: id }})
+        res.json({ message: "User deleted.😊", deleted })
+    } catch (error) {
+        res.status(400).json({ error })
+    }
+})
 
 module.exports = router;
 
