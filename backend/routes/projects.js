@@ -49,7 +49,7 @@ router.post("/", verifyToken, async (req, res) => {
 //     }
 // });
 
-// Delete project by id
+// Delete project by id and all columns and tasks in it
 router.delete("/:id", verifyToken, async (req, res) => {
     const id = req.params.id
     try {
