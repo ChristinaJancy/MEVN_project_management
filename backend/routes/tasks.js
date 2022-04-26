@@ -29,8 +29,8 @@ router.post("/", verifyToken, async (req,res) => {
         tags: req.body.tags
     })
     try { 
-        const savedTag = await task.save(); //save user
-        res.json({ message: "New role created.😊", newtag : savedTag});
+        const savedTask = await task.save(); //save user
+        res.json({ message: "New task created.😊", newtask : savedTask});
     } catch (error) { //if error, return error
         res.status(400).json({ error });
     }
