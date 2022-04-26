@@ -25,12 +25,12 @@
           Or
           {{ " " }}
           <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">
-          sign in to an existing user
+            sign in to an existing user
           </a>
         </p>
       </div>
       <!-- <form class="mt-8 space-y-6" action="/" method="POST"> -->
-            <div class="mt-8 space-y-6">
+      <div class="mt-8 space-y-6">
         <input type="hidden" name="remember" value="true" />
         <div class="rounded-md shadow-sm -space-y-px">
           <div>
@@ -39,7 +39,7 @@
               id="name"
               name="name"
               type="name"
-              v-model="state.name" 
+              v-model="state.name"
               autocomplete="name"
               required="true"
               class="
@@ -69,7 +69,7 @@
               id="email-address"
               name="email"
               type="email"
-              v-model="state.email" 
+              v-model="state.email"
               autocomplete="email"
               required="true"
               class="
@@ -99,7 +99,7 @@
               id="password"
               name="password"
               type="password"
-              v-model="state.password" 
+              v-model="state.password"
               autocomplete="current-password"
               required="true"
               class="
@@ -189,13 +189,12 @@
 import { LockClosedIcon } from "@heroicons/vue/solid";
 import userCrud from "../modules/userCrud";
 
-
 export default {
   components: {
     LockClosedIcon,
   },
-   setup() {
-    const { state,  newUser, } = userCrud();
+  setup() {
+    const { state, newUser } = userCrud();
     return { state, newUser };
   },
 };

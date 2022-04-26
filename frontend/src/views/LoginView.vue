@@ -29,7 +29,8 @@
           </a>
         </p>
       </div>
-      <form class="mt-8 space-y-6" action="#" method="POST">
+      <!-- <form class="mt-8 space-y-6" action="#" method="POST"> -->
+           <div class="mt-8 space-y-6">
         <input type="hidden" name="remember" value="true" />
         <div class="rounded-md shadow-sm -space-y-px">
           <div>
@@ -38,6 +39,7 @@
               id="email-address"
               name="email"
               type="email"
+              v-model="state.email"
               autocomplete="email"
               required="true"
               class="
@@ -67,6 +69,7 @@
               id="password"
               name="password"
               type="password"
+              v-model="state.password"
               autocomplete="current-password"
               required="true"
               class="
@@ -124,6 +127,7 @@
 
         <div>
           <button
+           @click="loginUser()"
             type="submit"
             class="
               group
@@ -155,17 +159,22 @@
             Login
           </button>
         </div>
-      </form>
+      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { LockClosedIcon } from "@heroicons/vue/solid";
+import userCrud from "../modules/userCrud";
 
 export default {
   components: {
     LockClosedIcon,
+  },
+  setup() {
+    const { state, loginUser } = userCrud();
+    return { state, loginUser };
   },
 };
 </script>

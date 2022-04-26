@@ -159,9 +159,9 @@
             <div class="text-center">
               <!--<div class="grid grid-cols-2 gap-y-4 gap-x-8 text-center">-->
               <router-link
-                to="/about"
+                to="/projects/project"
                 class="text-base font-medium text-gray-500 hover:text-gray-900"
-                >About
+                >Project
               </router-link>
             </div>
             <div>
