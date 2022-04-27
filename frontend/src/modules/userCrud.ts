@@ -11,7 +11,8 @@ const getUsers = () => {
     const state = ref({
         email: '',
         password: '',
-        name: ''
+        name: '',
+        token: ''
     })
 
     const newUser = () => {
@@ -37,7 +38,7 @@ const getUsers = () => {
             })
     }
     const user = ref({})
-    
+
     const loginUser = async () => {
         const requestOptions = {
             method: "POST",
@@ -53,16 +54,26 @@ const getUsers = () => {
         fetch("http://localhost:4000/api/users/login",
             requestOptions
         )
+            .then(response => response.json())
+
             .then(data => {
-                console.log("data:", data);
+                // console.log("json:", data);
+
+                data.data.token ? console.log("have Cvookie " + data.data.token) : console.log("no token");
+
+                state.value.token = data.data.token
+
                 setCookies()
                 router.push({ path: "/", replace: true })
+
             })
     }
 
     const setCookies = () => {
         setCookie('name', state.value.name, 1)
         setCookie('email', state.value.email, 1)
+        setCookie('token', state.value.token , 1)
+
     }
 
     return {
