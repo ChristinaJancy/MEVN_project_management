@@ -74,6 +74,7 @@ frontend/.env
 frontend/.env.test
 .env
 .env.test
+.env.development
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
