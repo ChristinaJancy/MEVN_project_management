@@ -43,9 +43,8 @@ describe('Workflow', () => {
                         expect(res).to.have.status(200);
                         expect(res.body).to.have.property('message');
                         expect(res.body.message).to.equal('User logged in 😊');
-                        expect(res.body.data).to.have.property('token');
-                        let token = res.body.data.token;
-
+                        expect(res.body).to.have.property('token');
+                        let token = res.body.token;
                         const projectTag = {
                             name: 'testtt',
                             color: '#fff'
