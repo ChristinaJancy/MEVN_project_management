@@ -8,7 +8,7 @@ chai.use(chaiHttp);
 //test whole workflow
 describe('Workflow', () => {
     //test workflow
-    it('Register user', (done) => {
+    it('Create user, login and create project with columns and tasks', (done) => {
         const user = {
             name: 'testtt',
             password: 'testtt',
