@@ -31,6 +31,16 @@ router.post("/", verifyToken, async (req,res) => {
     }
 })
 
+//update role by id
+router.put("/:id", verifyToken, async (req, res) => {
+    try {
+        const updatedTag = await schema.findByIdAndUpdate(req.params.id, req.body, { new: true })
+        res.json({ message: "Role updated.😊", updatedTag })
+    } catch (error) {
+        res.status(400).json({ message: error.message })
+    }
+});
+
 // delete role by id and remove role from all users
 router.delete("/:id", verifyToken, async (req, res) => {
     const id = req.params.id

@@ -36,6 +36,16 @@ router.post("/", verifyToken, async (req,res) => {
     }
 })
 
+//update task by id
+router.put("/:id", verifyToken, async (req, res) => {
+    try {
+        const updatedTask = await schema.findByIdAndUpdate(req.params.id, req.body, { new: true })
+        res.json({ message: "Task updated.😊", updatedTask })
+    } catch (error) {
+        res.status(400).json({ message: error.message })
+    }
+});
+
 //Delete task by id
 router.delete("/:id", verifyToken, async (req, res) => {
     const id = req.params.id

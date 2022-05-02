@@ -35,6 +35,17 @@ router.post("/", verifyToken, async (req, res) => {
     }
 });
 
+//Update column by id
+router.put("/:id", verifyToken, async (req, res) => {
+    try {
+        const updatedColumn = await schema.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        res.json({ message: "Column updated.😊", updatedColumn });
+    } catch (error) {
+        res.status(400).json({ error });
+    }
+});
+
+
 
 // Function to delete a column and all tasks in it
 const deleteColumn = async (id, column, tasks) => {

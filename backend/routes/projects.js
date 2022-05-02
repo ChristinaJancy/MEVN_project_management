@@ -40,14 +40,14 @@ router.post("/", verifyToken, async (req, res) => {
 });
 
 // Update project by id
-// router.put("/:id", verifyToken, async (req, res) => {
-//     try {
-//         const updatedProject = await schema.findByIdAndUpdate(req.params.id, req.body, { new: true })
-//         res.json({ message: "Project updated.😊", updatedProject })
-//     } catch (error) {
-//         res.status(400).json({ message: error.message })
-//     }
-// });
+router.put("/:id", verifyToken, async (req, res) => {
+    try {
+        const updatedProject = await schema.findByIdAndUpdate(req.params.id, req.body, { new: true })
+        res.json({ message: "Project updated.😊", updatedProject })
+    } catch (error) {
+        res.status(400).json({ message: error.message })
+    }
+});
 
 // Delete project by id and all columns and tasks in it
 router.delete("/:id", verifyToken, async (req, res) => {

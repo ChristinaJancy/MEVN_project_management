@@ -33,6 +33,16 @@ router.post("/", verifyToken, async (req,res) => {
     }
 })
 
+//update project tag by id
+router.put("/:id", verifyToken, async (req, res) => {
+    try {
+        const updatedTag = await schema.findByIdAndUpdate(req.params.id, req.body, { new: true })
+        res.json({ message: "Project tag updated.😊", updatedTag })
+    } catch (error) {
+        res.status(400).json({ message: error.message })
+    }
+});
+
 // delete project tag by id and remove project tag from all projects
 router.delete("/:id", verifyToken, async (req, res) => {
     const id = req.params.id

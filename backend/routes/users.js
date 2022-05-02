@@ -107,6 +107,15 @@ router.get("/:id", verifyToken, (req, res) => {
         .catch(err => { res.status(500).send({ message: err.message }) })
 });
 
+//update user by id
+router.put("/:id", verifyToken, (req, res) => {
+    try {
+        const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        res.json({ message: "User updated successfully 😊", updatedUser });
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+});
 
 //Delete user by id and remove user from all tasks and projects
 router.delete("/:id", verifyToken, async (req, res) => {
