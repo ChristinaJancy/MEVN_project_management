@@ -1,6 +1,14 @@
 <template>
   <header
-    class="flex items-center justify-between px-6 py-4 bg-white border-b-4 border-indigo-600"
+    class="
+      flex
+      items-center
+      justify-between
+      px-6
+      py-4
+      bg-white
+      border-b-4 border-indigo-600
+    "
   >
     <div class="flex items-center">
       <button
@@ -45,7 +53,17 @@
       <div class="relative">
         <button
           @click="dropdownOpen = !dropdownOpen"
-          class="relative z-10 block w-8 h-8 overflow-hidden rounded-full shadow focus:outline-none"
+          class="
+            relative
+            z-10
+            block
+            w-8
+            h-8
+            overflow-hidden
+            rounded-full
+            shadow
+            focus:outline-none
+          "
         >
           <img
             class="object-cover w-full h-full"
@@ -70,27 +88,62 @@
         >
           <div
             v-show="dropdownOpen"
-            class="absolute right-0 z-20 w-48 py-2 mt-2 bg-white rounded-md shadow-xl"
+            class="
+              absolute
+              right-0
+              z-20
+              w-48
+              py-2
+              mt-2
+              bg-white
+              rounded-md
+              shadow-xl
+            "
           >
             <router-link
               to="/profile"
-              class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white"
+              class="
+                block
+                px-4
+                py-2
+                text-sm text-gray-700
+                hover:bg-indigo-600 hover:text-white
+              "
               >Profile</router-link
             >
             <!-- Temporary login / sign up -->
-             <router-link
+            <router-link
               to="/login"
-              class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white"
+              class="
+                block
+                px-4
+                py-2
+                text-sm text-gray-700
+                hover:bg-indigo-600 hover:text-white
+              "
               >Log in</router-link
             >
-                <router-link
+            <router-link
               to="/register"
-              class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white"
+              class="
+                block
+                px-4
+                py-2
+                text-sm text-gray-700
+                hover:bg-indigo-600 hover:text-white
+              "
               >Sign up</router-link
             >
             <router-link
+              @click="logoutUser()"
               to="/"
-              class="block px-4 py-2 text-sm text-gray-700 hover:bg-indigo-600 hover:text-white"
+              class="
+                block
+                px-4
+                py-2
+                text-sm text-gray-700
+                hover:bg-indigo-600 hover:text-white
+              "
               >Log out</router-link
             >
           </div>
@@ -100,9 +153,23 @@
   </header>
 </template>
 
-<script setup lang="ts">
+<script  lang="ts">
 import { ref } from "vue";
 import { useSidebar } from "../hooks/useSidebar";
-const dropdownOpen = ref(false);
-const { isOpen } = useSidebar();
+import userCrud from "../modules/userCrud";
+
+export default {
+  setup() {
+    const { state, logoutUser } = userCrud();
+    const dropdownOpen = ref(false);
+    const { isOpen } = useSidebar();
+
+    return {
+      isOpen,
+      dropdownOpen,
+      state,
+      logoutUser,
+    };
+  },
+};
 </script>

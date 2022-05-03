@@ -1,6 +1,6 @@
 import { ref, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { setCookie, getCookie } from './cookie'
+import { setCookie, getCookie, deleteCookie } from './cookie'
 import { uri } from './uri'
 
 const getUsers = () => {
@@ -109,15 +109,19 @@ const getUsers = () => {
                 router.push({ path: "/", replace: true })
             })
     }
-    
 
+    const logoutUser = () => {
+        deleteCookie('id')
+        deleteCookie('email')
+        deleteCookie('token')
+        router.push({ path: "/login", replace: true })
+    }
 
     const setCookies = () => {
         setCookie('id', state.value.id, 1)
         setCookie('email', state.value.email, 1)
         setCookie('token', state.value.token, 1)
     }
-
 
     return {
         state,
@@ -127,6 +131,7 @@ const getUsers = () => {
         getSpecificUser,
         newUser,
         loginUser,
+        logoutUser,
         setCookie
     }
 }
