@@ -54,8 +54,11 @@
             />
           </svg>
 
-          <span class="mx-2 text-2xl font-semibold text-white"
-            >Better than Trello</span
+          <!-- <span class="mx-2 text-1xl font-semibold text-white"
+            >Meow ᓚᘏᗢ</span 
+          > -->
+          <span class="mx-2 text-1xl font-semibold text-white"
+            >Trællo (⌐■_■)🤏</span
           >
         </div>
       </div>
@@ -115,9 +118,7 @@
 
         <router-link
           class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
-          :class="[
-            $route.name === '/empty' ? activeClass : inactiveClass,
-          ]"
+          :class="[$route.name === '/empty' ? activeClass : inactiveClass]"
           to="/empty"
         >
           <svg
