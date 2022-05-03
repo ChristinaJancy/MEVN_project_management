@@ -108,7 +108,7 @@ router.get("/:id", verifyToken, (req, res) => {
 });
 
 //update user by id
-router.put("/:id", verifyToken, (req, res) => {
+router.put("/:id", verifyToken, async (req, res) => {
     try {
         const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
         res.json({ message: "User updated successfully 😊", updatedUser });
