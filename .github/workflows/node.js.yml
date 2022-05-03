@@ -50,4 +50,4 @@ jobs:
 
       - name: Deploy to heroku to main
         working-directory: ./backend
-        run: git push --force heroku main
+        run: git push heroku main --force
