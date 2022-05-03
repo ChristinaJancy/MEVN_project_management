@@ -87,7 +87,7 @@ router.post("/login", async (req, res) => {
             { expiresIn: process.env.JWT_EXPIRES_IN },
         );
 
-    res.header("auth-token", token).json({
+    res.status(200).header("auth-token", token).json({
         message: "User logged in 😊",
         token: token,
         id: user._id,
