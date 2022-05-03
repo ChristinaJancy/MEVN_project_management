@@ -29,7 +29,7 @@ const getUsers = () => {
                 "auth-token": getCookie('token')
             },
         };
-        fetch("http://localhost:4000/api/users",
+        fetch(uri + 'users',
             requestOptions
         )
             .then(response => response.json())
@@ -46,7 +46,7 @@ const getUsers = () => {
                 "auth-token": getCookie('token')
             },
         };
-        fetch(`http://localhost:4000/api/users/`,
+        fetch(uri + 'users',
             requestOptions
         )
             .then(response => response.json())
@@ -71,7 +71,7 @@ const getUsers = () => {
                 avatarPicture: 'img'
             })
         }
-        fetch("http://localhost:4000/api/users/register",
+        fetch(uri + 'users/register',
             requestOptions
         )
             .then(data => {
@@ -92,7 +92,7 @@ const getUsers = () => {
                 password: state.value.password
             })
         }
-        fetch("http://localhost:4000/api/users/login",
+        fetch(uri + 'users/login',
             requestOptions
         )
             .then(response => response.json())
