@@ -1,6 +1,7 @@
 import { ref, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { setCookie, getCookie } from './cookie'
+import { uri } from './uri'
 
 const getUsers = () => {
     const route = useRoute();
@@ -9,13 +10,17 @@ const getUsers = () => {
 
     const state = ref({
         email: '',
+        initials: '',
+        img: '',
         password: '',
         name: '',
         token: '',
+        roles: [],
         users: {},
         id: ''
     })
     const user = ref({})
+
     const getAllUsers = async () => {
         const requestOptions = {
             method: 'GET',
@@ -75,6 +80,7 @@ const getUsers = () => {
             })
     }
 
+
     const loginUser = async () => {
         const requestOptions = {
             method: "POST",
@@ -103,10 +109,11 @@ const getUsers = () => {
                 router.push({ path: "/", replace: true })
             })
     }
+    
+
 
     const setCookies = () => {
         setCookie('id', state.value.id, 1)
-        setCookie('name', state.value.name, 1)
         setCookie('email', state.value.email, 1)
         setCookie('token', state.value.token, 1)
     }

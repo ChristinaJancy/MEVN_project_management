@@ -1,30 +1,46 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+import { getCookie } from '../modules/cookie';
 
 const routes: Array<RouteRecordRaw> = [
     {
         path: '/',
         name: 'Dashboard',
-        component: () => import(/* webpackChunkName: "Home" */ '../views/DashboardView.vue')
+        component: () => import(/* webpackChunkName: "Home" */ '../views/DashboardView.vue'),
+        meta: {
+            requiresAuth: true
+        }
     },
     {
         path: '/projects/project',
         name: 'project',
-        component: () => import(/* webpackChunkName: "Project" */ '../views/ProjectView.vue')
+        component: () => import(/* webpackChunkName: "Project" */ '../views/ProjectView.vue'),
+        meta: {
+            requiresAuth: true
+        }
     },
     {
         path: '/users/:id',
         name: 'user',
-        component: () => import(/* webpackChunkName: "user" */ '../views/UserView.vue')
+        component: () => import(/* webpackChunkName: "user" */ '../views/UserView.vue'),
+        meta: {
+            requiresAuth: true
+        }
     },
     {
         path: '/profile',
         name: 'Profile',
-        component: () => import(/* webpackChunkName: "Profile" */ '../views/ProfileView.vue')
+        component: () => import(/* webpackChunkName: "Profile" */ '../views/ProfileView.vue'),
+        meta: {
+            requiresAuth: true
+        }
     },
     {
         path: '/projects',
         name: 'Projects',
-        component: () => import(/* webpackChunkName: "Projects" */ '../views/ProjectsView.vue')
+        component: () => import(/* webpackChunkName: "Projects" */ '../views/ProjectsView.vue'),
+        meta: {
+            requiresAuth: true
+        }
     },
     {
         path: '/register',
@@ -46,5 +62,16 @@ const router = createRouter({
     history: createWebHistory(),
     routes,
 });
+
+router.beforeEach((to, from, next) => {
+    const requiresAuth = to.matched.some(x => x.meta.requiresAuth);
+    const isAuthenticated = getCookie('token');
+
+    if (requiresAuth && !isAuthenticated) {
+        next('/login');
+    } else {
+        next();
+    }
+})
 
 export default router;

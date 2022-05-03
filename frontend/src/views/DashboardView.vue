@@ -4,37 +4,8 @@
 
     <div class="mt-8"></div>
 
-    <div class="grid grid-cols-12 mx-auto">
-      <div class="col-span-6 mx-auto">
-        <h3>All users</h3>
-        <div v-for="user in state.users" :key="user._id">
-          <router-link
-            :to="{
-              name: 'user',
-              params: {
-                id: user._id,
-                email: user.email,
-              },
-            }"
-          >
-            <div class="flex items-center">
-              <div class="w-1/4">
-                <img :src="user.avatar" class="w-16 h-16 rounded-full" />
-              </div>
-              <div class="w-3/4">
-                <h4 class="text-gray-700">{{ user.name }}</h4>
-                <p class="text-gray-600">{{ user.email }}</p>
-              </div>
-            </div>
-          </router-link>
-        </div>
-      </div>
-      <div class="col-span-6 mx-auto">
-        <h3>User currently logged in</h3>
-        <div></div>
-      </div>
-    </div>
     <div class="flex flex-col mt-8">
+      <h4 class="text-1xl font-bold text-gray-700">All users</h4>
       <div class="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
         <div
           class="
@@ -96,22 +67,6 @@
                     bg-gray-50
                   "
                 >
-                  Status
-                </th>
-                <th
-                  class="
-                    px-6
-                    py-3
-                    text-xs
-                    font-medium
-                    leading-4
-                    tracking-wider
-                    text-left text-gray-500
-                    uppercase
-                    border-b border-gray-200
-                    bg-gray-50
-                  "
-                >
                   Role
                 </th>
                 <th class="px-6 py-3 border-b border-gray-200 bg-gray-50"></th>
@@ -119,25 +74,34 @@
             </thead>
 
             <tbody class="bg-white">
-              <tr v-for="(u, index) in users" :key="index">
+              <!-- <tr v-for="(u, index) in users" :key="index"> -->
+              <tr v-for="user in state.users" :key="user._id">
                 <td
                   class="px-6 py-4 border-b border-gray-200 whitespace-nowrap"
                 >
                   <div class="flex items-center">
-                    <div class="flex-shrink-0 w-10 h-10">
+                    <div
+                      class="flex-shrink-0 w-10 h-10 bg-green-500 rounded-full"
+                    >
                       <img
                         class="w-10 h-10 rounded-full"
                         src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                         alt=""
+                        style="opacity: 0"
                       />
+                      <div
+                        class="-mt-80 text-center text-sm font-bold text-white"
+                      >
+                        {{ user.initials }}
+                      </div>
                     </div>
 
                     <div class="ml-4">
                       <div class="text-sm font-medium leading-5 text-gray-900">
-                        {{ u.name }}
+                        {{ user.name }}
                       </div>
                       <div class="text-sm leading-5 text-gray-500">
-                        {{ u.email }}
+                        {{ user.email }}
                       </div>
                     </div>
                   </div>
@@ -147,29 +111,8 @@
                   class="px-6 py-4 border-b border-gray-200 whitespace-nowrap"
                 >
                   <div class="text-sm leading-5 text-gray-900">
-                    {{ u.title }}
+                    {{ user.title }} title
                   </div>
-                  <div class="text-sm leading-5 text-gray-500">
-                    {{ u.title2 }}
-                  </div>
-                </td>
-
-                <td
-                  class="px-6 py-4 border-b border-gray-200 whitespace-nowrap"
-                >
-                  <span
-                    class="
-                      inline-flex
-                      px-2
-                      text-xs
-                      font-semibold
-                      leading-5
-                      text-green-800
-                      bg-green-100
-                      rounded-full
-                    "
-                    >{{ u.status }}</span
-                  >
                 </td>
 
                 <td
@@ -183,7 +126,8 @@
                     whitespace-nowrap
                   "
                 >
-                  {{ u.role }}
+                  <p v-if="user.roles">{{ user.roles}} </p>
+                  <p v-else>No roles</p>
                 </td>
 
                 <td
