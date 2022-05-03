@@ -126,7 +126,11 @@
                     whitespace-nowrap
                   "
                 >
-                  <p v-if="user.roles">{{ user.roles}} </p>
+                  <p v-if="user.roles">
+                    <span v-for="roles in user.roles" :key="roles">
+                      {{ roles.title }}</span
+                    >
+                  </p>
                   <p v-else>No roles</p>
                 </td>
 
@@ -144,6 +148,12 @@
                 >
                   <a href="#" class="text-indigo-600 hover:text-indigo-900"
                     >Edit</a
+                  ><br />
+                  <a
+                    href="#"
+                    class="text-red-600 hover:text-indigo-900"
+                    @click="deleteUser(user._id)"
+                    >Delete</a
                   >
                 </td>
               </tr>
@@ -186,13 +196,13 @@ import { onMounted } from "vue";
 
 export default {
   setup() {
-    const { state, getAllUsers, getSpecificUser } = userCrud();
+    const { state, getAllUsers, getSpecificUser, deleteUser } = userCrud();
     onMounted(() => {
       getAllUsers();
       getSpecificUser();
     });
 
-    return { state, getAllUsers, getSpecificUser };
+    return { state, getAllUsers, getSpecificUser, deleteUser };
   },
 };
 </script>

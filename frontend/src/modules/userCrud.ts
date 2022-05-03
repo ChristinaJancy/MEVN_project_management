@@ -117,6 +117,22 @@ const getUsers = () => {
         router.push({ path: "/login", replace: true })
     }
 
+    //A user can delete any user as long as they are logged in.
+    const deleteUser = (_id: string) => {
+        const requestOptions = {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "auth-token": getCookie('token')
+            },
+        }
+        fetch(uri + 'users/' + _id,
+            requestOptions
+        )
+            .then(response => response.json())
+            .then(getAllUsers)
+    }
+
     const setCookies = () => {
         setCookie('id', state.value.id, 1)
         setCookie('email', state.value.email, 1)
@@ -132,6 +148,7 @@ const getUsers = () => {
         newUser,
         loginUser,
         logoutUser,
+        deleteUser,
         setCookie
     }
 }
