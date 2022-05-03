@@ -48,6 +48,6 @@ jobs:
         working-directory: ./backend
         run: git remote add heroku https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
 
-      - name: Deploy to heroku
+      - name: Deploy to heroku to main
         working-directory: ./backend
         run: git push --force heroku main
