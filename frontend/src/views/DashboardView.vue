@@ -81,19 +81,21 @@
                 >
                   <div class="flex items-center">
                     <div
-                      class="flex-shrink-0 w-10 h-10 bg-green-500 rounded-full"
+                      class="flex-shrink-0 w-10 h-10 bg-green-500 rounded-full flex items-center justify-center"
                     >
-                      <img
+                      <!-- <img
                         class="w-10 h-10 rounded-full"
                         src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                         alt=""
                         style="opacity: 0"
-                      />
+                      /> -->
                       <div
-                        class="-mt-80 text-center text-sm font-bold text-white"
+                        class="text-center text-sm font-bold text-white"
+                        v-if="user.initials"
                       >
                         {{ user.initials }}
                       </div>
+
                     </div>
 
                     <div class="ml-4">
