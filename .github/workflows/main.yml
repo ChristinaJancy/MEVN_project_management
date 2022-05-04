@@ -48,7 +48,8 @@ jobs:
         run: git --version
 
       - name: Add git remote Heroku
-        run: git add /backend #heroku https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
+        working-directory: ./backend
+        run: git add . #heroku https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
 
       - name: Deploy to heroku to main
         run: git subtree push --prefix backend heroku main
