@@ -30,7 +30,7 @@
         </p>
       </div>
       <!-- <form class="mt-8 space-y-6" action="#" method="POST"> -->
-           <div class="mt-8 space-y-6">
+      <div class="mt-8 space-y-6">
         <input type="hidden" name="remember" value="true" />
         <div class="rounded-md shadow-sm -space-y-px">
           <div>
@@ -127,7 +127,7 @@
 
         <div>
           <button
-           @click="loginUser()"
+            @click="loginUser()"
             type="submit"
             class="
               group
@@ -165,7 +165,7 @@
 </template>
 
 <script lang="ts">
-import { LockClosedIcon } from "@heroicons/vue/solid";
+import {LockClosedIcon} from "@heroicons/vue/solid";
 import userCrud from "../modules/userCrud";
 
 export default {

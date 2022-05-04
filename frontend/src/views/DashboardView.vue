@@ -81,7 +81,16 @@
                 >
                   <div class="flex items-center">
                     <div
-                      class="flex-shrink-0 w-10 h-10 bg-green-500 rounded-full flex items-center justify-center"
+                      class="
+                        flex-shrink-0
+                        w-10
+                        h-10
+                        bg-green-500
+                        rounded-full
+                        flex
+                        items-center
+                        justify-center
+                      "
                     >
                       <!-- <img
                         class="w-10 h-10 rounded-full"
@@ -95,7 +104,6 @@
                       >
                         {{ user.initials }}
                       </div>
-
                     </div>
 
                     <div class="ml-4">
@@ -148,8 +156,15 @@
                     whitespace-nowrap
                   "
                 >
-                  <a href="#" class="text-indigo-600 hover:text-indigo-900"
-                    >Edit</a
+                  <router-link
+                    :to="{
+                      name: 'user',
+                      params: {
+                        id: user._id
+                      },
+                    }"
+                    class="text-indigo-600 hover:text-indigo-900"
+                    >Edit</router-link
                   ><br />
                   <a
                     href="#"

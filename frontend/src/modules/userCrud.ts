@@ -17,7 +17,9 @@ const getUsers = () => {
         token: '',
         roles: [],
         users: {},
-        id: ''
+        id: '',
+        newName: '',
+        newEmail: ''
     })
     const user = ref({})
 
@@ -80,6 +82,27 @@ const getUsers = () => {
             })
     }
 
+    const updateUser = (_id: string) => {
+        const requestOptions = {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "auth-token": getCookie('token')
+            },
+            body: JSON.stringify({
+                email: state.value.newEmail,
+                name: state.value.newName,
+            })
+        }
+        fetch(uri + 'users/' + _id,
+            requestOptions
+        )
+            .then(response => response.json())
+            .then(data => {
+                console.log("data:", data);
+                router.push({ path: "/", replace: true })
+            })
+    }
 
     const loginUser = async () => {
         const requestOptions = {
@@ -149,6 +172,7 @@ const getUsers = () => {
         loginUser,
         logoutUser,
         deleteUser,
+        updateUser,
         setCookie
     }
 }
