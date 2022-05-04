@@ -45,8 +45,7 @@ jobs:
           fecthc-depth: 0
         
       - name: Add git remote Heroku
-        run: echo ${{ secrets.HEROKU_API_KEY }}
-        # run: git remote add heroku https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
+        run: git remote add heroku https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
 
       - name: Deploy to heroku to main
         run: git subtree push --prefix backend heroku main --force
