@@ -18,3 +18,6 @@ First open the folder 'backend' in terminal, then
 2. once finished, write `npm run start-dev`
 3. dev server should now be running on
   > Local: http://localhost:4000/
+
+**Update:**
+The API is now live on heroku. 
