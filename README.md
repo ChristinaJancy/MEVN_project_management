@@ -1,8 +1,8 @@
 # MEVN_project_management
 PWA &amp; REST API project. 
-[![Node.js CI](https://github.com/ChristinaJancy/MEVN_project_management/actions/workflows/node.js.yml/badge.svg)](https://github.com/ChristinaJancy/MEVN_project_management/actions/workflows/node.js.yml)
 **Main task:** 
 Design &amp; develop a project management application. 
+[![Node.js CI](https://github.com/ChristinaJancy/MEVN_project_management/actions/workflows/node.js.yml/badge.svg)](https://github.com/ChristinaJancy/MEVN_project_management/actions/workflows/node.js.yml)
 
 
 # Getting started with frontend
