@@ -26,7 +26,7 @@ const verifyToken = (req, res, next) => { //middleware to verify token
     const token = req.header("auth-token");
 
     //if there is no token in the request, then fail
-    if (!token) return res.status(401).json({ error: "Access Denied" }); //401 - unauthorized
+    if (!token) return res.status(401).json({ error: "Access Denied 🤷‍♂️" }); //401 - unauthorized
 
     //check the token...
     try {
