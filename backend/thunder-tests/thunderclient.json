@@ -46,11 +46,11 @@
     "method": "GET",
     "sortNum": 30000,
     "created": "2022-04-05T10:26:41.896Z",
-    "modified": "2022-04-28T07:49:03.853Z",
+    "modified": "2022-05-05T10:22:40.047Z",
     "headers": [
       {
         "name": "auth-token",
-        "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoibmV3IHVzZXIiLCJpZCI6IjYyNGMxZmU1ZjRmOGJhNDU3N2RlMTkzZiIsImlhdCI6MTY1MTEzMjEyMSwiZXhwIjoxNjUxMjE4NTIxfQ.UDFLkhlHHJ_-TIe7v-R3T9aeTxMovXTzjieJziOMUt0"
+        "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9uYXRoYW4gTWFkc2VuIiwiaWQiOiI2MjczOGZkMTllZjQ0ZjdkNGU0MjIyNTAiLCJpYXQiOjE2NTE3NDU4MTEsImV4cCI6MTY1MTgzMjIxMX0.19iy5VMgmh15uaHbNV82lHWz1fW00ktzC3uw_gn2xhE"
       }
     ],
     "params": [],
@@ -189,12 +189,12 @@
     "method": "POST",
     "sortNum": 20000,
     "created": "2022-04-05T10:26:41.896Z",
-    "modified": "2022-04-05T10:55:01.444Z",
+    "modified": "2022-05-05T10:16:35.253Z",
     "headers": [],
     "params": [],
     "body": {
       "type": "json",
-      "raw": "{\n    \"email\": \"new@user.com\",\n    \"password\": \"123456\"\n}\n",
+      "raw": "{\n    \"email\": \"jona737a\",\n    \"password\": \"jwc22vun\"\n}\n",
       "form": []
     },
     "tests": []
@@ -399,11 +399,19 @@
     "method": "GET",
     "sortNum": 20000,
     "created": "2022-04-05T10:26:41.896Z",
+<<<<<<< Updated upstream
     "modified": "2022-05-05T08:03:54.848Z",
     "headers": [
       {
         "name": "auth-token",
         "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoibmV3IHVzZXIiLCJpZCI6IjYyNGMxZmU1ZjRmOGJhNDU3N2RlMTkzZiIsImlhdCI6MTY1MTczNzM1NCwiZXhwIjoxNjUxODIzNzU0fQ.l5KN6eCKYOxTDk7WGwBn9bYAUyFxuHpREM7EUWi5DIQ"
+=======
+    "modified": "2022-05-05T10:18:49.487Z",
+    "headers": [
+      {
+        "name": "auth-token",
+        "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9uYXRoYW4gTWFkc2VuIiwiaWQiOiI2MjczOGZkMTllZjQ0ZjdkNGU0MjIyNTAiLCJpYXQiOjE2NTE3NDU4MTEsImV4cCI6MTY1MTgzMjIxMX0.19iy5VMgmh15uaHbNV82lHWz1fW00ktzC3uw_gn2xhE"
+>>>>>>> Stashed changes
       }
     ],
     "params": [],
@@ -547,15 +555,15 @@
     "colId": "3ae5de68-e9e5-4ac3-b284-fedb351a7eaf",
     "containerId": "",
     "name": "Get user with id",
-    "url": "localhost:4000/api/users/:id",
+    "url": "localhost:4000/api/users/6273a19361781410b419c9d2",
     "method": "GET",
     "sortNum": 40000,
     "created": "2022-04-13T10:27:46.930Z",
-    "modified": "2022-04-13T10:28:11.224Z",
+    "modified": "2022-05-05T10:17:31.676Z",
     "headers": [
       {
         "name": "auth-token",
-        "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoibmV3IHVzZXIiLCJpZCI6IjYyNGMxZmU1ZjRmOGJhNDU3N2RlMTkzZiIsImlhdCI6MTY0OTc1NDM1MSwiZXhwIjoxNjQ5ODQwNzUxfQ.p4HzeCSJeQtX3_ZFPA5HYu_iNeNYUG3wfN9EsntV3zw"
+        "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9uYXRoYW4gTWFkc2VuIiwiaWQiOiI2MjczOGZkMTllZjQ0ZjdkNGU0MjIyNTAiLCJpYXQiOjE2NTE3NDU4MTEsImV4cCI6MTY1MTgzMjIxMX0.19iy5VMgmh15uaHbNV82lHWz1fW00ktzC3uw_gn2xhE"
       }
     ],
     "params": [],

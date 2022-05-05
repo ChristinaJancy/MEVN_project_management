@@ -3,6 +3,14 @@ const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
 
+//swagger dependencies
+const swaggerUi = require("swagger-ui-express");
+const yaml = require("yamljs");
+
+//Swagger setup
+const swaggerDocument = yaml.load("./swagger.yaml");
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 //load configuration from .env file and set up port
 require('dotenv-flow').config();
 

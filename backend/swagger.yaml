@@ -1,0 +1,387 @@
+#Yaml file for swagger documentation 
+openapi: 3.0.0
+info:
+  title: MEVN project management API
+  description: MongoDB ExpressJS NodeJS REST API for project management project
+  version: 1.0.0
+servers:
+  - url: http://localhost:4000/api/
+    description: Localhost development server 
+  - url: https://mevn-project-management.herokuapp.com/api/
+    description: Heroku remote server
+components:
+  securitySchemes:
+    ApiKeyAuth:        # arbitrary name for the security scheme
+      type: apiKey
+      in: header       # can be "header", "query" or "cookie"
+      name: auth-token
+
+  schemas:
+    Column:
+      type: object
+      properties:
+        title:
+          type: string
+        tasks:
+          type: array
+    
+    Project:
+      type: object
+      properties:
+        title:
+          type: string
+        deadline:
+          type: date
+        description:
+          type: string
+        tags:
+          type: array
+        columns:
+          type: array
+        assigned:
+          type: array
+    
+    ProjectTag:
+      type: object
+      properties:
+        name:
+          type: string
+        color:
+          type: string
+    
+    ProjectTemplate:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        columns:
+          type: array
+    
+    Role:
+      type: object
+      properties:
+        title:
+          type: string
+        color:
+          type: string
+    
+    Task:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        deadline:
+          type: date
+        status:
+          type: string
+        assigned:
+          type: array
+        tags:
+          type: array
+
+    User:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        avatarPicture:
+          type: string
+        roles:
+          type: array
+
+#
+#     ROUTES
+#
+
+# User routes
+paths:
+  /users/register:
+    post:
+      summary: Register a new User
+      description: Register a new User in the database
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+
+      responses:
+        201:
+          description: User created succesfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  newUser:
+                    type: string
+
+  /users/login:
+    post:
+      summary: Login a User
+      description: Login a User in order to get JWT token (auth-token)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      
+      responses:
+        200:
+          description: User logged in succesfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  token:
+                    type: string
+                  id: 
+                    type: string
+
+  /users:
+    get:
+      summary: Get all Users
+      description: Get all Users from the database
+      security:
+        - ApiKeyAuth: []
+      responses:
+        200:
+          description: Users retrieved succesfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+
+  /users/{id}:
+    get:
+      summary: Get a User by id
+      description: Get a User by id from the database
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: User id
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: User retrieved succesfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+    
+    delete:
+      summary: Delete a User by id
+      description: Delete a User by id from the database
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: User id
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: User deleted succesfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+
+    put:
+      summary: Update a User by id
+      description: Update a User by id from the database
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: User id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+      responses:
+        200:
+          description: User updated succesfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  updatedUser:
+                    type: string
+
+
+# Project routes
+
+  /projects:
+    get:
+      summary: Get all Projects
+      description: Get all Projects from the database
+      security:
+        - ApiKeyAuth: []
+      responses:
+        200:
+          description: Projects retrieved succesfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Project"
+  
+  /projects/{id}:
+    get:
+      summary: Get a Project by id
+      description: Get a Project by id from the database
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: Project id
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Project retrieved succesfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Project"
+      
+    delete:
+      summary: Delete a Project by id
+      description: Delete a Project by id from the database
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: Project id
+          required: true
+          schema:
+            type: string
+      responses:
+
+  
+    
+  
+
+
+
+  
+  # /products/{id}:
+  #   get:
+  #     summary: Specific Product
+  #     description: Retrieves a specific Product based on it id.
+  #     parameters:
+  #       - in: path
+  #         name: id
+  #         required: true
+  #         description: MongoDB id
+  #         schema:
+  #           type: string
+  #     responses:
+  #       200:
+  #         description: A Product in the format of a JSON object.
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: array
+  #               items:
+  #                 $ref: "#/components/schemas/Product"
+   
+  #   put:
+  #     summary: Updates a specific Product
+  #     description: Updates a specific Product based on it id
+  #     security:
+  #       - ApiKeyAuth: []            
+  #     parameters:
+  #       - in: path
+  #         name: id
+  #         required: true
+  #         description: MongoDB id
+  #         schema:
+  #           type: string
+  #     requestBody:
+  #       required: true
+  #       content:
+  #         application/json:
+  #           schema:
+  #             $ref: "#/components/schemas/Product"
+
+  #     responses:
+  #       201:
+  #         description: Product updated succesfully
+  #         content:
+  #           application/json:
+  #             schema:
+  #               $ref: "#/components/schemas/Product"
+
+  #   delete:
+  #     summary: Deletes a specific Product
+  #     description: Deletes a specific Product based on it id
+  #     security:
+  #       - ApiKeyAuth: []            
+  #     parameters:
+  #       - in: path
+  #         name: id
+  #         required: true
+  #         description: MongoDB id
+  #         schema:
+  #           type: string      
+
+  #     responses:
+  #       201:
+  #         description: Product deleted succesfully
+  #         content:
+  #           application/json:
+  #             schema:
+  #               $ref: "#/components/schemas/Product"
+
+  
+
+
+    
+
+    
