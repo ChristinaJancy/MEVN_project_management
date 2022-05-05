@@ -3,7 +3,7 @@ import { useRoute, useRouter } from 'vue-router'
 import { setCookie, getCookie, deleteCookie } from './cookie'
 import { uri } from './uri'
 
-const getUsers = () => {
+const userCrud = () => {
     const route = useRoute();
     const router = useRouter();
     const userId = computed(() => route.params.id);
@@ -177,4 +177,4 @@ const getUsers = () => {
     }
 }
 
-export default getUsers 
+export default userCrud 

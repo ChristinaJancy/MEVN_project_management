@@ -32,39 +32,71 @@
                 xl:grid-cols-4 xl:gap-x-8
               "
             >
-              <router-link to="/projects/project"
-                v-for="project in projects"
-                :key="project.id"
-                :href="project.href"
+              <router-link
+                :to="{
+                  name: 'project',
+                  params: {
+                    id: project._id,
+                    title: project.title,
+                  },
+                }"
+                v-for="project in state.projects"
+                :key="project._id"
                 class="group"
               >
                 <div
                   class="
                     w-full
                     aspect-w-1 aspect-h-1
-                    bg-gray-200
+                    px-2
+                    pb-2
                     rounded-lg
                     overflow-hidden
                     xl:aspect-w-7 xl:aspect-h-8
+                    bg-white
                   "
                 >
-                  <img
-                    :src="project.imageSrc"
-                    :alt="project.imageAlt"
-                    class="
-                      w-full
-                      h-full
-                      object-center object-cover
-                      group-hover:opacity-75
-                    "
-                  />
+                  <div class="flex justify-between">
+                    <div>
+                      <h3 class="mt-1 text-sm text-gray-700 mb-0 font-bold">
+                        {{ project.title }}
+                      </h3>
+                      <p class="mt-1 text-sm text-gray-700 mb-0 font-medium">
+                        {{ project.description }}
+                      </p>
+                      <p
+                        class="mt-1 text-sm text-gray-700 mb-0 font-medium"
+                        v-for="assigned in project.assigned"
+                        :key="assigned"
+                      >
+                        {{ assigned.name }}
+                      </p>
+                      <br />
+                      <p class="text-sm text-gray-500">
+                        <!--https://momentjs.com/-->
+                        {{ moment(project.deadline).startOf("hour").fromNow() }}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div v-for="tag in project.tags" :key="tag">
+                    <p
+                      class="text-sm font-medium mt-1"
+                      align="right"
+                      :style="{ background: tag.color }"
+                    >
+                      <span
+                        :style="{
+                          color: 'white',
+                          'mix-blend-mode': 'difference',
+                        }"
+                        class="px-1 py-0.5 rounded-full"
+                      >
+                        {{ tag.name }}
+                      </span>
+                    </p>
+                  </div>
                 </div>
-                <h3 class="mt-4 text-sm text-gray-700 mb-0 font-bold">
-                  {{ project.title }}
-                </h3>
-                <p class="text-sm text-gray-700 font-normal">
-                  {{ project.deadline }}
-                </p>
               </router-link>
             </div>
           </div>
@@ -75,50 +107,29 @@
 </template>
 
 
-<script>
-const projects = [
-  {
-    id: 1,
-    title: "UX design of something",
-    href: "#",
-  deadline: '10/10/2020',
-    imageSrc: "https://picsum.photos/200",
-    imageAlt: "Something",
-  },
-  {
-    id: 2,
-    title: "New project wow!",
-    href: "#",
-   deadline: '10/10/2020',
-    imageSrc: "https://picsum.photos/200",
-    imageAlt: "Something",
-  },
-  {
-    id: 3,
-    title: "This is something cool",
-    href: "#",
-   deadline: '10/10/2020',
-    imageSrc: "https://picsum.photos/200",
-    imageAlt: "Something",
-  },
-  {
-    id: 4,
-    title: "You won't bellieve what happened next!",
-    href: "#",
-    deadline: '10/10/2020',
-    imageSrc: "https://picsum.photos/200",
-    imageAlt: "Something",
-  },
-];
+<script lang="ts">
+import projectCrud from "../modules/projectCrud";
+import { onMounted } from "vue";
+import { defineComponent } from "vue";
+import moment from "moment";
 
-export default {
+export default defineComponent({
   setup() {
-    return {
-      projects,
-    };
+    const { state, getAllProjects } = projectCrud();
+
+    onMounted(() => {
+      getAllProjects();
+    });
+
+    return { state, getAllProjects };
   },
-};
+  created: function () {
+    this.moment = moment;
+  },
+});
 </script>
+
+
 
 
 

@@ -165,12 +165,12 @@
 </template>
 
 <script lang="ts">
-import {LockClosedIcon} from "@heroicons/vue/solid";
+ import  LockClosedIcon from "@heroicons/vue/solid";
 import userCrud from "../modules/userCrud";
 
 export default {
   components: {
-    LockClosedIcon,
+     LockClosedIcon,
   },
   setup() {
     const { state, loginUser } = userCrud();

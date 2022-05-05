@@ -1,7 +1,7 @@
 <template>
   <div>
     <h3 class="text-3xl font-medium text-gray-700">Profile</h3>
-
+    
     <div class="mt-8"></div>
 
     <div class="flex flex-col mt-8">

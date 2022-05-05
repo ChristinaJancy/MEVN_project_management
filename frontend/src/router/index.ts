@@ -11,7 +11,7 @@ const routes: Array<RouteRecordRaw> = [
         }
     },
     {
-        path: '/projects/project',
+        path: '/projects/:title',
         name: 'project',
         component: () => import(/* webpackChunkName: "Project" */ '../views/ProjectView.vue'),
         meta: {
@@ -65,13 +65,15 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
     const requiresAuth = to.matched.some(x => x.meta.requiresAuth);
-    const isAuthenticated = getCookie('token');
+    const isAuthenticated = getCookie('token'); // check if user is logged in
 
-    if (requiresAuth && !isAuthenticated) {
+
+
+    if (requiresAuth && !isAuthenticated ) {
         next('/login');
     } else {
         next();
-    }
+    } 
 })
 
 export default router;
