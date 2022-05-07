@@ -173,6 +173,27 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/User"
+    post:
+      summary: Create a new User
+      description: Create a new User in the database
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"
+      responses:
+        201:
+          description: User created succesfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  newUser:
+                    type: string
 
   /users/{id}:
     get:
@@ -267,6 +288,30 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Project"
+
+    post:
+      summary: Create a new Project
+      description: Create a new Project in the database
+      security:
+        - ApiKeyAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Project"
+      responses:
+        201:
+          description: Project created succesfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  newProject:
+                    type: string
   
   /projects/{id}:
     get:
@@ -302,86 +347,276 @@ paths:
           schema:
             type: string
       responses:
-
-  
+        200:
+          description: Project deleted succesfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
     
+    put:
+      summary: Update a Project by id
+      description: Update a Project by id from the database
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: Project id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Project"
+      responses:
+        200:
+          description: Project updated succesfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  updatedProject:
+                    type: string
   
+  # Column routes
 
-
-
-  
-  # /products/{id}:
-  #   get:
-  #     summary: Specific Product
-  #     description: Retrieves a specific Product based on it id.
-  #     parameters:
-  #       - in: path
-  #         name: id
-  #         required: true
-  #         description: MongoDB id
-  #         schema:
-  #           type: string
-  #     responses:
-  #       200:
-  #         description: A Product in the format of a JSON object.
-  #         content:
-  #           application/json:
-  #             schema:
-  #               type: array
-  #               items:
-  #                 $ref: "#/components/schemas/Product"
-   
-  #   put:
-  #     summary: Updates a specific Product
-  #     description: Updates a specific Product based on it id
-  #     security:
-  #       - ApiKeyAuth: []            
-  #     parameters:
-  #       - in: path
-  #         name: id
-  #         required: true
-  #         description: MongoDB id
-  #         schema:
-  #           type: string
-  #     requestBody:
-  #       required: true
-  #       content:
-  #         application/json:
-  #           schema:
-  #             $ref: "#/components/schemas/Product"
-
-  #     responses:
-  #       201:
-  #         description: Product updated succesfully
-  #         content:
-  #           application/json:
-  #             schema:
-  #               $ref: "#/components/schemas/Product"
-
-  #   delete:
-  #     summary: Deletes a specific Product
-  #     description: Deletes a specific Product based on it id
-  #     security:
-  #       - ApiKeyAuth: []            
-  #     parameters:
-  #       - in: path
-  #         name: id
-  #         required: true
-  #         description: MongoDB id
-  #         schema:
-  #           type: string      
-
-  #     responses:
-  #       201:
-  #         description: Product deleted succesfully
-  #         content:
-  #           application/json:
-  #             schema:
-  #               $ref: "#/components/schemas/Product"
-
-  
-
-
+  /columns:
+    get:
+      summary: Get all Columns
+      description: Get all Columns from the database
+      security:
+        - ApiKeyAuth: []
+      responses:
+        200:
+          description: Columns retrieved succesfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Column"
     
+    post:
+      summary: Create a new Column
+      description: Create a new Column in the database
+      security:
+        - ApiKeyAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Column"
+      responses:  
+        201:
+          description: Column created succesfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  newColumn:
+                    type: string
+  
+  /columns/{id}:
+    get:
+      summary: Get a Column by id
+      description: Get a Column by id from the database
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: Column id
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Column retrieved succesfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Column"
 
+    delete:
+      summary: Delete a Column by id
+      description: Delete a Column by id from the database
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: Column id
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Column deleted succesfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
     
+    put:
+      summary: Update a Column by id
+      description: Update a Column by id from the database
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: Column id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Column"
+      responses:
+        200:
+          description: Column updated succesfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  updatedColumn:
+                    type: string
+    
+  #tasks routes
+  /tasks:
+    get:
+      summary: Get all Tasks
+      description: Get all Tasks from the database
+      security:
+        - ApiKeyAuth: []
+      responses:
+        200:
+          description: Tasks retrieved succesfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Task"
+                  
+    post:
+      summary: Create a new Task
+      description: Create a new Task in the database
+      security:
+        - ApiKeyAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Task"
+      responses:
+        201:
+          description: Task created succesfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  newTask:
+                    type: string
+  
+  /tasks/{id}:
+    get:
+      summary: Get a Task by id
+      description: Get a Task by id from the database
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: Task id
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Task retrieved succesfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Task"
+    
+    delete:
+      summary: Delete a Task by id
+      description: Delete a Task by id from the database
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: Task id
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Task deleted succesfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+    
+    put:
+      summary: Update a Task by id
+      description: Update a Task by id from the database  
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: Task id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Task"
+      responses:
+        200:
+          description: Task updated succesfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  updatedTask:
+                    type: string
