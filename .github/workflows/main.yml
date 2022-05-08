@@ -58,14 +58,14 @@ jobs:
           justlogin: true
       - run: heroku auth:whoami
 
-    steps: 
-      - name: Checkout
-        uses: actions/checkout@v2
-        with: 
-          fectch-depth: 0
+    # steps: 
+    #   - name: Checkout
+    #     uses: actions/checkout@v2
+    #     with: 
+    #       fectch-depth: 0
 
-      - name: Add git remote Heroku
-        run: heroku git:remote -a mevn-project-management
+    #   - name: Add git remote Heroku
+    #     run: heroku git:remote -a mevn-project-management
 
-      - name: Deploy to heroku to main
-        run: git subtree push --prefix backend heroku main
+    #   - name: Deploy to heroku to main
+    #     run: git subtree push --prefix backend heroku main
