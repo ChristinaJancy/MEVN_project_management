@@ -46,6 +46,7 @@ jobs:
           heroku_app_name: ${{secrets.HEROKU_APP_NAME}} #Must be unique in Heroku
           heroku_email: "jonathansmadsen@gmail.com"
           appdir: "backend" # <- This will point to the api folder in your project
+          dontuseforce: true # <- This will not force a deploy
     # steps: 
     #   - name: Checkout
     #     uses: actions/checkout@v2
