@@ -71,42 +71,51 @@
             <!-- <tr v-for="(u, index) in users" :key="index"> -->
             <tr v-for="user in state.users" :key="user._id">
               <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
-                <div class="flex items-center">
-                  <div
-                    class="
-                      flex-shrink-0
-                      w-10
-                      h-10
-                      bg-green-500
-                      rounded-full
-                      flex
-                      items-center
-                      justify-center
-                    "
-                  >
-                    <!-- <img
+                <router-link
+                  :to="{
+                    name: 'profile',
+                    params: {
+                      id: user._id,
+                    },
+                  }"
+                >
+                  <div class="flex items-center">
+                    <div
+                      class="
+                        flex-shrink-0
+                        w-10
+                        h-10
+                        bg-green-500
+                        rounded-full
+                        flex
+                        items-center
+                        justify-center
+                      "
+                    >
+                      <!-- <img
                         class="w-10 h-10 rounded-full"
                         src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                         alt=""
                         style="opacity: 0"
                       /> -->
-                    <div
-                      class="text-center text-sm font-bold text-white"
-                      v-if="user.initials"
-                    >
-                      {{ user.initials }}
+                      <div
+                        class="text-center text-sm font-bold text-white"
+                        v-if="user.initials"
+                      >
+                        {{ user.initials }}
+                      </div>
                     </div>
-                  </div>
 
-                  <div class="ml-4">
-                    <div class="text-sm font-medium leading-5 text-gray-900">
-                      {{ user.name }}
-                    </div>
-                    <div class="text-sm leading-5 text-gray-500">
-                      {{ user.email }}
+                    <div class="ml-4">
+                      <div class="text-sm font-medium leading-5 text-gray-900">
+                        {{ user.name }}
+                      </div>
+                      <div class="text-sm leading-5 text-gray-500">
+                        {{ user.email }}
+                      </div>
                     </div>
                   </div>
-                </div>
+                </router-link>
               </td>
 
               <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
@@ -178,13 +187,12 @@ import { onMounted } from "vue";
 
 export default {
   setup() {
-    const { state, getAllUsers, getSpecificUser, deleteUser } = userCrud();
+    const { state, getAllUsers, deleteUser } = userCrud();
     onMounted(() => {
       getAllUsers();
-      getSpecificUser();
     });
 
-    return { state, getAllUsers, getSpecificUser, deleteUser };
+    return { state, getAllUsers, deleteUser };
   },
 };
 </script>

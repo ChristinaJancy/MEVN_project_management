@@ -19,17 +19,17 @@ const routes: Array<RouteRecordRaw> = [
         }
     },
     {
-        path: '/users/:id',
-        name: 'user',
-        component: () => import(/* webpackChunkName: "user" */ '../views/UserView.vue'),
+        path: '/profile/:id',
+        name: 'profile',
+        component: () => import(/* webpackChunkName: "Profile" */ '../views/ProfileView.vue'),
         meta: {
             requiresAuth: true
         }
     },
     {
-        path: '/profile',
-        name: 'Profile',
-        component: () => import(/* webpackChunkName: "Profile" */ '../views/ProfileView.vue'),
+        path: '/:id/edit',
+        name: 'user',
+        component: () => import(/* webpackChunkName: "Edituser" */ '../views/EditUserView.vue'),
         meta: {
             requiresAuth: true
         }

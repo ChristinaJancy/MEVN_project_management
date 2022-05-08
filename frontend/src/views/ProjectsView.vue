@@ -121,6 +121,7 @@
 import projectCrud from "../modules/projectCrud";
 import { onMounted } from "vue";
 import { defineComponent } from "vue";
+// icons
 import { DotsVerticalIcon } from "@heroicons/vue/solid";
 
 import moment from "moment";
@@ -130,10 +131,11 @@ export default defineComponent({
     DotsVerticalIcon,
   },
   setup() {
-    const { state, getAllProjects } = projectCrud();
+    const { state, getAllProjects, getSpecificProject } = projectCrud();
 
     onMounted(() => {
       getAllProjects();
+      getSpecificProject();
     });
 
     return { state, getAllProjects };

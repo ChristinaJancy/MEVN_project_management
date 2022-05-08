@@ -15,24 +15,26 @@
       <div class="max-w-md w-full space-y-8">
         <h2 class="font-bold text-3xl text-gray-900">Update info ✍️(◔◡◔)</h2>
         <!-- <form class="mt-8 space-y-6" action="#" method="POST"> -->
+
         <div class="mt-8 space-y-6">
           <input type="hidden" name="remember" value="true" />
           <!------ User name ------>
           <div class="rounded-md shadow-sm -space-y-px">
             <div>
-              <label class="font-bold text-sm text-gray-700" for="email-address"
+              <label class="font-bold text-sm text-gray-700" for="name"
                 >Name</label
               >
+
+              <!--   v-model="state.newName"
+                :placeholder="user.name" -->
               <input
                 id="name"
                 name="name"
                 type="name"
-                v-model="state.newName"
+                v-model="state.name"
                 :placeholder="user.name"
-                required="true"
+                required
                 class="
-                  appearance-none
-                  rounded-none
                   relative
                   block
                   w-full
@@ -61,9 +63,9 @@
                 id="email-address"
                 name="email"
                 type="email"
-                v-model="state.newEmail"
+                v-model="state.email"
                 :placeholder="user.email"
-                required="true"
+                required
                 class="
                   appearance-none
                   rounded-none
@@ -128,12 +130,14 @@
 
 <script lang="ts">
 import userCrud from "../modules/userCrud";
+
 // import LockClosedIcon from "@heroicons/vue/solid";
 
 export default {
   // components: {
   //   LockClosedIcon,
   // },
+
   setup() {
     const { state, user, userId, getSpecificUser, updateUser } = userCrud();
     getSpecificUser();
