@@ -38,16 +38,6 @@ jobs:
     needs: [test]
     runs-on: ubuntu-latest
 
-    # steps:
-    #   - uses: actions/checkout@v2
-    #   - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
-    #     with:
-    #       heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-    #       heroku_app_name: ${{secrets.HEROKU_APP_NAME}} #Must be unique in Heroku
-    #       heroku_email: "jonathansmadsen@gmail.com"
-    #       appdir: "backend" # <- This will point to the api folder in your project
-
-  
     steps:
       - uses: actions/checkout@v2
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
@@ -55,8 +45,18 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: ${{secrets.HEROKU_APP_NAME}} #Must be unique in Heroku
           heroku_email: "jonathansmadsen@gmail.com"
-          justlogin: true
-      - run: heroku auth:whoami
+          appdir: "backend" # <- This will point to the api folder in your project
+
+  
+    # steps:
+    #   - uses: actions/checkout@v2
+    #   - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+    #     with:
+    #       heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+    #       heroku_app_name: ${{secrets.HEROKU_APP_NAME}} #Must be unique in Heroku
+    #       heroku_email: "jonathansmadsen@gmail.com"
+    #       justlogin: true
+    #   - run: heroku auth:whoami
 
     # steps: 
     #   - name: Checkout
