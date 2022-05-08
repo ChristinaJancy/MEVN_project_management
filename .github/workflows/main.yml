@@ -56,4 +56,4 @@ jobs:
         run: heroku git:remote -a mevn-project-management
 
       - name: Deploy to heroku to main
-        run: git subtree push --prefix backend heroku main --force
+        run: git subtree push --prefix backend heroku main
