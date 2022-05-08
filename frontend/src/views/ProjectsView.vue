@@ -32,57 +32,67 @@
                 xl:grid-cols-4 xl:gap-x-8
               "
             >
-              <router-link
-                :to="{
-                  name: 'project',
-                  params: {
-                    id: project._id,
-                    title: project.title,
-                  },
-                }"
+              <div
+                class="
+                  w-full
+                  aspect-w-1 aspect-h-1
+                  px-2
+                  pb-2
+                  rounded-lg
+                  overflow-hidden
+                  xl:aspect-w-7 xl:aspect-h-8
+                  bg-white
+                  group
+                "
                 v-for="project in state.projects"
                 :key="project._id"
-                class="group"
               >
-                <div
-                  class="
-                    w-full
-                    aspect-w-1 aspect-h-1
-                    px-2
-                    pb-2
-                    rounded-lg
-                    overflow-hidden
-                    xl:aspect-w-7 xl:aspect-h-8
-                    bg-white
-                  "
-                >
-                  <div class="flex justify-between">
-                    <div>
+                <div class="flex justify-between mt-1">
+                  <div>
+                    <router-link
+                      :to="{
+                        name: 'project',
+                        params: {
+                          id: project._id,
+                          title: project.title,
+                        },
+                      }"
+                    >
                       <h3 class="mt-1 text-sm text-gray-700 mb-0 font-bold">
                         {{ project.title }}
                       </h3>
-                      <p class="mt-1 text-sm text-gray-700 mb-0 font-medium">
-                        {{ project.description }}
-                      </p>
-                      <p
-                        class="mt-1 text-sm text-gray-700 mb-0 font-medium"
-                        v-for="assigned in project.assigned"
-                        :key="assigned"
-                      >
-                        {{ assigned.name }}
-                      </p>
-                      <br />
-                      <p class="text-sm text-gray-500">
-                        <!--https://momentjs.com/-->
-                        {{ moment(project.deadline).startOf("hour").fromNow() }}
-                      </p>
-                    </div>
+                    </router-link>
+                    <p class="mt-1 text-sm text-gray-700 mb-0 font-medium">
+                      {{ project.description }}
+                    </p>
+                    <p
+                      class="mt-1 text-sm text-gray-700 mb-0 font-medium"
+                      v-for="assigned in project.assigned"
+                      :key="assigned"
+                    >
+                      {{ assigned.name }}
+                    </p>
+                    <br />
                   </div>
-
+                  <div>
+                    <button class="text-blue-500">
+                      <DotsVerticalIcon class="h-5 w-5" />
+                    </button>
+                  </div>
+                </div>
+                <div class="flex justify-between">
+                  <!-- project deadline -->
+                  <p class="text-sm text-gray-500">
+                    <!--https://momentjs.com/-->
+                    {{ moment(project.deadline).startOf("hour").fromNow() }}
+                  </p>
+                  <!-- Loop through tags on project 
+                  'mix-blend-mode': 'difference' to make sure the text on the tags 
+                  has a good enough contrast compared to the background color
+                  -->
                   <div v-for="tag in project.tags" :key="tag">
                     <p
-                      class="text-sm font-medium mt-1"
-                      align="right"
+                      class="text-sm font-medium rounded-full"
                       :style="{ background: tag.color }"
                     >
                       <span
@@ -90,14 +100,14 @@
                           color: 'white',
                           'mix-blend-mode': 'difference',
                         }"
-                        class="px-1 py-0.5 rounded-full"
+                        class="px-1 py-0.5 m-0"
                       >
                         {{ tag.name }}
                       </span>
                     </p>
                   </div>
                 </div>
-              </router-link>
+              </div>
             </div>
           </div>
         </div>
@@ -111,9 +121,14 @@
 import projectCrud from "../modules/projectCrud";
 import { onMounted } from "vue";
 import { defineComponent } from "vue";
+import { DotsVerticalIcon } from "@heroicons/vue/solid";
+
 import moment from "moment";
 
 export default defineComponent({
+  components: {
+    DotsVerticalIcon,
+  },
   setup() {
     const { state, getAllProjects } = projectCrud();
 
