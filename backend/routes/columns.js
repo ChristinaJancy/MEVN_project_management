@@ -35,7 +35,7 @@ router.post("/", verifyToken, async (req, res) => {
     }
 });
 
-//Update column by id
+//Update a column by id
 router.put("/:id", verifyToken, async (req, res) => {
     try {
         const updatedColumn = await schema.findByIdAndUpdate(req.params.id, req.body, { new: true });
