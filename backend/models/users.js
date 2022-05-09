@@ -11,11 +11,11 @@ let objectSchema = new Schema({
     created_at: { type: Date, default: Date.now },
     last_updated_at: { type: Date, default: Date.now },
     initials: { type: String, required: true, },
-    roles: [/*{
+    roles: [{
         type: Schema.Types.ObjectId,
         ref: 'role',
         autopopulate: true
-    }*/]
+    }]
 })
 
 
