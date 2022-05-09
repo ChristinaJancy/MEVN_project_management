@@ -45,18 +45,18 @@ describe('Workflow', () => {
                         expect(res.body.message).to.equal('User logged in 😊');
                         expect(res.body).to.have.property('token');
                         let token = res.body.token;
-                        const projectTag = {
+                        const tag = {
                             name: 'testtt',
                             color: '#fff'
                         }
                         chai.request(server)
-                            .post('/api/project-tags')
+                            .post('/api/tags')
                             .set({ "auth-token": token })
-                            .send(projectTag)
+                            .send(tag)
                             .end((err, res) => {
                                 expect(res).to.have.status(200);
                                 expect(res.body).to.have.property('message');
-                                expect(res.body.message).to.equal('New project tag created.😊');
+                                expect(res.body.message).to.equal('New tag created.😊');
                                 expect(res.body).to.have.property('newtag');
                                 expect(res.body.newtag).to.have.property('_id');
                                 expect(res.body.newtag).to.have.property('name');

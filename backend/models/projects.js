@@ -9,7 +9,7 @@ let objectSchema = new Schema({
     description: { type: String, required: true },
     tags: [{
         type: Schema.Types.ObjectId,
-        ref: 'projectTag',
+        ref: 'tag',
         autopopulate: true
     }],
     columns: [{

@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const schema = require("../models/projectTags")
+const schema = require("../models/tags")
 const tasks = require("../models/tasks")
 const projects = require("../models/projects")
 
@@ -27,7 +27,7 @@ router.post("/", verifyToken, async (req,res) => {
     })
     try { 
         const savedTag = await tag.save(); //save user
-        res.json({ message: "New project tag created.😊", newtag : savedTag});
+        res.json({ message: "New tag created.😊", newtag : savedTag});
     } catch (error) {
         res.status(400).json({ error });
     }
@@ -37,7 +37,7 @@ router.post("/", verifyToken, async (req,res) => {
 router.put("/:id", verifyToken, async (req, res) => {
     try {
         const updatedTag = await schema.findByIdAndUpdate(req.params.id, req.body, { new: true })
-        res.json({ message: "Project tag updated.😊", updatedTag })
+        res.json({ message: "Tag updated.😊", updatedTag })
     } catch (error) {
         res.status(400).json({ message: error.message })
     }

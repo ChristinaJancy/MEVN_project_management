@@ -7,4 +7,4 @@ let objectSchema = new schema({
     color: {type: String, required: true, match: /^#(?:[0-9a-fA-F]{3}){1,2}$/ } //Only accepts hexidecimal color values
 });
 
-module.exports = mongoose.model("projectTag", objectSchema);
+module.exports = mongoose.model("tag", objectSchema);

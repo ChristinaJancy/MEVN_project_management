@@ -19,7 +19,7 @@ const usersRoute = require("./routes/users");
 const rolesRoute = require("./routes/roles");
 const projectsRoute = require("./routes/projects");
 const tasksRoute = require("./routes/tasks");
-const projectTagsRoute = require("./routes/projectTags");
+const tagsRoute = require("./routes/tags");
 const column = require("./routes/columns");
 const columnRoute = column.router;
 const projectTemplatesRoute = require("./routes/projectTemplates");
@@ -52,7 +52,7 @@ app.use("/api/users", usersRoute);
 app.use("/api/roles", rolesRoute); 
 app.use("/api/projects", projectsRoute); 
 app.use("/api/tasks", tasksRoute);
-app.use("/api/project-tags", projectTagsRoute); 
+app.use("/api/tags", tagsRoute); 
 app.use("/api/columns", columnRoute);
 app.use("/api/project-templates", projectTemplatesRoute); 
 

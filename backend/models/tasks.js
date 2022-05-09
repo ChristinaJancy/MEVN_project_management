@@ -16,7 +16,7 @@ let objectSchema = new Schema(
         }],
         tags:[{
             type: Schema.Types.ObjectId,
-            ref: 'projectTag',
+            ref: 'tag',
             autopopulate: true
             //autopopulate: {select: ['name', 'color']}
         }]
