@@ -17,11 +17,8 @@ const userCrud = () => {
         token: '',
         roles: [],
         users: {},
-        id: '',
-        newName: '',
-        newEmail: ''
+        id: ''
     })
-    const user = ref({})
 
     const getAllUsers = async () => {
         const requestOptions = {
@@ -55,7 +52,7 @@ const userCrud = () => {
                 .then(response => response.json())
                 .then(data => {
                     // user.value = data.filter((user: { _id: string | string[]; }) => user._id === userId.value)
-                    user.value = data.filter(((user: { _id: string | string[]; }) => user._id === userId.value)
+                    state.value = data.filter(((state: { _id: string | string[]; }) => state._id === userId.value)
                     )
                 })
         }
@@ -98,7 +95,6 @@ const userCrud = () => {
                     name: state.value.name,
                     email: state.value.email
                 })
-
             }
             fetch(uri + 'users/' + _id,
                 requestOptions,
@@ -106,6 +102,7 @@ const userCrud = () => {
                 .then(response => response.json())
                 .then(data => {
                     console.log("data:", data);
+                    // debugger
                     router.push({ path: "/", replace: true })
                 })
         }
@@ -177,7 +174,6 @@ const userCrud = () => {
 
     return {
         state,
-        user,
         userId,
         getAllUsers,
         getSpecificUser,

@@ -10,6 +10,10 @@ const projectCrud = () => {
 
     const state = ref({
         projects: {},
+        title: '',
+        description: '',
+        tags: [],
+        id: '',
     })
     const project = ref({})
 
@@ -52,6 +56,8 @@ const projectCrud = () => {
     return {
         state,
         projectId,
+        project,
+
         getAllProjects,
         getSpecificProject
     }

@@ -1,5 +1,52 @@
 <template>
   <div>
+    <div v-for="project in project" :key="project._id">
+      <h1 class="text-4xl tracking-tight font-extrabold text-blue-900 block">
+        {{ project.title }}
+        <span
+          class="text-sm inline block"
+          v-for="tag in project.tags"
+          :key="tag"
+        >
+          {{ tag.name }}
+        </span>
+      </h1>
+      <div>
+        <h4 class="mt-0 text-sm font-extrabold block inline">Description</h4>
+        {{ " " }}
+        <p class="text-base -mt-5 inline">
+          {{ project.description }}
+        </p>
+      </div>
+
+      <div>
+        <h4 class="mt-0 text-sm font-extrabold block inline">Deadline</h4>
+        {{ " " }}
+        <p class="inline">
+          <!--https://momentjs.com/-->
+          {{ moment(project.deadline).startOf("hour").fromNow() }}
+        </p>
+      </div>
+      <!-- column -->
+      <div v-for="column in project.colums" :key="column">
+        <h4 class="text-sm font-extrabold block inline">{{ column.title }}</h4>
+        <div v-for="task in column.tasks" :key="task">
+          <div class="flex flex-col">
+            <div class="flex flex-row">
+              <div class="flex-1">
+                <h4 class="text-sm font-extrabold block inline">
+                  {{ task.title }}
+                </h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <br />
+
+    <br />
     <div class="grid grid-cols-12 mx-auto">
       <div class="lg:col-span-3 md:col-span-auto sm:col-span-12 col-span-12">
         <h3>Todo</h3>
@@ -52,16 +99,29 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import draggable from "vuedraggable";
+import projectCrud from "../modules/projectCrud";
+import moment from "moment";
+import { defineComponent } from "vue";
 
-export default {
+export default defineComponent({
   name: "three-lists",
   display: "Three Lists",
   order: 1,
   components: {
     draggable,
   },
+
+  setup() {
+    const { state, project, projectId, getSpecificProject } = projectCrud();
+    getSpecificProject();
+    return { state, project, projectId };
+  },
+  created: function () {
+    this.moment = moment;
+  },
+
   data() {
     return {
       list1: [
@@ -99,5 +159,6 @@ export default {
       window.console.log(evt);
     },
   },
-};
+});
 </script>
+

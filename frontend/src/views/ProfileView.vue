@@ -11,7 +11,7 @@
       lg:px-8
     "
   >
-    <div v-for="user in user" :key="user._id">
+    <div v-for="user in state" :key="user._id">
       <div class="max-w-md w-full space-y-8">
         <h2 class="font-bold text-3xl text-gray-900">Profile</h2>
         <!-- <form class="mt-8 space-y-6" action="#" method="POST"> -->
@@ -94,11 +94,11 @@ export default defineComponent({
     LockClosedIcon,
   },
   setup() {
-    const { state, user, userId, getSpecificUser } = userCrud();
+    const { state, userId, getSpecificUser } = userCrud();
 
     getSpecificUser();
 
-    return { state, user, userId };
+    return { state, userId };
   },
 });
 </script>
