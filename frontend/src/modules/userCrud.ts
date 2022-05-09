@@ -83,18 +83,19 @@ const userCrud = () => {
             })
     }
 
-    const updateUser = (_id: string) => {
+    const updateUser = (_id: string, name: string, email: string) => {
         try {
+            const body = {
+                email,
+                name
+            }
             const requestOptions = {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
                     "auth-token": getCookie('token')
                 },
-                body: JSON.stringify({
-                    name: state.value.name,
-                    email: state.value.email
-                })
+                body: JSON.stringify(body)
             }
             fetch(uri + 'users/' + _id,
                 requestOptions,
