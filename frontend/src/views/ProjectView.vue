@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-for="project in project" :key="project._id">
+    <div v-for="project in projectState" :key="project._id">
       <h1 class="text-4xl tracking-tight font-extrabold text-blue-900 block">
         {{ project.title }}
         <span
@@ -27,26 +27,55 @@
           {{ moment(project.deadline).startOf("hour").fromNow() }}
         </p>
       </div>
+
       <!-- column -->
-      <div v-for="column in project.colums" :key="column">
+      <!-- <div v-for="column in specificProject.columns" :key="column">
         <h4 class="text-sm font-extrabold block inline">{{ column.title }}</h4>
-        <div v-for="task in column.tasks" :key="task">
+        <div v-for="task in column.tasks" :key="task._id">
           <div class="flex flex-col">
             <div class="flex flex-row">
               <div class="flex-1">
                 <h4 class="text-sm font-extrabold block inline">
-                  {{ task.title }}
+                  {{ task.name }}
                 </h4>
               </div>
             </div>
           </div>
         </div>
+      </div> -->
+
+      <br />
+      <!-- test -->
+      <div class="grid grid-cols-12 mx-auto">
+        <div
+          class="lg:col-span-3 md:col-span-auto sm:col-span-12 col-span-12"
+          v-for="column in project.columns"
+          :key="column"
+        >
+          <h3>{{ column.title }}</h3>
+          <draggable
+            class="list-group"
+            :list="column.tasks"
+            group="tasks"
+            @change="log"
+            itemKey="name"
+          >
+            <template #item="{ element }">
+              <div class="list-group-item">{{ element.name }}</div>
+            </template>
+          </draggable>
+        </div>
+
+        <rawDisplayer class="col-3" :value="list1" title="List 1" />
+        <rawDisplayer class="col-3" :value="list2" title="List 2" />
       </div>
     </div>
-
+    <!-- test end -->
     <br />
+    <hr
+      style="height: 2px; border-width: 0; color: gray; background-color: gray"
+    />
 
-    <br />
     <div class="grid grid-cols-12 mx-auto">
       <div class="lg:col-span-3 md:col-span-auto sm:col-span-12 col-span-12">
         <h3>Todo</h3>
@@ -114,9 +143,9 @@ export default defineComponent({
   },
 
   setup() {
-    const { state, project, projectId, getSpecificProject } = projectCrud();
+    const { projectState, projectId, getSpecificProject } = projectCrud();
     getSpecificProject();
-    return { state, project, projectId };
+    return { projectState, projectId };
   },
   created: function () {
     this.moment = moment;

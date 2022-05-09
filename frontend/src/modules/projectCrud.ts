@@ -8,14 +8,13 @@ const projectCrud = () => {
     const router = useRouter();
     const projectId = computed(() => route.params.id);
 
-    const state = ref({
+    const projectState = ref({
         projects: {},
         title: '',
         description: '',
         tags: [],
         id: '',
     })
-    const project = ref({})
 
     const getAllProjects = async () => {
         const requestOptions = {
@@ -30,7 +29,7 @@ const projectCrud = () => {
         )
             .then(response => response.json())
             .then(data => {
-                state.value.projects = data
+                projectState.value.projects = data
             })
     }
 
@@ -48,16 +47,14 @@ const projectCrud = () => {
             .then(response => response.json())
             .then(data => {
                 // user.value = data.filter((user: { _id: string | string[]; }) => user._id === userId.value)
-                project.value = data.filter(((project: { _id: string | string[]; }) => project._id === projectId.value)
+                projectState.value = data.filter(((projectState: { _id: string | string[]; }) => projectState._id === projectId.value)
                 )
             })
     }
 
     return {
-        state,
+        projectState,
         projectId,
-        project,
-
         getAllProjects,
         getSpecificProject
     }
