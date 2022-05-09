@@ -620,3 +620,351 @@ paths:
                     type: string
                   updatedTask:
                     type: string
+  
+  # project tags routes
+  /projectTags:
+    get:
+      summary: Get all ProjectTags
+      description: Get all ProjectTags from the database
+      security:
+        - ApiKeyAuth: []
+      responses:
+        200:
+          description: ProjectTags retrieved succesfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ProjectTag"
+    
+    post:
+      summary: Create a new ProjectTag
+      description: Create a new ProjectTag in the database
+      security:
+        - ApiKeyAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProjectTag"
+      responses:
+        201:
+          description: ProjectTag created succesfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  newProjectTag:
+                    type: string
+  
+  /projectTags/{id}:
+    get:
+      summary: Get a ProjectTag by id
+      description: Get a ProjectTag by id from the database
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: ProjectTag id
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: ProjectTag retrieved succesfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProjectTag"
+    
+    delete:
+      summary: Delete a ProjectTag by id
+      description: Delete a ProjectTag by id from the database
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: ProjectTag id
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: ProjectTag deleted succesfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+    
+    put:
+      summary: Update a ProjectTag by id
+      description: Update a ProjectTag by id from the database
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: ProjectTag id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProjectTag"
+      responses:
+        200:
+          description: ProjectTag updated succesfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  updatedProjectTag:
+                    type: string
+  
+  #project templates routes
+  /projectTemplates:
+    get:
+      summary: Get all ProjectTemplates
+      description: Get all ProjectTemplates from the database
+      security:
+        - ApiKeyAuth: []
+      responses:
+        200:
+          description: ProjectTemplates retrieved succesfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ProjectTemplate"
+    
+    post:
+      summary: Create a new ProjectTemplate
+      description: Create a new ProjectTemplate in the database
+      security:
+        - ApiKeyAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProjectTemplate"
+      responses:
+        201:
+          description: ProjectTemplate created succesfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  newProjectTemplate:
+                    type: string
+  
+  /projectTemplates/{id}:
+    get:
+      summary: Get a ProjectTemplate by id
+      description: Get a ProjectTemplate by id from the database
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: ProjectTemplate id
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: ProjectTemplate retrieved succesfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProjectTemplate"
+
+    delete:
+      summary: Delete a ProjectTemplate by id
+      description: Delete a ProjectTemplate by id from the database
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: ProjectTemplate id
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: ProjectTemplate deleted succesfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+
+    put:
+      summary: Update a ProjectTemplate by id
+      description: Update a ProjectTemplate by id from the database
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: ProjectTemplate id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProjectTemplate"
+      responses:
+        200:
+          description: ProjectTemplate updated succesfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  updatedProjectTemplate:
+                    type: string
+  
+  #Roles routes
+  /roles:
+    get:
+      summary: Get all Roles
+      description: Get all Roles from the database
+      security:
+        - ApiKeyAuth: []
+      responses:
+        200:
+          description: Roles retrieved succesfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Role"
+
+    post:
+      summary: Create a new Role
+      description: Create a new Role in the database
+      security:
+        - ApiKeyAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Role"
+      responses:
+        201:
+          description: Role created succesfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  newRole:
+                    type: string
+
+  /roles/{id}:
+    get:
+      summary: Get a Role by id
+      description: Get a Role by id from the database
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: Role id
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Role retrieved succesfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Role"
+              
+    delete:
+      summary: Delete a Role by id
+      description: Delete a Role by id from the database
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: Role id
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Role deleted succesfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+
+    put:
+      summary: Update a Role by id
+      description: Update a Role by id from the database
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: Role id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Role"
+      responses:
+        200:
+          description: Role updated succesfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  updatedRole:
+                    type: string
