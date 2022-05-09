@@ -30,7 +30,7 @@ router.post("/register", async (req, res) => {
     //generate initials
     const initials = req.body.name.toUpperCase().split(' ').map(name => name[0]).join('');
     
-    const role = ["62554108c76611700f3d804d"]
+    const role = ["6271156a8547fd10454ddf19"]
 
     //create user object and save it in Mongo (via try-catch)
     const user = new User({
