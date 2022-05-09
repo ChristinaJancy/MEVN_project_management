@@ -173,27 +173,6 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/User"
-    post:
-      summary: Create a new User
-      description: Create a new User in the database
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/User"
-      responses:
-        201:
-          description: User created succesfully
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                  newUser:
-                    type: string
 
   /users/{id}:
     get:
