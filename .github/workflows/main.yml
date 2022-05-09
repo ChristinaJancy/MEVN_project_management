@@ -46,17 +46,26 @@ jobs:
           heroku_app_name: ${{secrets.HEROKU_APP_NAME}} #Must be unique in Heroku
           heroku_email: "jonathansmadsen@gmail.com"
           appdir: "backend" # <- This will point to the api folder in your project
+
+  
+    # steps:
+    #   - uses: actions/checkout@v2
+    #   - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+    #     with:
+    #       heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+    #       heroku_app_name: ${{secrets.HEROKU_APP_NAME}} #Must be unique in Heroku
+    #       heroku_email: "jonathansmadsen@gmail.com"
+    #       justlogin: true
+    #   - run: heroku auth:whoami
+
     # steps: 
     #   - name: Checkout
     #     uses: actions/checkout@v2
     #     with: 
     #       fectch-depth: 0
 
-    #   - name: Git version
-    #     run: git --version
-
     #   - name: Add git remote Heroku
-    #     run: git remote add heroku https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/${{ secrets.HEROKU_APP_NAME }}.git
+    #     run: heroku git:remote -a mevn-project-management
 
     #   - name: Deploy to heroku to main
-    #     run: git subtree push --prefix backend heroku main --force
+    #     run: git subtree push --prefix backend heroku main

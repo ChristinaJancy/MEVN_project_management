@@ -38,7 +38,7 @@ const projectCrud = () => {
                 "auth-token": getCookie('token')
             },
         };
-        fetch(uri + 'users',
+        fetch(uri + 'projects',
             requestOptions
         )
             .then(response => response.json())

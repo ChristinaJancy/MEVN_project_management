@@ -9,11 +9,11 @@ const userCrud = () => {
     const userId = computed(() => route.params.id);
 
     const state = ref({
+        name: '',
         email: '',
         initials: '',
         img: '',
         password: '',
-        name: '',
         token: '',
         roles: [],
         users: {},
@@ -41,24 +41,28 @@ const userCrud = () => {
     }
 
     const getSpecificUser = async () => {
-        const requestOptions = {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                "auth-token": getCookie('token')
-            },
-        };
-        fetch(uri + 'users',
-            requestOptions
-        )
-            .then(response => response.json())
-            .then(data => {
-                // user.value = data.filter((user: { _id: string | string[]; }) => user._id === userId.value)
-                user.value = data.filter(((user: { _id: string | string[]; }) => user._id === userId.value)
-                )
-            })
+        try {
+            const requestOptions = {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    "auth-token": getCookie('token')
+                },
+            };
+            fetch(uri + 'users',
+                requestOptions
+            )
+                .then(response => response.json())
+                .then(data => {
+                    // user.value = data.filter((user: { _id: string | string[]; }) => user._id === userId.value)
+                    user.value = data.filter(((user: { _id: string | string[]; }) => user._id === userId.value)
+                    )
+                })
+        }
+        catch (error) {
+            console.log(error)
+        }
     }
-
     const newUser = () => {
         const requestOptions = {
             method: "POST",
@@ -83,25 +87,34 @@ const userCrud = () => {
     }
 
     const updateUser = (_id: string) => {
-        const requestOptions = {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-                "auth-token": getCookie('token')
-            },
-            body: JSON.stringify({
-                email: state.value.newEmail,
-                name: state.value.newName,
-            })
+        try {
+            const requestOptions = {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    "auth-token": getCookie('token')
+                },
+                body: JSON.stringify({
+                    name: state.value.name,
+                    email: state.value.email
+                })
+
+            }
+            fetch(uri + 'users/' + _id,
+                requestOptions,
+            )
+                .then(response => response.json())
+                .then(data => {
+                    console.log("data:", data);
+                    router.push({ path: "/", replace: true })
+                })
         }
-        fetch(uri + 'users/' + _id,
-            requestOptions
-        )
-            .then(response => response.json())
-            .then(data => {
-                console.log("data:", data);
-                router.push({ path: "/", replace: true })
-            })
+
+        catch (error) {
+            console.log("error:", error);
+        }
+
+
     }
 
     const loginUser = async () => {
