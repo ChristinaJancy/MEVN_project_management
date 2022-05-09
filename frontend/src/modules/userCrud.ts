@@ -146,6 +146,7 @@ const userCrud = () => {
         deleteCookie('id')
         deleteCookie('email')
         deleteCookie('token')
+        
         router.push({ path: "/login", replace: true })
     }
 

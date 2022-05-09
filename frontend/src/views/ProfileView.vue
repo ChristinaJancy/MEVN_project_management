@@ -87,11 +87,11 @@
 <script lang="ts">
 import userCrud from "../modules/userCrud";
 import { defineComponent } from "vue";
-import { LockClosedIcon } from "@heroicons/vue/solid";
+// import { LockClosedIcon } from "@heroicons/vue/solid";
 
 export default defineComponent({
   components: {
-    LockClosedIcon,
+    // LockClosedIcon,
   },
   setup() {
     const { state, userId, getSpecificUser } = userCrud();
