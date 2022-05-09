@@ -67,8 +67,6 @@ router.beforeEach((to, from, next) => {
     const requiresAuth = to.matched.some(x => x.meta.requiresAuth);
     const isAuthenticated = getCookie('token'); // check if user is logged in
 
-
-
     if (requiresAuth && !isAuthenticated ) {
         next('/login');
     } else {
