@@ -110,7 +110,12 @@ router.get("/:id", verifyToken, (req, res) => {
 //update user by id
 router.put("/:id", verifyToken, async (req, res) => {
     try {
-        const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        let body = req.body;
+        if (body.name){
+            let initials = body.name.toUpperCase().split(' ').map(name => name[0]).join('');
+            body['initials'] = initials;
+        }
+        const updatedUser = await User.findByIdAndUpdate(req.params.id, body, { new: true });
         res.json({ message: "User updated successfully 😊", updatedUser });
     } catch (error) {
         res.status(400).json({ message: error.message });
