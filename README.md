@@ -1,6 +1,6 @@
 # MEVN_project_management
 
-PWA &amp; REST API project.
+PWA &amp; REST API project.<br>
 [![Netlify Status](https://api.netlify.com/api/v1/badges/c332601d-caac-4285-8636-1be7bb08867e/deploy-status)](https://app.netlify.com/sites/traello/deploys)
 
 **Main task:** 
