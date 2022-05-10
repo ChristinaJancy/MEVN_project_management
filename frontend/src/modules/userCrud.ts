@@ -28,7 +28,7 @@ const userCrud = () => {
                 "auth-token": getCookie('token')
             },
         };
-        fetch(uri + 'users',
+        await fetch(uri + 'users',
             requestOptions
         )
             .then(response => response.json())

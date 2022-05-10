@@ -37,12 +37,15 @@
           :key="column"
         >
           <h3>{{ column.title }}</h3>
+
+          <!-- :list="column.tasks" -->
           <draggable
             class="list-group"
-            :list="column.tasks"
+            v-model="column.tasks"
             group="tasks"
-            @change="log"
             itemKey="name"
+            @end="onEnd"
+            @change="log"
           >
             <template #item="{ element }">
               <div class="list-group-item">{{ element.name }}</div>
@@ -119,8 +122,8 @@ import moment from "moment";
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "three-lists",
-  display: "Three Lists",
+  name: "project",
+  display: "project",
   order: 1,
   components: {
     draggable,
@@ -157,21 +160,29 @@ export default defineComponent({
   // },
 
   methods: {
-    add: function () {
-      this.list.push({ name: "Juan" });
-    },
-    replace: function () {
-      this.list = [{ name: "Edgard" }];
-    },
-    clone: function (el: any) {
-      return {
-        name: el.name + " cloned",
-      };
-    },
+   onEnd: function (/**Event*/evt) {
+      console.log(evt);
+   },
     log: function (evt: any) {
-      window.console.log(evt);
+      window.console.log(evt.oldIndex + " " + evt.newIndex);
     },
   },
+  // methods: {
+  //   add: function () {
+  //     this.list.push({ name: "Juan" });
+  //   },
+  //   replace: function () {
+  //     this.list = [{ name: "Edgard" }];
+  //   },
+  //   clone: function (el: any) {
+  //     return {
+  //       name: el.name + " cloned",
+  //     };
+  //   },
+  //   log: function (evt: any) {
+  //     window.console.log(evt);
+  //   },
+  // },
 });
 </script>
 

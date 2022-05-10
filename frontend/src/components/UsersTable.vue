@@ -15,7 +15,6 @@
         <table class="min-w-full">
           <thead>
             <tr>
-              
               <!-- name -->
               <th
                 class="
@@ -187,15 +186,17 @@
 
 <script lang="ts">
 import userCrud from "../modules/userCrud";
-import { onMounted } from "vue";
-import { defineComponent } from "vue";
+import { onMounted, defineComponent, ref } from "vue";
 
 export default defineComponent({
-  setup() {
+  async setup() {
     const { state, userId, getAllUsers, deleteUser } = userCrud();
+
     onMounted(() => {
       getAllUsers();
     });
+
+    await getAllUsers();
 
     return { state, userId, getAllUsers, deleteUser };
   },
