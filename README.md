@@ -6,7 +6,7 @@ Design &amp; develop a project management application.
 [![Node.js CI](https://github.com/ChristinaJancy/MEVN_project_management/actions/workflows/node.js.yml/badge.svg)](https://github.com/ChristinaJancy/MEVN_project_management/actions/workflows/node.js.yml)
 <br><br>
 [![Netlify Status](https://api.netlify.com/api/v1/badges/c332601d-caac-4285-8636-1be7bb08867e/deploy-status)](https://app.netlify.com/sites/traello/deploys)
-<br><br>
+<br>
 # Getting started with frontend
 
 First open the folder 'frontend' in terminal, then
