@@ -134,14 +134,16 @@ export default defineComponent({
       getAllProjects();
     });
 
-    return { projectState, getAllProjects };
+    return { projectState, getAllProjects, moment };
   },
   components: {
     DotsVerticalIcon,
   },
+
   created: function () {
     this.moment = moment;
   },
+
 });
 </script>
 

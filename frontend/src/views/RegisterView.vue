@@ -188,8 +188,9 @@
 <script lang="ts">
 import { LockClosedIcon } from "@heroicons/vue/solid";
 import userCrud from "../modules/userCrud";
+import { defineComponent } from "vue";
 
-export default {
+export default defineComponent({
   components: {
     LockClosedIcon,
   },
@@ -197,5 +198,5 @@ export default {
     const { state, newUser } = userCrud();
     return { state, newUser };
   },
-};
+});
 </script>

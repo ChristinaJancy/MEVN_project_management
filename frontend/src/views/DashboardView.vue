@@ -11,9 +11,11 @@
 
 <script lang="ts">
 import UsersTable from "../components/UsersTable.vue";
-export default {
+import { defineComponent } from "vue";
+
+export default defineComponent({
   components: {
     UsersTable,
   },
-};
+});
 </script>

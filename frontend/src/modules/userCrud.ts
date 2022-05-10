@@ -9,15 +9,15 @@ const userCrud = () => {
     const userId = computed(() => route.params.id);
 
     const state = ref({
-        name: '',
-        email: '',
-        initials: '',
-        img: '',
-        password: '',
-        token: '',
-        roles: [],
-        users: {},
-        id: ''
+        name: '' as string | string[] | any,
+        email: '' as string | any,
+        initials: '' as string | any,
+        img: '' as string | any,
+        password: '' as string | any,
+        token: '' as string | any,
+        roles: [] as string[],
+        users: {} as { [key: string]: any },
+        id: '' as string,
     })
 
     const getAllUsers = async () => {
@@ -146,7 +146,7 @@ const userCrud = () => {
         deleteCookie('id')
         deleteCookie('email')
         deleteCookie('token')
-        
+
         router.push({ path: "/login", replace: true })
     }
 

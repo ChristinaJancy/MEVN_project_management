@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-for="project in projectState" :key="project._id">
+    <div v-for="project in projectState" :key="project">
       <h1 class="text-4xl tracking-tight font-extrabold text-blue-900 block">
         {{ project.title }}
         <span
@@ -28,22 +28,6 @@
         </p>
       </div>
 
-      <!-- column -->
-      <!-- <div v-for="column in specificProject.columns" :key="column">
-        <h4 class="text-sm font-extrabold block inline">{{ column.title }}</h4>
-        <div v-for="task in column.tasks" :key="task._id">
-          <div class="flex flex-col">
-            <div class="flex flex-row">
-              <div class="flex-1">
-                <h4 class="text-sm font-extrabold block inline">
-                  {{ task.name }}
-                </h4>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> -->
-
       <br />
       <!-- test -->
       <div class="grid grid-cols-12 mx-auto">
@@ -66,8 +50,8 @@
           </draggable>
         </div>
 
-        <rawDisplayer class="col-3" :value="list1" title="List 1" />
-        <rawDisplayer class="col-3" :value="list2" title="List 2" />
+        <!-- <rawDisplayer class="col-3" :value="list1" title="List 1" />
+        <rawDisplayer class="col-3" :value="list2" title="List 2" /> -->
       </div>
     </div>
     <!-- test end -->
@@ -76,7 +60,7 @@
       style="height: 2px; border-width: 0; color: gray; background-color: gray"
     />
 
-    <div class="grid grid-cols-12 mx-auto">
+    <!-- <div class="grid grid-cols-12 mx-auto">
       <div class="lg:col-span-3 md:col-span-auto sm:col-span-12 col-span-12">
         <h3>Todo</h3>
         <draggable
@@ -124,7 +108,7 @@
 
       <rawDisplayer class="col-3" :value="list1" title="List 1" />
       <rawDisplayer class="col-3" :value="list2" title="List 2" />
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -145,32 +129,32 @@ export default defineComponent({
   setup() {
     const { projectState, projectId, getSpecificProject } = projectCrud();
     getSpecificProject();
-    return { projectState, projectId };
+    return { projectState, projectId, moment };
   },
   created: function () {
     this.moment = moment;
   },
 
-  data() {
-    return {
-      list1: [
-        { name: "John", id: 1 },
-        { name: "Joao", id: 2 },
-        { name: "Jean", id: 3 },
-        { name: "Gerard", id: 4 },
-      ],
-      list2: [
-        { name: "Juan", id: 5 },
-        { name: "Edgard", id: 6 },
-        { name: "Johnson", id: 7 },
-      ],
-      list3: [
-        { name: "Johnny", id: 8 },
-        { name: "Edgardio", id: 9 },
-        { name: "Johnsonson", id: 10 },
-      ],
-    };
-  },
+  // data() {
+  //   return {
+  //     list1: [
+  //       { name: "John", id: 1 },
+  //       { name: "Joao", id: 2 },
+  //       { name: "Jean", id: 3 },
+  //       { name: "Gerard", id: 4 },
+  //     ],
+  //     list2: [
+  //       { name: "Juan", id: 5 },
+  //       { name: "Edgard", id: 6 },
+  //       { name: "Johnson", id: 7 },
+  //     ],
+  //     list3: [
+  //       { name: "Johnny", id: 8 },
+  //       { name: "Edgardio", id: 9 },
+  //       { name: "Johnsonson", id: 10 },
+  //     ],
+  //   };
+  // },
 
   methods: {
     add: function () {
@@ -179,12 +163,12 @@ export default defineComponent({
     replace: function () {
       this.list = [{ name: "Edgard" }];
     },
-    clone: function (el) {
+    clone: function (el: any) {
       return {
         name: el.name + " cloned",
       };
     },
-    log: function (evt) {
+    log: function (evt: any) {
       window.console.log(evt);
     },
   },

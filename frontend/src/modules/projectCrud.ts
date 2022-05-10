@@ -9,11 +9,11 @@ const projectCrud = () => {
     const projectId = computed(() => route.params.id);
 
     const projectState = ref({
-        projects: {},
-        title: '',
-        description: '',
-        tags: [],
-        id: '',
+        projects: {} as { [key: string]: any },
+        title: '' as string | any,
+        description: '' as string | any,
+        tags: [] as string[],
+        id: '' as string,
     })
 
     const getAllProjects = async () => {

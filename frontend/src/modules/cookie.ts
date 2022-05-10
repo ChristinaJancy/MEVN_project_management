@@ -24,7 +24,7 @@ function getCookie(cname: string) {
 
 //set type of user 
 function checkCookie() {
-  let user = getCookie("user");
+  let user: string[] | any = getCookie("user");
   if (user != "") {
     alert("Welcome again " + user);
   } else {

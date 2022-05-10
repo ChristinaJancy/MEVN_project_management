@@ -15,6 +15,8 @@
         <table class="min-w-full">
           <thead>
             <tr>
+              
+              <!-- name -->
               <th
                 class="
                   px-6
@@ -31,6 +33,7 @@
               >
                 Name
               </th>
+              <!-- title -->
               <th
                 class="
                   px-6
@@ -47,6 +50,7 @@
               >
                 Title
               </th>
+              <!-- role -->
               <th
                 class="
                   px-6
@@ -120,7 +124,7 @@
 
               <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
                 <div class="text-sm leading-5 text-gray-900">
-                  {{ user.title }} title
+                  {{ user.title }}
                 </div>
               </td>
 
@@ -184,15 +188,16 @@
 <script lang="ts">
 import userCrud from "../modules/userCrud";
 import { onMounted } from "vue";
+import { defineComponent } from "vue";
 
-export default {
+export default defineComponent({
   setup() {
-    const { state, getAllUsers, deleteUser } = userCrud();
+    const { state, userId, getAllUsers, deleteUser } = userCrud();
     onMounted(() => {
       getAllUsers();
     });
 
-    return { state, getAllUsers, deleteUser };
+    return { state, userId, getAllUsers, deleteUser };
   },
-};
+});
 </script>
