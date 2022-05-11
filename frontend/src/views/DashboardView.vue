@@ -4,13 +4,12 @@
     <div class="mt-8"></div>
     <h4 class="text-1xl font-bold text-gray-700">All users</h4>
     <!-- All users table -->
-
     <Suspense>
       <template #default>
         <UsersTable />
       </template>
       <template #fallback>
-        <Loading /> 
+        <LoadingTable />
       </template>
     </Suspense>
   </div>
@@ -18,13 +17,13 @@
 
 <script lang="ts">
 import UsersTable from "../components/UsersTable.vue";
-import Loading from "../components/Loading.vue";
+import LoadingTable from "../components/LoadingTable.vue";
 import { defineComponent } from "vue";
 
 export default defineComponent({
   components: {
     UsersTable,
-   Loading,
+    LoadingTable,
   },
 
   setup() {

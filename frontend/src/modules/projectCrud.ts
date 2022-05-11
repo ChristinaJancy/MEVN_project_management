@@ -10,10 +10,13 @@ const projectCrud = () => {
 
     const projectState = ref({
         projects: {} as { [key: string]: any },
+        project: {} as any,
         title: '' as string | any,
         description: '' as string | any,
         tags: [] as string[],
         id: '' as string,
+        columns: [] as string[],
+        tasks: [] as string[]
     })
 
     const getAllProjects = async () => {
@@ -52,11 +55,79 @@ const projectCrud = () => {
             })
     }
 
+    const updateProject = async (_id) => {
+        const requestOptions = {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                "auth-token": getCookie('token')
+            },
+            body: JSON.stringify({
+            })
+        };
+        fetch(uri + 'projects/' + _id,
+            requestOptions
+        )
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+            }
+            )
+    }
+
+
+    // in progess
+    const createProject = async () => {
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                "auth-token": getCookie('token')
+            },
+            body: JSON.stringify({
+                title: projectState.value.title,
+                description: projectState.value.description,
+                tags: projectState.value.tags,
+                columns: projectState.value.columns
+            })
+        };
+        fetch(uri + 'projects',
+            requestOptions
+        )
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+            })
+    }
+
+
+    // in progress
+    const deleteProject = async (_id) => {
+        const requestOptions = {
+            method: 'DELETE',
+            headers: {
+                "auth-token": getCookie('token')
+            }
+        };
+        fetch(uri + 'projects/' + _id,
+            requestOptions
+        )
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+            })
+    }
+
+    //-----tasks---------
+
     return {
         projectState,
         projectId,
         getAllProjects,
-        getSpecificProject
+        getSpecificProject,
+        updateProject,
+        createProject,
+        deleteProject
     }
 }
 
