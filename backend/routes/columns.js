@@ -3,6 +3,7 @@ const router = require("express").Router();
 const schema = require("../models/columns")
 const tasks = require("../models/tasks")
 const { verifyToken } = require("../validation")
+const { isValidObjectId } = require("../modules/IdCheck")
 
 
 
@@ -41,9 +42,13 @@ router.put("/draggable", verifyToken, async (req, res) => {
     newColumnId = req.body.columnId
 
     try{
-        const deleteTaskFromColumn = await schema.updateOne({ tasks: taskId }, { $pull: { tasks: taskId } })
-        const updateTaskColumn = await schema.findByIdAndUpdate(newColumnId, {$push: { tasks: taskId } }, { new: true })
-        res.json({ message: "Task moved.😊", newColumn: updateTaskColumn, oldColumn: deleteTaskFromColumn }) 
+        if(isValidObjectId(taskId) && isValidObjectId(newColumnId)){
+            const deleteTaskFromColumn = await schema.updateOne({ tasks: taskId }, { $pull: { tasks: taskId } })
+            const updateTaskColumn = await schema.findByIdAndUpdate(newColumnId, {$push: { tasks: taskId } }, { new: true }) 
+            res.json({ message: "Task moved.😊", newColumn: updateTaskColumn, oldColumn: deleteTaskFromColumn }) 
+        }else{
+            res.status(400).json({ message: "Invalid task or column id" })
+        }
     }catch(error){
         res.status(400).json({ error: error.message });
     }
