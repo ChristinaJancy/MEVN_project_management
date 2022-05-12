@@ -501,6 +501,8 @@ paths:
                   type: string
                 taskId:
                   type: string
+                taskIndex:
+                  type: integer
       responses:
         200:
           description: Column updated succesfully
