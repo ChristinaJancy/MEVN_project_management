@@ -38,7 +38,7 @@ router.post("/", verifyToken, async (req, res) => {
 
 //Update task from two columns
 router.put("/draggable/move", verifyToken, async (req, res) => {
-    taskId = req.body.taskId
+    const taskId = [req.body.taskId]
     newColumnId = req.body.columnId
     taskIndex = req.body.taskIndex
 
