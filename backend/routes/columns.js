@@ -35,6 +35,21 @@ router.post("/", verifyToken, async (req, res) => {
     }
 });
 
+//Update task from two columns
+router.put("/draggable", verifyToken, async (req, res) => {
+    taskId = req.body.taskId
+    newColumnId = req.body.columnId
+
+    try{
+        const deleteTaskFromColumn = await schema.updateOne({ tasks: taskId }, { $pull: { tasks: taskId } })
+        const updateTaskColumn = await schema.findByIdAndUpdate(newColumnId, {$push: { tasks: taskId } }, { new: true })
+        res.json({ message: "Task moved.😊", newColumn: updateTaskColumn, oldColumn: deleteTaskFromColumn }) 
+    }catch(error){
+        res.status(400).json({ error: error.message });
+    }
+
+})
+
 //Update a column by id
 router.put("/:id", verifyToken, async (req, res) => {
     try {
@@ -44,8 +59,6 @@ router.put("/:id", verifyToken, async (req, res) => {
         res.status(400).json({ error });
     }
 });
-
-
 
 // Function to delete a column and all tasks in it
 const deleteColumn = async (id, column, tasks) => {
