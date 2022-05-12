@@ -38,14 +38,14 @@ router.post("/", verifyToken, async (req, res) => {
 
 //Update task from two columns
 router.put("/draggable/move", verifyToken, async (req, res) => {
-    const taskId = [req.body.taskId]
+    const taskId = req.body.taskId
     newColumnId = req.body.columnId
-    taskIndex = req.body.taskIndex
+    tasksArray = req.body.taskIds
 
     try{
-        if(isValidObjectId(taskId[0]) && isValidObjectId(newColumnId)){
-            const deleteTaskFromColumn = await schema.updateOne({ tasks: taskId[0] }, { $pull: { tasks: taskId[0] } })
-            const updateTaskColumn = await schema.findByIdAndUpdate(newColumnId, {$push: { tasks: {$each:taskId, $postion: taskIndex} } }, { new: true }) 
+        if(isValidObjectId(taskId) && isValidObjectId(newColumnId)){
+            const deleteTaskFromColumn = await schema.updateOne({ tasks: taskId }, { $pull: { tasks: taskId } })
+            const updateTaskColumn = await schema.findByIdAndUpdate(newColumnId, {$set: { tasks: tasksArray } }, { new: true }) 
             res.json({ message: "Task moved.😊", newColumn: updateTaskColumn, oldColumn: deleteTaskFromColumn }) 
         }else{
             res.status(400).json({ message: "Invalid task or column id" })
