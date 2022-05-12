@@ -37,7 +37,7 @@ router.post("/", verifyToken, async (req, res) => {
 });
 
 //Update task from two columns
-router.put("/draggable", verifyToken, async (req, res) => {
+router.put("/draggable/move", verifyToken, async (req, res) => {
     taskId = req.body.taskId
     newColumnId = req.body.columnId
 
@@ -54,6 +54,22 @@ router.put("/draggable", verifyToken, async (req, res) => {
     }
 
 })
+
+//Replace task array in column
+router.put("/draggable/internal", verifyToken, async (req, res) => {
+    columnId = req.body.columnId
+    newTasks = req.body.tasks
+    try{
+        if(isValidObjectId(columnId)){
+            const updateColumn = await schema.findByIdAndUpdate(columnId, { $set: {tasks: newTasks }}, { new: true })
+            res.json({ message: "Tasks replaced.😊", newColumn: updateColumn })
+        }else{
+            res.status(400).json({ message: "Invalid column id" })
+        }
+    }catch(error){
+        res.status(400).json({ error: error.message });
+    }
+});
 
 //Update a column by id
 router.put("/:id", verifyToken, async (req, res) => {

@@ -484,7 +484,7 @@ paths:
                   updatedColumn:
                     type: string
 
-  /columns/draggable:
+  /columns/draggable/move:
     put:
       summary: update two columns and move on task to the other
       description: update two columns and move on task to the other
@@ -495,7 +495,12 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/Column"
+              type: object
+              properties:
+                columnId:
+                  type: string
+                taskId:
+                  type: string
       responses:
         200:
           description: Column updated succesfully
@@ -509,6 +514,36 @@ paths:
                   newColumn:
                     type: string
                   oldColumn:
+                    type: string
+
+  /columns/draggable/internal:
+    put:
+      summary: Replace task array with new tasks
+      description: Replace task array with new tasks
+      security:
+        - ApiKeyAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                columnId:
+                  type: string
+                tasks:
+                  type: array
+      responses:
+        200:
+          description: Column updated succesfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  newColumn:
                     type: string
     
   #tasks routes
