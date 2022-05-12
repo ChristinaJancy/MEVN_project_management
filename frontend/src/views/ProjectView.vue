@@ -9,7 +9,7 @@
       </h1>
       <div>
         <h4 class="mt-0 text-sm font-extrabold inline">Description</h4>
-        {{ " " }}
+        {{ ' ' }}
         <p class="text-base -mt-5 inline">
           {{ project.description }}
         </p>
@@ -17,10 +17,10 @@
 
       <div>
         <h4 class="mt-0 text-sm font-extrabold inline">Deadline</h4>
-        {{ " " }}
+        {{ ' ' }}
         <p class="inline">
           <!--https://momentjs.com/-->
-          {{ moment(project.deadline).startOf("hour").fromNow() }}
+          {{ moment(project.deadline).startOf('hour').fromNow() }}
         </p>
       </div>
 
@@ -28,19 +28,7 @@
       <!-- test -->
       <div class="grid grid-cols-12 mx-auto">
         <div
-          class="
-            lg:col-span-3
-            md:col-span-auto
-            sm:col-span-12
-            col-span-12
-            bg-gray-100
-            rounded-lg
-            shadow-lg
-            mr-3
-            mt-3
-            pl-3
-            pt-2
-          "
+          class="lg:col-span-3 md:col-span-auto sm:col-span-12 col-span-12 bg-gray-100 rounded-lg shadow-lg mr-3 mt-3 pl-3 pt-2"
           v-for="column in project.columns"
           :key="column"
         >
@@ -50,16 +38,15 @@
           >
             {{ column.title }}
           </h4>
-
-          <!-- :list="column.tasks" -->
+          <!-- task card -->
           <draggable
-            v-model="column.tasks"
+            :list="column.tasks"
             group="tasks"
-            itemKey="name"
-            @end="onEnd"
-            @change="log"
+            item-key="id"
+            @add="onTaskEnd(column._id, $event)"
+            @update="onTaskUpdate(column._id)"
+        
           >
-            <!-- <template #item="{ element, index }"> -->
             <template #item="{ element }">
               <div
                 id="taskCard"
@@ -79,7 +66,6 @@
                 <p class="text-sm" style="position: absolute; bottom: 0">
                   {{ element.assigned.initials }} JJ
                 </p>
-                <!-- <span class="text-sm">| Index:{{ index }}</span> -->
               </div>
             </template>
           </draggable>
@@ -88,30 +74,20 @@
 
       <!-- task modal -->
       <TaskCard :show="showModal" @close-modal="showModal = false" />
-
-      <br />
-      <hr
-        style="
-          height: 2px;
-          border-width: 0;
-          color: gray;
-          background-color: gray;
-        "
-      />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import draggable from "vuedraggable";
-import projectCrud from "../modules/projectCrud";
-import moment from "moment";
-import TaskCard from "../components/TaskCard.vue";
-import { defineComponent, ref } from "vue";
+import draggable from 'vuedraggable';
+import projectCrud from '../modules/projectCrud';
+import columnCrud from '../modules/columnCrud';
+import moment from 'moment';
+import TaskCard from '../components/TaskCard.vue';
+import { defineComponent, ref } from 'vue';
+
 export default defineComponent({
-  name: "project",
-  display: "project",
-  order: 1,
+  name: 'project',
   components: {
     draggable,
     TaskCard,
@@ -119,12 +95,22 @@ export default defineComponent({
 
   setup() {
     const { projectState, projectId, getSpecificProject } = projectCrud();
+    const { columnState, moveTaskToNewColumn, moveTaskInsideColumn } =
+      columnCrud();
 
     getSpecificProject();
-    
+
     const showModal = ref(false);
 
-    return { projectState, projectId, moment, showModal };
+    return {
+      projectState,
+      columnState,
+      projectId,
+      moment,
+      showModal,
+      moveTaskToNewColumn,
+      moveTaskInsideColumn,
+    };
   },
 
   created: function () {
@@ -132,13 +118,35 @@ export default defineComponent({
   },
 
   methods: {
-    onEnd: function (evt: any) {
-      console.log(evt);
+    onTaskEnd(columnId: string, event: any) {
+      /*This function is called when a task is dropped in a new column */
+
+      const taskId = event.item._underlying_vm_._id;
+
+      /*gets the project state, finds the project with the same id as the projectId in the url, 
+      finds the column with the same id as the columnId that the task is being moved to */
+      const tasks = this.projectState
+        .find((project: any) => project._id === this.projectId)
+        .columns.find((column: any) => column._id === columnId).tasks;
+
+      //maps the tasks array to find the task with the same id as the dropped task
+      const taskIds = tasks.map((task: { _id: string | string[] }) => task._id);
+
+      this.moveTaskToNewColumn(columnId, taskId, taskIds);
     },
-    log: function (evt: any) {
-      window.console.log(evt.oldIndex + " " + evt.newIndex);
+
+    onTaskUpdate(columnId: string) {
+      /*This function is called when a task is moved inside its own column */
+
+      const tasks = this.projectState
+        .find((project: any) => project._id === this.projectId)
+        .columns.find((column: any) => column._id === columnId).tasks;
+
+      //maps the tasks array to find the task with the same id as the dropped task
+      const taskIds = tasks.map((task: { _id: string | string[] }) => task._id);
+
+      this.moveTaskInsideColumn(columnId, taskIds);
     },
   },
 });
 </script>
-

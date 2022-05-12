@@ -55,26 +55,33 @@ const projectCrud = () => {
             })
     }
 
-    const updateProject = async (_id) => {
-        const requestOptions = {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-                "auth-token": getCookie('token')
-            },
-            body: JSON.stringify({
-            })
-        };
-        fetch(uri + 'projects/' + _id,
-            requestOptions
-        )
-            .then(response => response.json())
-            .then(data => {
-                console.log(data)
-            }
+    const updateProjectDetails = (_id: string, title: string, description: string, deadline:any, tags: any) => {
+        try {
+            const requestOptions = {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    "auth-token": getCookie('token')
+                },
+                body: JSON.stringify({
+                    title, 
+                    description, 
+                    deadline,
+                    tags
+                })
+            };
+            fetch(uri + 'projects/' + _id,
+                requestOptions
             )
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data)
+                })
+        }
+        catch (error) {
+            console.log(error)
+        }
     }
-
 
     // in progess
     const createProject = async () => {
@@ -85,10 +92,7 @@ const projectCrud = () => {
                 "auth-token": getCookie('token')
             },
             body: JSON.stringify({
-                title: projectState.value.title,
-                description: projectState.value.description,
-                tags: projectState.value.tags,
-                columns: projectState.value.columns
+
             })
         };
         fetch(uri + 'projects',
@@ -102,7 +106,7 @@ const projectCrud = () => {
 
 
     // in progress
-    const deleteProject = async (_id) => {
+    const deleteProject = async (_id: string) => {
         const requestOptions = {
             method: 'DELETE',
             headers: {
@@ -125,7 +129,7 @@ const projectCrud = () => {
         projectId,
         getAllProjects,
         getSpecificProject,
-        updateProject,
+        updateProjectDetails,
         createProject,
         deleteProject
     }
