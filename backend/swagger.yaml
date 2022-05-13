@@ -664,16 +664,16 @@ paths:
                   updatedTask:
                     type: string
   
-  # project tags routes
-  /projectTags:
+  # tags routes
+  /tags:
     get:
-      summary: Get all ProjectTags
-      description: Get all ProjectTags from the database
+      summary: Get all Tags
+      description: Get all Tags from the database
       security:
         - ApiKeyAuth: []
       responses:
         200:
-          description: ProjectTags retrieved succesfully
+          description: Tags retrieved succesfully
           content:
             application/json:
               schema:
@@ -682,8 +682,8 @@ paths:
                   $ref: "#/components/schemas/ProjectTag"
     
     post:
-      summary: Create a new ProjectTag
-      description: Create a new ProjectTag in the database
+      summary: Create a new Tag
+      description: Create a new Tag in the database
       security:
         - ApiKeyAuth: []
       requestBody:
@@ -694,7 +694,7 @@ paths:
               $ref: "#/components/schemas/ProjectTag"
       responses:
         201:
-          description: ProjectTag created succesfully
+          description: Tag created succesfully
           content:
             application/json:
               schema:
@@ -702,45 +702,45 @@ paths:
                 properties:
                   message:
                     type: string
-                  newProjectTag:
+                  newtag:
                     type: string
   
-  /projectTags/{id}:
+  /tags/{id}:
     get:
-      summary: Get a ProjectTag by id
-      description: Get a ProjectTag by id from the database
+      summary: Get a Tag by id
+      description: Get a Tag by id from the database
       security:
         - ApiKeyAuth: []
       parameters:
         - name: id
           in: path
-          description: ProjectTag id
+          description: Tag id
           required: true
           schema:
             type: string
       responses:
         200:
-          description: ProjectTag retrieved succesfully
+          description: Tag retrieved succesfully
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ProjectTag"
     
     delete:
-      summary: Delete a ProjectTag by id
-      description: Delete a ProjectTag by id from the database
+      summary: Delete a Tag by id
+      description: Delete a Tag by id from the database
       security:
         - ApiKeyAuth: []
       parameters:
         - name: id
           in: path
-          description: ProjectTag id
+          description: Tag id
           required: true
           schema:
             type: string
       responses:
         200:
-          description: ProjectTag deleted succesfully
+          description: Tag deleted succesfully
           content:
             application/json:
               schema:
@@ -750,14 +750,14 @@ paths:
                     type: string
     
     put:
-      summary: Update a ProjectTag by id
-      description: Update a ProjectTag by id from the database
+      summary: Update a Tag by id
+      description: Update a Tag by id from the database
       security:
         - ApiKeyAuth: []
       parameters:
         - name: id
           in: path
-          description: ProjectTag id
+          description: Tag id
           required: true
           schema:
             type: string
@@ -769,7 +769,7 @@ paths:
               $ref: "#/components/schemas/ProjectTag"
       responses:
         200:
-          description: ProjectTag updated succesfully
+          description: Tag updated succesfully
           content:
             application/json:
               schema:
@@ -777,14 +777,14 @@ paths:
                 properties:
                   message:
                     type: string
-                  updatedProjectTag:
+                  updatedTag:
                     type: string
   
   #project templates routes
-  /projectTemplates:
+  /project-templates:
     get:
-      summary: Get all ProjectTemplates
-      description: Get all ProjectTemplates from the database
+      summary: Get all Templates
+      description: Get all Templates from the database
       security:
         - ApiKeyAuth: []
       responses:
@@ -821,7 +821,7 @@ paths:
                   newProjectTemplate:
                     type: string
   
-  /projectTemplates/{id}:
+  /project-templates/{id}:
     get:
       summary: Get a ProjectTemplate by id
       description: Get a ProjectTemplate by id from the database
