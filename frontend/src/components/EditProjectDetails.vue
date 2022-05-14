@@ -167,10 +167,7 @@
                     project._id,
                     project.title,
                     project.description,
-                    project.tags
-                  )
-                "
-              >
+                    project.tags)">
                 edit
               </button>
               <button
