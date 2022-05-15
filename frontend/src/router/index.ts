@@ -5,7 +5,16 @@ const routes: Array<RouteRecordRaw> = [
     {
         path: '/',
         name: 'Dashboard',
-        component: () => import(/* webpackChunkName: "Home" */ '../views/DashboardView.vue'),
+        component: () => import(/* webpackChunkName: "Dashboard" */ '../views/DashboardView.vue'),
+        meta: {
+            requiresAuth: true
+        }
+    },
+//Projects
+    {
+        path: '/projects',
+        name: 'projects',
+        component: () => import(/* webpackChunkName: "Projects" */ '../views/ProjectsView.vue'),
         meta: {
             requiresAuth: true
         }
@@ -19,6 +28,15 @@ const routes: Array<RouteRecordRaw> = [
         }
     },
     {
+        path: '/projects/new-project',
+        name: 'new-project',
+        component: () => import(/* webpackChunkName: "create-project */ '../views/CreateProjectView.vue'),
+        meta: {
+            requiresAuth: true
+        }
+    },
+    //user
+    {
         path: '/profile/:id',
         name: 'profile',
         component: () => import(/* webpackChunkName: "Profile" */ '../views/ProfileView.vue'),
@@ -30,14 +48,6 @@ const routes: Array<RouteRecordRaw> = [
         path: '/:id/edit',
         name: 'user',
         component: () => import(/* webpackChunkName: "Edituser" */ '../views/EditUserView.vue'),
-        meta: {
-            requiresAuth: true
-        }
-    },
-    {
-        path: '/projects',
-        name: 'projects',
-        component: () => import(/* webpackChunkName: "Projects" */ '../views/ProjectsView.vue'),
         meta: {
             requiresAuth: true
         }

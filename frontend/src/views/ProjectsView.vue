@@ -3,13 +3,16 @@
     <h3 class="text-3xl font-medium text-gray-700">Projects</h3>
     <div class="mt-8"></div>
     <h4 class="text-1xl font-bold text-gray-700">Your projects</h4>
-    <button
-      type="button"
-      class="button w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-indigo-500 text-base font-medium text-white hover:bg-indigo-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
-     
-      >
-       Create project
-    </button>
+    
+
+    <router-link to="/projects/new-project">
+      <button
+        type="button"
+        class="button w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-indigo-500 text-base font-medium text-white hover:bg-indigo-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+        >
+        Create project
+      </button>
+    </router-link>
     <div class="flex flex-col mt-8">
       <div
         class="

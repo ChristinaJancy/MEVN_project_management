@@ -12,10 +12,12 @@ const projectCrud = () => {
         projects: {} as { [key: string]: any },
         project: {} as any,
         title: '' as string | any,
+        deadline: '' as string | any,
         description: '' as string | any,
-        tags: [] as string[],
+        tags: [] as string[] | any,
+        assigned: [] as string[] | any,
         id: '' as string,
-        columns: [] as string[],
+        columns: [] as string[] | any,
         tasks: [] as string[]
     })
 
@@ -27,7 +29,7 @@ const projectCrud = () => {
                 "auth-token": getCookie('token')
             },
         };
-       await fetch(uri + 'projects',
+        await fetch(uri + 'projects',
             requestOptions
         )
             .then(response => response.json())
@@ -55,7 +57,7 @@ const projectCrud = () => {
             })
     }
 
-    const updateProjectDetails = (_id: string, title: string, description: string, deadline:any, tags: any) => {
+    const updateProjectDetails = (_id: string, title: string, description: string, deadline: any, tags: any) => {
         try {
             const requestOptions = {
                 method: 'PUT',
@@ -64,8 +66,8 @@ const projectCrud = () => {
                     "auth-token": getCookie('token')
                 },
                 body: JSON.stringify({
-                    title, 
-                    description, 
+                    title,
+                    description,
                     deadline,
                     tags
                 })
@@ -92,7 +94,12 @@ const projectCrud = () => {
                 "auth-token": getCookie('token')
             },
             body: JSON.stringify({
-
+                title: projectState.value.title,
+                deadline: projectState.value.deadline,
+                description: projectState.value.description,
+                tags: projectState.value.tags,
+                columns: projectState.value.columns,
+                assigned: projectState.value.assigned
             })
         };
         fetch(uri + 'projects',
@@ -100,7 +107,8 @@ const projectCrud = () => {
         )
             .then(response => response.json())
             .then(data => {
-                console.log(data)
+                console.log("data:", data);
+                router.push({ path: "/projects", replace: true })
             })
     }
 

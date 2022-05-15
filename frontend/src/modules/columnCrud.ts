@@ -11,9 +11,28 @@ const columnCrud = () => {
     const columnState = ref({
         title: '' as string,
         description: '' as string,
-        tasks: [] as string[]
+        tasks: [] as string[],
+        id: '' as string,
+        columns: [] as string[]
     })
 
+    const getAllColumns = async () => {
+        const requestOptions = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                "auth-token": getCookie('token')
+            },
+        };
+        await fetch(uri + 'columns',
+            requestOptions
+        )
+            .then(response => response.json())
+            .then(data => {
+                columnState.value.columns = data
+            })
+
+    }
     //For moving a task to a new column
     const moveTaskToNewColumn = async (columnId: string, taskId: string, taskIds: string[]) => {
         try {
@@ -40,7 +59,7 @@ const columnCrud = () => {
             console.log(error)
         }
     }
-   //For moving a task inside its current column 
+    //For moving a task inside its current column 
     const moveTaskInsideColumn = async (columnId: string, tasks: string[]) => {
         try {
             const requestOptions = {
@@ -69,7 +88,8 @@ const columnCrud = () => {
         columnState,
         columnId,
         moveTaskToNewColumn,
-        moveTaskInsideColumn
+        moveTaskInsideColumn,
+        getAllColumns
     }
 }
 

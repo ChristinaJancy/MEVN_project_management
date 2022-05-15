@@ -3,7 +3,9 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
-
+  plugins: [
+    require('@tailwindcss/forms'),
+  ],
   content: [
     "./src/index.html",
     "./src/views/**/*.{vue,ts}",
@@ -16,6 +18,5 @@ module.exports = {
       },
     },
   },
-
 }
 
