@@ -171,7 +171,7 @@
                 <a
                   href="#"
                   class="text-red-600 hover:text-indigo-900"
-                  @click="deleteUser(user._id)"
+                  @click="deleteAUser(user._id)"
                   >Delete</a
                 >
               </td>
@@ -187,18 +187,35 @@
 <script lang="ts">
 import userCrud from "../modules/userCrud";
 import { onMounted, defineComponent, ref } from "vue";
+import { getCookie } from "../modules/cookie";
 
 export default defineComponent({
   async setup() {
     const { state, userId, getAllUsers, deleteUser } = userCrud();
-
     onMounted(() => {
       getAllUsers();
     });
 
     await getAllUsers();
 
-    return { state, userId, getAllUsers, deleteUser };
+    return { state, userId, getAllUsers, deleteUser, getCookie };
+  },
+  methods: {
+    deleteAUser(id: string) {
+      //if logged in user === user to be deleted,
+      //then js confirm to prevent accidental deletion of self
+      let currentUserId = this.getCookie("id");
+      if (currentUserId === id) {
+        //if yes delete user, else do nothing
+        if (confirm("Are you sure you want to delete your account?")) {
+          this.deleteUser(id);
+        }
+      }
+      //if it is not the same user, delete user without confirming
+      else {
+        this.deleteUser(id);
+      }
+    },
   },
 });
 </script>

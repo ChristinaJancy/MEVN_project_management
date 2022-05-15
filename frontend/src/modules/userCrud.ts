@@ -165,7 +165,7 @@ const userCrud = () => {
             .then(response => response.json())
             .then(() => {
                 //if the user that is logged in is the user that is being deleted, log them out
-                if (_id === getCookie('id')) {
+                if (_id === getCookie('id') ) {
                     logoutUser()
                 }
                 else {
