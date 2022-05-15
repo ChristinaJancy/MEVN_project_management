@@ -163,7 +163,15 @@ const userCrud = () => {
             requestOptions
         )
             .then(response => response.json())
-            .then(getAllUsers)
+            .then(data => {
+                //if the user that is logged in is the user that is being deleted, log them out
+                if (data = _id) {
+                    logoutUser()
+                }
+                else {
+                    getAllUsers()
+                }
+            })
     }
 
     const setCookies = () => {

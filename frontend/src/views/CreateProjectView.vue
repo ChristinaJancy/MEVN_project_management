@@ -5,7 +5,6 @@
     <div class="md:grid md:grid-cols-3 md:gap-6">
       <div class="mt-5 md:mt-0 md:col-span-2">
         <!-- form -->
-        <div>
           <div class="shadow sm:rounded-md">
             <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
               <!-- title -->
@@ -73,7 +72,7 @@
                   class="block text-sm font-medium text-gray-700"
                   >Tags</label
                 >
-                 <!-- :options="tagState.tags.map((tag ) => tag.name)" -->
+                <!-- :options="tagState.tags.map((tag ) => tag.name)" -->
                 <Multiselect
                   v-model="projectState.tags"
                   mode="tags"
@@ -81,7 +80,6 @@
                   :close-on-select="false"
                   :searchable="true"
                   :create-option="true"
-                 
                 />
               </div>
 
@@ -93,7 +91,7 @@
                   >Assign members</label
                 >
 
-                 <!-- :options="state.users.map((user) => user.name)" -->
+                <!-- :options="state.users.map((user) => user.name)" -->
                 <Multiselect
                   v-model="projectState.assigned"
                   mode="tags"
@@ -102,7 +100,6 @@
                   :searchable="true"
                   :create-option="true"
                   label="name"
-                 
                 >
                 </Multiselect>
               </div>
@@ -190,7 +187,7 @@
               </button>
             </div>
           </div>
-        </div>
+  
         <!-- /form end -->
       </div>
     </div>
