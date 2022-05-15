@@ -2,6 +2,8 @@ const router = require("express").Router();
 const schema = require("../models/roles")
 const user = require("../models/users")
 const { verifyToken } = require("../validation")
+const { encodeHtmlEntities } = require("../modules/InputSanitizer");
+
 
 module.exports = router;
 

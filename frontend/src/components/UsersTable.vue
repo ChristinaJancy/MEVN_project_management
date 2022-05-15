@@ -105,7 +105,7 @@
                         class="text-center text-sm font-bold text-white"
                         v-if="user.initials"
                       >
-                        {{ user.initials }}
+                        {{ user.initials }} 
                       </div>
                     </div>
 
@@ -114,7 +114,7 @@
                         {{ user.name }}
                       </div>
                       <div class="text-sm leading-5 text-gray-500">
-                        {{ user.email }}
+                      {{  user.email  }} 
                       </div>
                     </div>
                   </div>

@@ -2,6 +2,7 @@ const router = require("express").Router();
 const schema = require("../models/tags")
 const tasks = require("../models/tasks")
 const projects = require("../models/projects")
+const { encodeHtmlEntities } = require("../modules/InputSanitizer");
 
 const { verifyToken } = require("../validation")
 

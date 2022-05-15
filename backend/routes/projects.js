@@ -4,6 +4,8 @@ const { verifyToken } = require("../validation")
 const column = require("../models/columns")
 const tasks = require("../models/tasks")
 const { deleteColumn } = require("./columns")
+const { encodeHtmlEntities } = require("../modules/InputSanitizer");
+
 
 module.exports = router;
 
