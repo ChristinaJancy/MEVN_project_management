@@ -17,7 +17,7 @@ const projectCrud = () => {
         tags: [] as string[] | any,
         assigned: [] as string[] | any,
         id: '' as string,
-        columns: [] as string[] | any,
+        columns:[] as string[],
         tasks: [] as string[]
     })
 
@@ -97,9 +97,8 @@ const projectCrud = () => {
                 title: projectState.value.title,
                 deadline: projectState.value.deadline,
                 description: projectState.value.description,
-                tags: projectState.value.tags,
-                columns: projectState.value.columns,
-                assigned: projectState.value.assigned
+                tags: ["627e281e1e7b024e2517e60d", "627e28881e7b024e2517e60f", "627e28bb1e7b024e2517e611"],
+                assigned: ["6278fcec6b9f24120c8a73d4", "62738fd19ef44f7d4e422250"]
             })
         };
         fetch(uri + 'projects',
@@ -111,7 +110,6 @@ const projectCrud = () => {
                 router.push({ path: "/projects", replace: true })
             })
     }
-
 
     // in progress
     const deleteProject = async (_id: string) => {
@@ -125,9 +123,7 @@ const projectCrud = () => {
             requestOptions
         )
             .then(response => response.json())
-            .then(data => {
-                console.log(data)
-            })
+            .then(getAllProjects)
     }
 
     //-----tasks---------

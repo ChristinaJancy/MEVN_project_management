@@ -73,6 +73,7 @@
                   class="block text-sm font-medium text-gray-700"
                   >Tags</label
                 >
+                 <!-- :options="tagState.tags.map((tag ) => tag.name)" -->
                 <Multiselect
                   v-model="projectState.tags"
                   mode="tags"
@@ -80,7 +81,7 @@
                   :close-on-select="false"
                   :searchable="true"
                   :create-option="true"
-                  :options="tagState.tags.map((tag) => tag.name)"
+                 
                 />
               </div>
 
@@ -91,6 +92,8 @@
                   class="block text-sm font-medium text-gray-700"
                   >Assign members</label
                 >
+
+                 <!-- :options="state.users.map((user) => user.name)" -->
                 <Multiselect
                   v-model="projectState.assigned"
                   mode="tags"
@@ -99,7 +102,7 @@
                   :searchable="true"
                   :create-option="true"
                   label="name"
-                  :options="state.users.map((user) => user.name)"
+                 
                 >
                 </Multiselect>
               </div>
@@ -109,9 +112,17 @@
                 <label
                   for="about"
                   class="block text-sm font-medium text-gray-700"
-                  >Assign members</label
+                  >Project template</label
                 >
-                <Multiselect
+
+                <SelectElement
+                  name="select"
+                  :native="false"
+                  placeholder="Template"
+                  :options="['With template', 'No template']"
+                />
+
+                <!-- <Multiselect
                   v-model="projectState.columns"
                   mode="tags"
                   placeholder="Columns"
@@ -121,8 +132,9 @@
                   label="title"
                   :options="columnState.columns.map((column) => column.title)"
                 >
-                </Multiselect>
+                </Multiselect> -->
               </div>
+
               <!------------ Deadline ------------>
               <div class="mt-6">
                 <label
@@ -190,6 +202,7 @@
 import { defineComponent, onMounted } from "vue";
 import { CheckIcon, SelectorIcon } from "@heroicons/vue/solid";
 import Multiselect from "@vueform/multiselect";
+import SelectElement from "@vueform/multiselect";
 import projectCrud from "../modules/projectCrud";
 import userCrud from "../modules/userCrud";
 import tagCrud from "../modules/tagCrud";
@@ -202,6 +215,7 @@ export default defineComponent({
     CheckIcon,
     SelectorIcon,
     Multiselect,
+    SelectElement,
   },
   setup() {
     const { projectState, createProject } = projectCrud();

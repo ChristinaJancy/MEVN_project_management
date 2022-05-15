@@ -41,16 +41,25 @@
             {{ project.description }}
           </p>
           <!-- assigned -->
-          <p
-            class="mt-1 text-gray-700 mb-0"
-            v-for="assigned in project.assigned"
-            :key="assigned"
-          >
-            <span class="text-xs uppercase font-bold"> Assigned:</span>
-            {{ " " }}
-            <!-- space -->
-            <span class="text-sm">{{ assigned.name }}</span>
-          </p>
+          <div>
+            <p class="mt-1 text-gray-700 mb-0 text-xs uppercase font-bold">
+              Assigned:
+            </p>
+            <p
+              class="mt-0 inline-flex"
+              v-for="(assigned, index) in project.assigned"
+              :key="index"
+            >
+              <span class="text-sm"
+                >{{ assigned.name }}
+                <!-- If it is NOT the last name in the array, then ,&nbsp;
+                this makes sure there is no comma after the last name. -->
+                <span v-if="index != Object.keys(project.assigned).length - 1"
+                  >,&nbsp;</span
+                >
+              </span>
+            </p>
+          </div>
           <!-- deadline -->
           <p class="text-gray-700 mb-0">
             <span class="text-xs uppercase font-bold"> Deadline:</span>
@@ -106,6 +115,7 @@
                   <MenuItem v-slot="{ active }">
                     <a
                       href="#"
+                      @click="deleteProject(project._id)"
                       :class="[
                         active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                         'block px-4 py-2 text-sm',
@@ -161,7 +171,8 @@ import moment from "moment";
 
 export default defineComponent({
   async setup() {
-    const { projectState, getAllProjects, getSpecificProject } = projectCrud();
+    const { projectState, projectId, getAllProjects, getSpecificProject, deleteProject } =
+      projectCrud();
 
     getSpecificProject();
     const selectedProject = ref("");
@@ -177,9 +188,11 @@ export default defineComponent({
     return {
       projectState,
       getAllProjects,
+      projectId,
       moment,
       showModal,
       selectedProject,
+      deleteProject,
     };
   },
   components: {
