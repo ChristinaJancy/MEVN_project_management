@@ -109,8 +109,8 @@ router.put("/:id", verifyToken, async (req, res) => {
         let body = req.body;
         if (body.name){ 
             let initials = body.name.toUpperCase().split(' ').map(name => name[0]);
-            if (initials.length > 2) {
-                for (let i = 1; i < initials.length; i++) {
+            if (initials > 2) {
+                for (let i = 1; i < initials; i++) {
                     initials.splice(index, i);
                 }
             }
