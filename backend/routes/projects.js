@@ -24,7 +24,7 @@ router.get("/:id", verifyToken, (req, res) => {
 // Create new project
 router.post("/", verifyToken, async (req, res) => {
     const assignColumns = async (bodyColumns) => {
-        if (bodyColumns === []) {
+        if (bodyColumns === [] || bodyColumns === undefined) {
             const columns = [];
             return columns;
         } else {

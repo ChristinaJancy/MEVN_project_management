@@ -66,7 +66,8 @@ describe('Workflow', () => {
                                     title: 'testtt',
                                     description: 'testtt',
                                     tags: [res.body.newtag._id],
-                                    deadline: '01-01-2000'
+                                    deadline: '01-01-2000',
+                                    columns: []
                                 }
                                 chai.request(server)
                                     .post('/api/projects')
