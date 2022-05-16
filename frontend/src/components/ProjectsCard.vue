@@ -1,27 +1,11 @@
 <template>
   <div
-    class="
-      grid grid-cols-1
-      gap-y-10
-      sm:grid-cols-2
-      gap-x-6
-      lg:grid-cols-3
-      xl:grid-cols-4 xl:gap-x-8
-    "
+    class="grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8"
   >
     <div
       v-for="project in projectState.projects"
       :key="project._id"
-      class="
-        w-full
-        aspect-w-1 aspect-h-1
-        px-2
-        pb-2
-        rounded-lg
-        xl:aspect-w-7 xl:aspect-h-8
-        bg-white
-        group
-      "
+      class="w-full aspect-w-1 aspect-h-1 px-2 pb-2 rounded-lg xl:aspect-w-7 xl:aspect-h-8 bg-white group"
     >
       <div class="flex relative justify-between mt-1">
         <div>
@@ -63,11 +47,11 @@
           <!-- deadline -->
           <p class="text-gray-700 mb-0">
             <span class="text-xs uppercase font-bold"> Deadline:</span>
-            {{ " " }}
+            {{ ' ' }}
 
             <!--https://momentjs.com/-->
             <span class="text-sm">
-              {{ moment(project.deadline).startOf("hour").fromNow() }}</span
+              {{ moment(project.deadline).startOf('hour').fromNow() }}</span
             >
           </p>
           <br />
@@ -87,29 +71,22 @@
               leave-to-class="transform opacity-0 scale-95"
             >
               <MenuItems
-                class="
-                  absolute
-                  right-0
-                  m-0
-                  p-0
-                  w-56
-                  rounded-md
-                  shadow-lg
-                  bg-white
-                  ring-1 ring-black ring-opacity-5
-                  focus:outline-none
-                "
+                class="absolute right-0 m-0 p-0 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
               >
                 <div class="py-1">
                   <MenuItem v-slot="{ active }">
-                    <a
-                      href="#"
-                      @click="EditProjectDetails()"
+                    <router-link
+                      :to="{
+                        name: 'project-edit',
+                        params: {
+                          id: project._id,
+                        },
+                      }"
                       :class="[
                         active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                         'block px-4 py-2 text-sm',
                       ]"
-                      >Edit</a
+                      >Edit</router-link
                     >
                   </MenuItem>
                   <MenuItem v-slot="{ active }">
@@ -153,36 +130,31 @@
         </p>
       </div>
     </div>
-
-    <!-- task modal -->
-    <EditProjectDetails :show="showModal" @close-modal="showModal = false" />
   </div>
 </template>
 
 <script lang="ts">
-import projectCrud from "../modules/projectCrud";
-import EditProjectDetails from "../components/EditProjectDetails.vue";
-import { onMounted, defineComponent, ref } from "vue";
+import projectCrud from '../modules/projectCrud';
+import { onMounted, defineComponent, ref } from 'vue';
 // tailwind
-import { DotsVerticalIcon } from "@heroicons/vue/solid";
-
-import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
-import moment from "moment";
+import { DotsVerticalIcon } from '@heroicons/vue/solid';
+import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue';
+import moment from 'moment';
 
 export default defineComponent({
   async setup() {
-    const { projectState, projectId, getAllProjects, getSpecificProject, deleteProject } =
-      projectCrud();
-
-    getSpecificProject();
-    const selectedProject = ref("");
-
-    const showModal = ref(false);
+    const {
+      projectState,
+      projectId,
+      getAllProjects,
+      getSpecificProject,
+      deleteProject,
+    } = projectCrud();
 
     onMounted(() => {
       getAllProjects();
     });
-
+    getSpecificProject();
     await getAllProjects();
 
     return {
@@ -190,23 +162,17 @@ export default defineComponent({
       getAllProjects,
       projectId,
       moment,
-      showModal,
-      selectedProject,
       deleteProject,
     };
   },
   components: {
     DotsVerticalIcon,
-    EditProjectDetails,
     Menu,
     MenuButton,
     MenuItem,
     MenuItems,
   },
   methods: {
-    EditProjectDetails() {
-      this.showModal = true;
-    },
   },
   created: function () {
     this.moment = moment;

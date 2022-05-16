@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": " vite build",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -12,6 +12,7 @@
     "@vueform/multiselect": "^2.3.4",
     "moment": "^2.29.3",
     "vue": "^3.2.25",
+    "vue-multiselect": "^3.0.0-alpha.2",
     "vue-router": "^4.0.12",
     "vuedraggable": "^4.1.0"
   },

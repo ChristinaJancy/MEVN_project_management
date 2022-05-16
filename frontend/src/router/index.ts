@@ -28,6 +28,14 @@ const routes: Array<RouteRecordRaw> = [
         }
     },
     {
+        path: '/project/edit/:id',
+        name: 'project-edit',
+        component: () => import(/* webpackChunkName: "edit-project" */ '../views/EditProjectView.vue'),
+        meta: {
+            requiresAuth: true
+        }
+    },
+    {
         path: '/projects/new-project',
         name: 'new-project',
         component: () => import(/* webpackChunkName: "create-project */ '../views/CreateProjectView.vue'),

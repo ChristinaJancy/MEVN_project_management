@@ -17,8 +17,9 @@ const projectCrud = () => {
         tags: [] as string[] | any,
         assigned: [] as string[] | any,
         id: '' as string,
-        columns:[] as string[],
-        tasks: [] as string[]
+        columns: [] as string[],
+        tasks: [] as string[],
+        projectToEdit: {} as any,
     })
 
     const getAllProjects = async () => {
@@ -46,7 +47,7 @@ const projectCrud = () => {
                 "auth-token": getCookie('token')
             },
         };
-        fetch(uri + 'projects',
+        await fetch(uri + 'projects',
             requestOptions
         )
             .then(response => response.json())
@@ -57,7 +58,7 @@ const projectCrud = () => {
             })
     }
 
-    const updateProjectDetails = (_id: string, title: string, description: string, deadline: any, tags: any) => {
+    const updateProjectDetails = (_id: string, title: string, description: string, deadline: any, tags: string[], assigned: string[]) => {
         try {
             const requestOptions = {
                 method: 'PUT',
@@ -69,7 +70,8 @@ const projectCrud = () => {
                     title,
                     description,
                     deadline,
-                    tags
+                    tags,
+                    assigned
                 })
             };
             fetch(uri + 'projects/' + _id,
@@ -77,7 +79,8 @@ const projectCrud = () => {
             )
                 .then(response => response.json())
                 .then(data => {
-                    console.log(data)
+                    console.log("data:", data);
+                    router.push({ path: "/projects", replace: true })
                 })
         }
         catch (error) {
@@ -97,11 +100,13 @@ const projectCrud = () => {
                 title: projectState.value.title,
                 deadline: projectState.value.deadline,
                 description: projectState.value.description,
-                tags: ["627e281e1e7b024e2517e60d", "627e28881e7b024e2517e60f", "627e28bb1e7b024e2517e611"],
-                assigned: ["6278fcec6b9f24120c8a73d4", "62738fd19ef44f7d4e422250"]
+                tags: projectState.value.tags,
+                assigned: projectState.value.assigned
+                // tags: ["627e281e1e7b024e2517e60d", "627e28881e7b024e2517e60f", "627e28bb1e7b024e2517e611"],
+                // assigned: ["6278fcec6b9f24120c8a73d4", "62738fd19ef44f7d4e422250"]
             })
         };
-        fetch(uri + 'projects',
+        await fetch(uri + 'projects',
             requestOptions
         )
             .then(response => response.json())

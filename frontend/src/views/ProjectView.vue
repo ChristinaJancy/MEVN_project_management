@@ -56,7 +56,7 @@
                 <h3
                   class="text-sm font-bold text-gray-800 mt-0 mb-0"
                   style="cursor: pointer"
-                  @click="showModal = true"
+                  @click="showModal = true;  "
                 >
                   {{ element.name }}
                 </h3>
@@ -73,7 +73,8 @@
       </div>
 
       <!-- task modal -->
-      <TaskCard :show="showModal" @close-modal="showModal = false" />
+      <TaskCard :show="showModal"  @close-modal="showModal = false" />
+
     </div>
   </div>
 </template>
@@ -120,7 +121,6 @@ export default defineComponent({
   methods: {
     onTaskEnd(columnId: string, event: any) {
       /*This function is called when a task is dropped in a new column */
-
       const taskId = event.item._underlying_vm_._id;
 
       /*gets the project state, finds the project with the same id as the projectId in the url, 

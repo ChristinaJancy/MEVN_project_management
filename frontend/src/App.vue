@@ -14,3 +14,6 @@ const layout = computed(
   () => `${currentRoute.value.meta.layout || defaultLayout}-layout`
 );
 </script>
+
+<!--vue multiselect styling https://github.com/shentao/vue-multiselect/tree/next-->
+<style src="vue-multiselect/dist/vue-multiselect.css"></style>
