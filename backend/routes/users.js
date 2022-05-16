@@ -7,6 +7,7 @@ const projects = require('../models/projects');
 const { registerValidation, loginValidation, verifyToken } = require('../validation');
 
 
+// Create new user
 router.post("/register", async (req, res) => {
 
     //validate user inputs (name, email, password)
@@ -51,14 +52,8 @@ router.post("/register", async (req, res) => {
     // res.send("User registered successfully");
 });
 
+//Login user and send JWT token
 router.post("/login", async (req, res) => {
-
-    //validate user login info (email, password)
-    const { error } = loginValidation(req.body);
-
-    if (error) {
-        return res.status(400).json({ error: error.details[0].message });
-    }
 
     //if login info is valid find the user by email in database
     const user = await User.findOne({ email: req.body.email });
@@ -72,7 +67,7 @@ router.post("/login", async (req, res) => {
     const validPassword = await bcrypt.compare(req.body.password, user.password);
 
     //throw error if password is wrong 
-    if (!validPassword) { 
+    if (!validPassword) {
         return res.status(400).json({ error: "Password is wrong" })
     }
 
@@ -94,25 +89,31 @@ router.post("/login", async (req, res) => {
     });
 })
 
+// Get all users
 router.get("/", verifyToken, (req, res) => {
     User.find()
         .then(data => { res.send(data); })
         .catch(err => { res.status(500).send({ message: err.message }) })
 });
 
-//get user by id
+// Get user by id
 router.get("/:id", verifyToken, (req, res) => {
     User.findById(req.params.id)
         .then(data => { res.send(data); })
         .catch(err => { res.status(500).send({ message: err.message }) })
 });
 
-//update user by id
+// Update user by id
 router.put("/:id", verifyToken, async (req, res) => {
     try {
         let body = req.body;
-        if (body.name){
-            let initials = body.name.toUpperCase().split(' ').map(name => name[0]).join('');
+        if (body.name){ 
+            let initials = body.name.toUpperCase().split(' ').map(name => name[0]);
+            if (initials.length > 2) {
+                for (let i = 1; i < initials.length; i++) {
+                    initials.splice(index, i);
+                }
+            }
             body['initials'] = initials;
         }
         const updatedUser = await User.findByIdAndUpdate(req.params.id, body, { new: true });
@@ -122,7 +123,7 @@ router.put("/:id", verifyToken, async (req, res) => {
     }
 });
 
-//Delete user by id and remove user from all tasks and projects
+// Delete user by id and remove user from all tasks and projects
 router.delete("/:id", verifyToken, async (req, res) => {
     const id = req.params.id
     try {

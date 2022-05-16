@@ -29,9 +29,9 @@ router.post("/", verifyToken, async (req, res) => {
         tasks: req.body.tasks
     })
     try {
-        const savedColumn = await column.save(); //save user
+        const savedColumn = await column.save();
         res.json({ message: "New column created.😊", newcolumn: savedColumn });
-    } catch (error) { //if error, return error
+    } catch (error) {
         res.status(400).json({ error });
     }
 });
@@ -89,7 +89,7 @@ const deleteColumn = async (id, column, tasks) => {
         let task;
         await column.findById(id).then(data => {
             task = data.tasks
-            if (task.length > 0) {
+            if (task.length > 0) { //If there are tasks in the column delete them
                 for (let i = 0; i < task.length; i++) {
                     taskIds.push(task[i]._id)
                 }

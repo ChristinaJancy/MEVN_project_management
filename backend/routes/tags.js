@@ -7,12 +7,14 @@ const { verifyToken } = require("../validation")
 
 module.exports = router;
 
+// Get all tags
 router.get("/", verifyToken, (req, res) => {
     schema.find()
         .then(data => { res.send(data); })
         .catch(err => { res.status(500).send({ message: err.message }) })
 });
 
+// Get tag by id
 router.get("/:id", verifyToken, (req, res) => {
     const id = req.params.id
     schema.findById(id)
@@ -20,6 +22,7 @@ router.get("/:id", verifyToken, (req, res) => {
         .catch(err => { res.status(500).send({ message: err.message }) })
 });
 
+// Create new tag
 router.post("/", verifyToken, async (req,res) => {
     const tag = new schema({
         name: req.body.name,
@@ -33,7 +36,7 @@ router.post("/", verifyToken, async (req,res) => {
     }
 })
 
-//update project tag by id
+// Update project tag by id
 router.put("/:id", verifyToken, async (req, res) => {
     try {
         const updatedTag = await schema.findByIdAndUpdate(req.params.id, req.body, { new: true })
@@ -43,7 +46,7 @@ router.put("/:id", verifyToken, async (req, res) => {
     }
 });
 
-// delete project tag by id and remove project tag from all projects
+// Delete project tag by id and remove project tag from all projects
 router.delete("/:id", verifyToken, async (req, res) => {
     const id = req.params.id
     try {

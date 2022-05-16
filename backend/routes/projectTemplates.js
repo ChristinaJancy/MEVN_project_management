@@ -4,12 +4,14 @@ const { verifyToken } = require("../validation")
 
 module.exports = router;
 
+// Get all project templates
 router.get("/", verifyToken, (req, res) => {
     schema.find()
         .then(data => { res.send(data); })
         .catch(err => { res.status(500).send({ message: err.message }) })
 });
 
+// Get project template by id
 router.get("/:id", verifyToken, (req, res) => {
     const id = req.params.id
     schema.findById(id)
@@ -17,6 +19,7 @@ router.get("/:id", verifyToken, (req, res) => {
         .catch(err => { res.status(500).send({ message: err.message }) })
 });
 
+// Create new project template
 router.post("/", verifyToken, async (req, res) => {
     const template = new schema({
         name: req.body.name,

@@ -4,6 +4,7 @@ const { verifyToken } = require("../validation")
 
 module.exports = router;
 
+// Get all tasks
 router.get("/", verifyToken, (req, res) => {
     schema.find()
         .then(data => { res.send(data); })
@@ -18,6 +19,7 @@ router.get("/:id", verifyToken, (req, res) => {
         .catch(err => { res.status(500).send({ message: err.message }) })
 });
 
+// Create new task
 router.post("/", verifyToken, async (req,res) => {
     const status = "in progress";
     const task = new schema({
@@ -36,7 +38,7 @@ router.post("/", verifyToken, async (req,res) => {
     }
 })
 
-//update task by id
+// Update task by id
 router.put("/:id", verifyToken, async (req, res) => {
     try {
         const updatedTask = await schema.findByIdAndUpdate(req.params.id, req.body, { new: true })
@@ -46,7 +48,7 @@ router.put("/:id", verifyToken, async (req, res) => {
     }
 });
 
-//Delete task by id
+// Delete task by id
 router.delete("/:id", verifyToken, async (req, res) => {
     const id = req.params.id
     try {

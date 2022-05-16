@@ -7,6 +7,7 @@ const { deleteColumn } = require("./columns");
 
 module.exports = router;
 
+// Get all projects
 router.get("/", verifyToken, (req, res) => {
     schema.find()
         .then(data => { res.send(data); })
@@ -22,8 +23,6 @@ router.get("/:id", verifyToken, (req, res) => {
 
 // Create new project
 router.post("/", verifyToken, async (req, res) => {
-    
-    
     const assignColumns = async (bodyColumns) => {
         if (bodyColumns === []) {
             const columns = [];
@@ -46,7 +45,6 @@ router.post("/", verifyToken, async (req, res) => {
         };
     };
 
-
     try {
         const projectSchema = await assignColumns(req.body.columns).then(columns => {
             console.log(columns)
@@ -67,8 +65,6 @@ router.post("/", verifyToken, async (req, res) => {
     } catch (error) {
         res.status(400).json({ message: error.message })
     }
-
-
 });
 
 // Update project by id
@@ -86,8 +82,8 @@ router.delete("/:id", verifyToken, async (req, res) => {
     const id = req.params.id
     try {
         await schema.findById(id).then(data => {
-            const columns = data.columns
-            if (columns.length > 0) {
+        const columns = data.columns
+        if (columns.length > 0) {
                 for (let i = 0; i < columns.length; i++) {
                     const columnId = columns[i]._id
                     deleteColumn(columnId, column, tasks).then(data => {
