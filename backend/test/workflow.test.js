@@ -95,7 +95,7 @@ describe('Workflow', () => {
                                             .end((err, res) => {
                                                 expect(res).to.have.status(200);
                                                 expect(res.body).to.have.property('message');
-                                                expect(res.body.message).to.equal('New column created.😊');
+                                                expect(res.body.message).to.equal('New column created.😊 and added to project');
                                                 expect(res.body).to.have.property('newcolumn');
                                                 expect(res.body.newcolumn).to.have.property('_id');
                                                 expect(res.body.newcolumn).to.have.property('title');
