@@ -7,7 +7,7 @@ Design &amp; develop a project management application.
 **Live on:** <br>
 [![Netlify Status](https://api.netlify.com/api/v1/badges/c332601d-caac-4285-8636-1be7bb08867e/deploy-status)](https://traello.netlify.app/)
   
-[![Node.js CI](https://github.com/ChristinaJancy/MEVN_project_management/actions/workflows/node.js.yml/badge.svg)](https://github.com/ChristinaJancy/MEVN_project_management/actions/workflows/node.js.yml)
+[![Node.js CI](https://github.com/ChristinaJancy/MEVN_project_management/actions/workflows/main.yml/badge.svg?branch=main)](https://github.com/ChristinaJancy/MEVN_project_management/actions/workflows/main.yml)
     
 
 # Getting started with frontend
