@@ -89,6 +89,10 @@ const projectCrud = () => {
     }
 
     // in progess
+
+    // tags: ["627e281e1e7b024e2517e60d", "627e28881e7b024e2517e60f", "627e28bb1e7b024e2517e611"],
+    // assigned: ["6278fcec6b9f24120c8a73d4", "62738fd19ef44f7d4e422250"]
+
     const createProject = async () => {
         const requestOptions = {
             method: 'POST',
@@ -100,10 +104,9 @@ const projectCrud = () => {
                 title: projectState.value.title,
                 deadline: projectState.value.deadline,
                 description: projectState.value.description,
+                columns: projectState.value.columns,
                 tags: projectState.value.tags,
                 assigned: projectState.value.assigned
-                // tags: ["627e281e1e7b024e2517e60d", "627e28881e7b024e2517e60f", "627e28bb1e7b024e2517e611"],
-                // assigned: ["6278fcec6b9f24120c8a73d4", "62738fd19ef44f7d4e422250"]
             })
         };
         await fetch(uri + 'projects',

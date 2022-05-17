@@ -101,7 +101,7 @@
             "
           >
             <router-link
-              to="/profile"
+              to="/profile/"
               class="
                 block
                 px-4
