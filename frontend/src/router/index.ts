@@ -10,7 +10,31 @@ const routes: Array<RouteRecordRaw> = [
             requiresAuth: true
         }
     },
-//Projects
+    {
+        path: '/members',
+        name: 'Members',
+        component: () => import(/* webpackChunkName: "members" */ '../views/UsersView.vue'),
+        meta: {
+            requiresAuth: true
+        }
+    },
+    {
+        path: '/tags',
+        name: 'Tags',
+        component: () => import(/* webpackChunkName: "tags" */ '../views/TagsView.vue'),
+        meta: {
+            requiresAuth: true
+        }
+    },
+    {
+        path: '/roles',
+        name: 'Roles',
+        component: () => import(/* webpackChunkName: "tags" */ '../views/RolesView.vue'),
+        meta: {
+            requiresAuth: true
+        }
+    },
+    //Projects
     {
         path: '/projects',
         name: 'projects',
@@ -85,11 +109,11 @@ router.beforeEach((to, from, next) => {
     const requiresAuth = to.matched.some(x => x.meta.requiresAuth);
     const isAuthenticated = getCookie('token'); // check if user is logged in
 
-    if (requiresAuth && !isAuthenticated ) {
+    if (requiresAuth && !isAuthenticated) {
         next('/login');
     } else {
         next();
-    } 
+    }
 })
 
 export default router;

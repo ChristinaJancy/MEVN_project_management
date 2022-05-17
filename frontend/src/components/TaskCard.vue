@@ -109,12 +109,7 @@
 </template>
 
 <script>
-import {
-  Dialog,
-  DialogTitle,
-  TransitionChild,
-  TransitionRoot,
-} from '@headlessui/vue';
+import { Dialog, DialogTitle, TransitionChild,  TransitionRoot } from '@headlessui/vue';
 import { PaperClipIcon } from '@heroicons/vue/solid';
 import projectCrud from '../modules/projectCrud';
 import { defineComponent, ref } from 'vue';
