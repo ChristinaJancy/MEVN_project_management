@@ -29,7 +29,6 @@ router.post("/register", async (req, res) => {
     const password = await bcrypt.hash(req.body.password, salt);
 
     //generate initials
-
     let initials = req.body.name.toUpperCase().split(' ').map(name => name[0]);
     console.log(initials)
     if (initials.length > 2) {
@@ -42,6 +41,7 @@ router.post("/register", async (req, res) => {
         initials = initials.join('');
     }
 
+    // Placeholder role for user ---- Replace when frontend is ready
     const role = ["6271156a8547fd10454ddf19"]
 
     //create user object and save it in Mongo (via try-catch)
