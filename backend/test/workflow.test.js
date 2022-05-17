@@ -89,7 +89,7 @@ describe('Workflow', () => {
                                             tasks: []
                                         }
                                         chai.request(server)
-                                            .post('/api/columns')
+                                            .post('/api/columns/' + res.body.newproject._id)
                                             .set({ "auth-token": token })
                                             .send(column)
                                             .end((err, res) => {

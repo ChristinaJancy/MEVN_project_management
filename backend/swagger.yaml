@@ -366,6 +366,29 @@ paths:
                     type: string
                   updatedProject:
                     type: string
+    
+  /projects/user/{id}:
+    get:
+      summary: Get all Projects by user id
+      description: Get all Projects by user id from the database
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: User id
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Projects retrieved succesfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Project"
   
   # Column routes
 
@@ -384,19 +407,27 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Column"
-    
+  
+  /columns/{projectId}:
     post:
       summary: Create a new Column
       description: Create a new Column in the database
       security:
         - ApiKeyAuth: []
+      parameters:
+        - name: projectId
+          in: path
+          description: Project id
+          required: true
+          schema:
+            type: string
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: "#/components/schemas/Column"
-      responses:  
+      responses:
         201:
           description: Column created succesfully
           content:
@@ -407,8 +438,10 @@ paths:
                   message:
                     type: string
                   newColumn:
-                    type: string
-  
+                    type: object
+                  project:
+                    type: object
+
   /columns/{id}:
     get:
       summary: Get a Column by id

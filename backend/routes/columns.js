@@ -23,14 +23,18 @@ router.get("/:id", verifyToken, (req, res) => {
 });
 
 // Create new column
-router.post("/", verifyToken, async (req, res) => {
+router.post("/:projectId", verifyToken, async (req, res) => {
     const column = new schema({
         title: req.body.title,
         tasks: req.body.tasks
     })
     try {
-        const savedColumn = await column.save();
-        res.json({ message: "New column created.😊", newcolumn: savedColumn });
+        const savedColumn = column.save().then(savedColumn => {
+            schema.findByIdAndUpdate(req.params.projectId, { $push: { columns: savedColumn._id } })
+            .then(updatedProject => {
+                res.json({ message: "New column created.😊 and added to project", newcolumn: savedColumn, project: updatedProject }) 
+            })
+        });
     } catch (error) {
         res.status(400).json({ error });
     }

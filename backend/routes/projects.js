@@ -21,47 +21,42 @@ router.get("/:id", verifyToken, (req, res) => {
         .catch(err => { res.status(500).send({ message: err.message }) })
 });
 
+// Get project by user id
+router.get("/user/:id", verifyToken, (req, res) => {
+    schema.find({ assigned: req.params.id })
+        .then(data => { res.send(data); })
+        .catch(err => { res.status(500).send({ message: err.message }) })
+});
+
 // Create new project
-router.post("/", verifyToken, async (req, res) => {
-    const assignColumns = async (bodyColumns) => {
-        if (bodyColumns === [] || bodyColumns === undefined) {
-            const columns = [];
-            return columns;
-        } else {
-            // if there are columns in the project create new columns with that name
-            const columns = [];
-            columnNames = bodyColumns;
-            await columnNames.forEach(async columnName => {
-                const columnObject = new column({
-                    title: columnName,
-                    tasks: []
-                })
-                const savedColumn = await columnObject.save()
-                columns.push(savedColumn._id.valueOf())
-                console.log("columns inside forEach", columns)
-            });
-            console.log("columns outside forEach", columns)
-            return columns;
-        };
-    };
+router.post("/", verifyToken, (req, res) => {
 
     try {
-        const projectSchema = await assignColumns(req.body.columns).then(columns => {
-            console.log(columns)
-            const project = new schema({
-                title: req.body.title,
-                deadline: req.body.deadline,
-                description: req.body.description,
-                tags: req.body.tags,
-                columns: columns,
-                assigned: req.body.assigned
-            })
-            return project
-        });
-        
-        console.log(projectSchema)
-        const savedProject = await projectSchema.save()
-        res.json({ message: "New project created.😊", newproject: savedProject })
+        const columnsIds = [];
+        // -------  create columns  ------- NOT FINISHED ------- DOESN'T WORK
+        // req.body.columns.forEach(columnName => {
+        //     const columnObject = new column({
+        //         title: columnName,
+        //         tasks: []
+        //     })
+        //     const savedColumn = columnObject.save().then(savedColumn => {
+        //         columnsIds.push(savedColumn._id.valueOf())
+        //         console.log("columns inside forEach", columnsIds)
+        //     })
+        // })
+
+        const project = new schema({
+            title: req.body.title,
+            deadline: req.body.deadline,
+            description: req.body.description,
+            tags: req.body.tags,
+            columnsIds,
+            assigned: req.body.assigned
+        })
+        project.save().then(savedProject => {
+            res.json({ message: "New project created.😊", newproject: savedProject })
+        })
+
     } catch (error) {
         res.status(400).json({ message: error.message })
     }
@@ -82,8 +77,8 @@ router.delete("/:id", verifyToken, async (req, res) => {
     const id = req.params.id
     try {
         await schema.findById(id).then(data => {
-        const columns = data.columns
-        if (columns.length > 0) {
+            const columns = data.columns
+            if (columns.length > 0) {
                 for (let i = 0; i < columns.length; i++) {
                     const columnId = columns[i]._id
                     deleteColumn(columnId, column, tasks).then(data => {
