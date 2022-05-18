@@ -45,30 +45,30 @@ router.post("/", verifyToken, (req, res) => {
             projectId = data._id;
             console.log("saved project")
         })
+        res.status(200).json({ message: "Project created successfully 😊 with columns", project })
         
-        if (req.body.columns) {
-            const columns = req.body.columns;
-            columns.forEach((columnName, index) => {
-                console.log(columnName)
-                const newColumn = new column({
-                    title: columnName,
-                    tasks: [],
-                })
-                newColumn.save().then(data => {
-                    const columnId = data._id
-                    project.columns.push(columnId)
-                    console.log("Project columns" + project.columns)
-                    schema.findByIdAndUpdate(projectId, { $push: { columns: columnId } }, { new: true })
-                })
-                if(index === columns.length - 1) {
-                    console.log("Saved column. Index: " + index)
-                    res.status(200).json({ message: "Project created successfully 😊 with columns", project })
-                }
-            })
+        // if (req.body.columns) {
+        //     const columns = req.body.columns;
+        //     columns.forEach((columnName, index) => {
+        //         console.log(columnName)
+        //         const newColumn = new column({
+        //             title: columnName,
+        //             tasks: [],
+        //         })
+        //         newColumn.save().then(data => {
+        //             const columnId = data._id
+        //             project.columns.push(columnId)
+        //             console.log("Project columns" + project.columns)
+        //             schema.findByIdAndUpdate(projectId, { $push: { columns: columnId } }, { new: true })
+        //         })
+        //         if(index === columns.length - 1) {
+        //             console.log("Saved column. Index: " + index)
+        //         }
+        //     })
             
-        }else{
-            res.status(200).json({ message: "Project created successfully 😊", project })
-        }  
+        // }else{
+        //     res.status(200).json({ message: "Project created successfully 😊", project })
+        // }  
     } catch (error) {
         res.status(400).json({ message: error.message })
     }
