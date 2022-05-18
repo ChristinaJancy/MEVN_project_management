@@ -45,7 +45,7 @@ router.post("/", verifyToken, (req, res) => {
             projectId = data._id;
             console.log("saved project")
         })
-        res.status(200).json({ message: "Project created successfully 😊", project })
+        res.status(200).json({ message: "New project created.😊", project })
         
         // if (req.body.columns) {
         //     const columns = req.body.columns;
