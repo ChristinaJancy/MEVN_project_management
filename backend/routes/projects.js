@@ -14,7 +14,7 @@ router.get("/", verifyToken, (req, res) => {
         .catch(err => { res.status(500).send({ message: err.message }) })
 });
 
-// get project by id
+// Get project by id
 router.get("/:id", verifyToken, (req, res) => {
     schema.findById(req.params.id)
         .then(data => { res.send(data); })
@@ -32,34 +32,47 @@ router.get("/user/:id", verifyToken, (req, res) => {
 router.post("/", verifyToken, (req, res) => {
 
     try {
-        const columnsIds = [];
-        // -------  create columns  ------- NOT FINISHED ------- DOESN'T WORK
-        // req.body.columns.forEach(columnName => {
-        //     const columnObject = new column({
-        //         title: columnName,
-        //         tasks: []
-        //     })
-        //     const savedColumn = columnObject.save().then(savedColumn => {
-        //         columnsIds.push(savedColumn._id.valueOf())
-        //         console.log("columns inside forEach", columnsIds)
-        //     })
-        // })
-
         const project = new schema({
             title: req.body.title,
             deadline: req.body.deadline,
             description: req.body.description,
             tags: req.body.tags,
-            columnsIds,
+            columns: [],
             assigned: req.body.assigned
         })
-        project.save().then(savedProject => {
-            res.json({ message: "New project created.😊", newproject: savedProject })
+        let projectId;
+        project.save().then(data => {
+            projectId = data._id;
+            console.log("saved project")
         })
-
+        
+        if (req.body.columns) {
+            const columns = req.body.columns;
+            columns.forEach((columnName, index) => {
+                console.log(columnName)
+                const newColumn = new column({
+                    title: columnName,
+                    tasks: [],
+                })
+                newColumn.save().then(data => {
+                    const columnId = data._id
+                    project.columns.push(columnId)
+                    console.log("Project columns" + project.columns)
+                    schema.findByIdAndUpdate(projectId, { $push: { columns: columnId } }, { new: true })
+                })
+                if(index === columns.length - 1) {
+                    console.log("Saved column. Index: " + index)
+                    res.status(200).json({ message: "Project created successfully 😊 with columns", project })
+                }
+            })
+            
+        }else{
+            res.status(200).json({ message: "Project created successfully 😊", project })
+        }  
     } catch (error) {
         res.status(400).json({ message: error.message })
     }
+
 });
 
 // Update project by id

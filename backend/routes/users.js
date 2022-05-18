@@ -10,25 +10,25 @@ const { registerValidation, loginValidation, verifyToken } = require('../validat
 // Create new user
 router.post("/register", async (req, res) => {
 
-    //validate user inputs (name, email, password)
+    // Validate user inputs (name, email, password)
     const { error } = registerValidation(req.body);
 
     if (error) {
         return res.status(400).json({ error: error.details[0].message });
     }
 
-    //check if email is already registeret
+    // Check if email is already registeret
     const emailExist = await User.findOne({ email: req.body.email });
 
     if (emailExist) {
         return res.status(400).json({ error: "Email already exists" });
     }
 
-    //hash password before saving in database
+    // Hash password before saving in database
     const salt = await bcrypt.genSalt(10);
     const password = await bcrypt.hash(req.body.password, salt);
 
-    //generate initials
+    // Generate initials
     let initials = req.body.name.toUpperCase().split(' ').map(name => name[0]);
     console.log(initials)
     if (initials.length > 2) {
@@ -44,7 +44,7 @@ router.post("/register", async (req, res) => {
     // Placeholder role for user ---- Replace when frontend is ready
     const role = ["6271156a8547fd10454ddf19"]
 
-    //create user object and save it in Mongo (via try-catch)
+    // Create user object and save it in Mongo (via try-catch)
     const user = new User({
         name: req.body.name,
         email: req.body.email,
@@ -53,28 +53,27 @@ router.post("/register", async (req, res) => {
         initials: initials,
         roles: role
     });
-    //try to save user in database (via try-catch)
+    // Try to save user in database (via try-catch)
     try {
         const savedUser = await user.save(); //save user
         res.json({ message: "New user created.😊", newUser: savedUser });
     } catch (error) { //if error, return error
         res.status(400).json({ error });
     }
-    // res.send("User registered successfully");
 });
 
-//Login user and send JWT token
+// Login user and send JWT token
 router.post("/login", async (req, res) => {
 
-    //if login info is valid find the user by email in database
+    // If login info is valid find the user by email in database
     const user = await User.findOne({ email: req.body.email });
 
-    //throw error if email is wrong - user does not exist in DB 
+    // Throw error if email is wrong - user does not exist in DB 
     if (!user) {
         return res.status(400).json({ error: "Email is wrong" });
     }
 
-    //check for password correctness - compare hashed password with password from DB
+    // Check for password correctness - compare hashed password with password from DB
     const validPassword = await bcrypt.compare(req.body.password, user.password);
 
     //throw error if password is wrong 
@@ -82,7 +81,7 @@ router.post("/login", async (req, res) => {
         return res.status(400).json({ error: "Password is wrong" })
     }
 
-    //create authentication token with username and id
+    // create authentication token with username and id
     const token = jwt.sign(
         //payload data
         {

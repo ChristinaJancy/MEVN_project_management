@@ -34,7 +34,7 @@ router.post("/", verifyToken, async (req,res) => {
     }
 })
 
-//update role by id
+// Update role by id
 router.put("/:id", verifyToken, async (req, res) => {
     try {
         const updatedTag = await schema.findByIdAndUpdate(req.params.id, req.body, { new: true })
@@ -44,7 +44,7 @@ router.put("/:id", verifyToken, async (req, res) => {
     }
 });
 
-// delete role by id and remove role from all users
+// Delete role by id and remove role from all users
 router.delete("/:id", verifyToken, async (req, res) => {
     const id = req.params.id
     try {

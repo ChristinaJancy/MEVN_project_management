@@ -1,4 +1,3 @@
-// setup router for /columns
 const router = require("express").Router();
 const schema = require("../models/columns")
 const tasks = require("../models/tasks")
@@ -14,7 +13,7 @@ router.get("/", verifyToken, (req, res) => {
         .catch(err => { res.status(500).send({ message: err.message }) })
 });
 
-//Get column with id
+// Get column with id
 router.get("/:id", verifyToken, (req, res) => {
     const id = req.params.id
     schema.findById(id)
@@ -40,7 +39,7 @@ router.post("/:projectId", verifyToken, async (req, res) => {
     }
 });
 
-//Update task from two columns
+// Update task from two columns
 router.put("/draggable/move", verifyToken, async (req, res) => {
     const taskId = req.body.taskId
     newColumnId = req.body.columnId
@@ -60,7 +59,7 @@ router.put("/draggable/move", verifyToken, async (req, res) => {
 
 })
 
-//Replace task array in column
+// Replace task array in column
 router.put("/draggable/internal", verifyToken, async (req, res) => {
     columnId = req.body.columnId
     newTasks = req.body.tasks
@@ -76,7 +75,7 @@ router.put("/draggable/internal", verifyToken, async (req, res) => {
     }
 });
 
-//Update a column by id
+// Update a column by id
 router.put("/:id", verifyToken, async (req, res) => {
     try {
         const updatedColumn = await schema.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -107,7 +106,7 @@ const deleteColumn = async (id, column, tasks) => {
     }
 }
 
-//Delete column by id and all tasks in column
+// Delete column by id and all tasks in column
 router.delete("/:id", verifyToken, async (req, res) => {
     const id = req.params.id
     await deleteColumn(id, schema, tasks).then(data => {

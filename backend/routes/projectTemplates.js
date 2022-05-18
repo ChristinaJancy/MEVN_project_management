@@ -35,7 +35,7 @@ router.post("/", verifyToken, async (req, res) => {
     }
 });
 
-//update project template by id
+// Update project template by id
 router.put("/:id", verifyToken, async (req, res) => {
     try {
         const updatedTemplate = await schema.findByIdAndUpdate(req.params.id, req.body, { new: true })
@@ -45,7 +45,7 @@ router.put("/:id", verifyToken, async (req, res) => {
     }
 });
 
-//Delete project template by id
+// Delete project template by id
 router.delete("/:id", verifyToken, async (req, res) => {
     const id = req.params.id
     try {
