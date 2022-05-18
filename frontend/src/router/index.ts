@@ -18,6 +18,7 @@ const routes: Array<RouteRecordRaw> = [
             requiresAuth: true
         }
     },
+    // tags
     {
         path: '/tags',
         name: 'Tags',
@@ -27,9 +28,26 @@ const routes: Array<RouteRecordRaw> = [
         }
     },
     {
+        path: '/tags/new-tag',
+        name: 'NewTask',
+        component: () => import(/* webpackChunkName: "new-task" */ '../views/CreateTagView.vue'),
+        meta: {
+            requiresAuth: true
+        }
+    },
+    // roles
+    {
         path: '/roles',
         name: 'Roles',
         component: () => import(/* webpackChunkName: "tags" */ '../views/RolesView.vue'),
+        meta: {
+            requiresAuth: true
+        }
+    },
+    {
+        path: '/roles/new-role',
+        name: 'NewRole',
+        component: () => import(/* webpackChunkName: "new-role" */ '../views/CreateRoleView.vue'),
         meta: {
             requiresAuth: true
         }

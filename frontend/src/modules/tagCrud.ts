@@ -33,10 +33,78 @@ const tagCrud = () => {
                 tagState.value.tags = data
             })
     }
+
+    const createTag = async () => {
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                "auth-token": getCookie('token')
+            },
+            body: JSON.stringify({
+                name: tagState.value.name,
+                color: tagState.value.color
+            })
+        };
+        await fetch(uri + 'tags',
+            requestOptions
+        )
+            .then(response => response.json())
+            .then(data => {
+                console.log("data:", data);
+                router.push({ path: "/tags", replace: true })
+            })
+    }
+
+    const updateTag = (_id: string, name: string, color: string) => {
+        try {
+            const requestOptions = {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    "auth-token": getCookie('token')
+                },
+                body: JSON.stringify({
+                    name, color
+                })
+            }
+            fetch(uri + 'tags/' + _id,
+                requestOptions,
+            )
+                .then(response => response.json())
+                .then(() => {
+                    getAllTags();
+                })
+        }
+
+        catch (error) {
+            console.log("error:", error);
+        }
+    }
+
+    const deleteTag = (_id: string) => {
+        const requestOptions = {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "auth-token": getCookie('token')
+            },
+        }
+        fetch(uri + 'tags/' + _id,
+            requestOptions
+        )
+            .then(response => response.json())
+            .then(() => {
+                getAllTags();
+            })
+    }
     return {
         tagState,
         tagId,
-        getAllTags
+        getAllTags,
+        createTag,
+        deleteTag,
+        updateTag
     }
 }
 

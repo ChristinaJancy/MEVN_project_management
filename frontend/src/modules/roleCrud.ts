@@ -9,7 +9,7 @@ const roleCrud = () => {
     const roleId = computed(() => route.params.id);
 
     const roleState = ref({
-        name: '' as string,
+        title: '' as string,
         color: '' as string,
         id: '' as string,
         roles: [] as string[]
@@ -31,10 +31,76 @@ const roleCrud = () => {
                 roleState.value.roles = data
             })
     }
+    const createRole = async () => {
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                "auth-token": getCookie('token')
+            },
+            body: JSON.stringify({
+                title: roleState.value.title,
+                color: roleState.value.color
+            })
+        };
+        await fetch(uri + 'roles',
+            requestOptions
+        )
+            .then(response => response.json())
+            .then(data => {
+                console.log("data:", data);
+                router.push({ path: "/roles", replace: true })
+            })
+    }
+
+    const updateRole = (_id: string, title: string, color: string) => {
+        try {
+            const requestOptions = {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    "auth-token": getCookie('token')
+                },
+                body: JSON.stringify({
+                    title, color
+                })
+            }
+            fetch(uri + 'roles/' + _id,
+                requestOptions,
+            )
+                .then(response => response.json())
+                .then(() => {
+                    getAllRoles();
+                })
+        }
+        catch (error) {
+            console.log(error);
+        }
+    }
+    const deleteRole = (_id: string) => {
+        const requestOptions = {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "auth-token": getCookie('token')
+            },
+        }
+        fetch(uri + 'roles/' + _id,
+            requestOptions
+        )
+            .then(response => response.json())
+            .then(() => {
+                getAllRoles();
+            })
+    }
+
     return {
         roleState,
         roleId,
-        getAllRoles
+        getAllRoles,
+        createRole,
+        updateRole,
+        deleteRole
     }
 }
 

@@ -83,7 +83,7 @@ const userCrud = () => {
             })
     }
 
-    const updateUser = (_id: string, name: string, email: string) => {
+    const updateUser = (_id: string, name: string, email: string, roles: string[]) => {
         try {
             const requestOptions = {
                 method: "PUT",
@@ -92,7 +92,7 @@ const userCrud = () => {
                     "auth-token": getCookie('token')
                 },
                 body: JSON.stringify({
-                    name, email
+                    name, email, roles
                 })
             }
             fetch(uri + 'users/' + _id,
@@ -102,15 +102,12 @@ const userCrud = () => {
                 .then(data => {
                     console.log("data:", data);
                     // debugger
-                    router.push({ path: "/", replace: true })
+                    router.go(-1)
                 })
         }
-
         catch (error) {
             console.log("error:", error);
         }
-
-
     }
 
     const loginUser = async () => {

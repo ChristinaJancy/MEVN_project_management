@@ -2,67 +2,26 @@
   <div class="flex flex-col mt-8">
     <div class="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
       <div
-        class="
-          inline-block
-          min-w-full
-          overflow-hidden
-          align-middle
-          border-b border-gray-200
-          shadow
-          sm:rounded-lg
-        "
+        class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg"
       >
         <table class="min-w-full">
           <thead>
             <tr>
               <!-- name -->
               <th
-                class="
-                  px-6
-                  py-3
-                  text-xs
-                  font-medium
-                  leading-4
-                  tracking-wider
-                  text-left text-gray-500
-                  uppercase
-                  border-b border-gray-200
-                  bg-gray-50
-                "
+                class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50"
               >
                 Name
               </th>
               <!-- title -->
               <th
-                class="
-                  px-6
-                  py-3
-                  text-xs
-                  font-medium
-                  leading-4
-                  tracking-wider
-                  text-left text-gray-500
-                  uppercase
-                  border-b border-gray-200
-                  bg-gray-50
-                "
+                class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50"
               >
                 Title
               </th>
               <!-- role -->
               <th
-                class="
-                  px-6
-                  py-3
-                  text-xs
-                  font-medium
-                  leading-4
-                  tracking-wider
-                  text-left text-gray-500
-                  uppercase
-                  border-b border-gray-200
-                  bg-gray-50
-                "
+                class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50"
               >
                 Role
               </th>
@@ -84,23 +43,9 @@
                 >
                   <div class="flex items-center">
                     <div
-                      class="
-                        flex-shrink-0
-                        w-10
-                        h-10
-                        bg-green-500
-                        rounded-full
-                        flex
-                        items-center
-                        justify-center
-                      "
+                      :style="{ 'background-color': user.roles[0].color }"
+                      class="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center"
                     >
-                      <!-- <img
-                        class="w-10 h-10 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                        alt=""
-                        style="opacity: 0"
-                      /> -->
                       <div
                         class="text-center text-sm font-bold text-white"
                         v-if="user.initials"
@@ -128,35 +73,18 @@
               </td>
 
               <td
-                class="
-                  px-6
-                  py-4
-                  text-sm
-                  leading-5
-                  text-gray-500
-                  border-b border-gray-200
-                  whitespace-nowrap
-                "
+                class="px-6 py-4 text-sm leading-5 text-gray-500 border-b border-gray-200 whitespace-nowrap"
               >
                 <p v-if="user.roles">
                   <span v-for="roles in user.roles" :key="roles">
-                    {{ roles.title }}</span
-                  >
+                    {{ roles.title }} <br
+                  /></span>
                 </p>
                 <p v-else>No roles</p>
               </td>
 
               <td
-                class="
-                  px-6
-                  py-4
-                  text-sm
-                  font-medium
-                  leading-5
-                  text-right
-                  border-b border-gray-200
-                  whitespace-nowrap
-                "
+                class="px-6 py-4 text-sm font-medium leading-5 text-right border-b border-gray-200 whitespace-nowrap"
               >
                 <router-link
                   :to="{
@@ -167,7 +95,7 @@
                   }"
                   class="text-indigo-600 hover:text-indigo-900"
                   >Edit</router-link
-                ><br />
+                ><br /><br />
                 <a
                   href="#"
                   class="text-red-600 hover:text-indigo-900"
@@ -183,11 +111,10 @@
   </div>
 </template>
 
-
 <script lang="ts">
-import userCrud from "../modules/userCrud";
-import { onMounted, defineComponent, ref } from "vue";
-import { getCookie } from "../modules/cookie";
+import userCrud from '../modules/userCrud';
+import { onMounted, defineComponent, ref } from 'vue';
+import { getCookie } from '../modules/cookie';
 
 export default defineComponent({
   async setup() {
@@ -204,10 +131,10 @@ export default defineComponent({
     deleteAUser(id: string) {
       //if logged in user === user to be deleted,
       //then js confirm to prevent accidental deletion of self
-      let currentUserId = this.getCookie("id");
+      let currentUserId = this.getCookie('id');
       if (currentUserId === id) {
         //if yes delete user, else do nothing
-        if (confirm("Are you sure you want to delete your account?")) {
+        if (confirm('Are you sure you want to delete your account?')) {
           this.deleteUser(id);
         }
       }
