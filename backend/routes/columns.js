@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const schema = require("../models/columns")
 const tasks = require("../models/tasks")
+const projects = require("../models/projects")
 const { verifyToken } = require("../validation")
 const { isValidObjectId } = require("../modules/IdCheck")
 
@@ -28,8 +29,9 @@ router.post("/:projectId", verifyToken, (req, res) => {
         tasks: []
     })
     try {
-        column.save().then(savedColumn => {
-            schema.findByIdAndUpdate(req.params.projectId, { $push: { columns: savedColumn._id } })
+        column.save()
+        .then(savedColumn => {
+            projects.findByIdAndUpdate(req.params.projectId, { $push: { columns: savedColumn._id } }, { new: true })
             .then(updatedProject => {
                 res.json({ message: "New column created.😊 and added to project", newcolumn: savedColumn, project: updatedProject }) 
             })

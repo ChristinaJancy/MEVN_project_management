@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h3 class="text-3xl font-medium text-gray-700">Members</h3>
+  <div  >
+    <h3 class="text-3xl font-medium text-gray-700" >Members</h3>
     <div class="mt-8"></div>
     <h4 class="text-1xl font-bold text-gray-700">All members</h4>
     <!-- All users table -->

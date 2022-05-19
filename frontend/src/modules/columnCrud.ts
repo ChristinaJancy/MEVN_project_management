@@ -13,7 +13,7 @@ const columnCrud = () => {
         description: '' as string,
         tasks: [] as string[],
         id: '' as string,
-        columns: [] as string[]
+        columns: [] as object[],
     })
 
     const getAllColumns = async () => {
@@ -31,7 +31,28 @@ const columnCrud = () => {
             .then(data => {
                 columnState.value.columns = data
             })
+    }
 
+    const createColumn = (projectId: string, title: string) => {
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                "auth-token": getCookie('token')
+            },
+            body: JSON.stringify({
+                title
+            })
+        }
+
+         fetch(uri + 'columns/' + projectId,
+            requestOptions
+        )
+            .then(response => response.json())
+            .then(data => {
+                columnState.value.columns.push(data)
+                console.log(data)
+            })
     }
     //For moving a task to a new column
     const moveTaskToNewColumn = async (columnId: string, taskId: string, taskIds: string[]) => {
@@ -84,12 +105,15 @@ const columnCrud = () => {
         }
     }
 
+
+
     return {
         columnState,
         columnId,
         moveTaskToNewColumn,
         moveTaskInsideColumn,
-        getAllColumns
+        getAllColumns,
+        createColumn
     }
 }
 

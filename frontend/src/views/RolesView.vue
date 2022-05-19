@@ -4,7 +4,7 @@
     <div class="mt-8"></div>
     <h4 class="text-1xl font-bold text-gray-700">All roles</h4>
 
-    <!-- All users table -->
+    <!-- All roles table -->
     <Suspense>
       <template #default>
         <RolesTable />
