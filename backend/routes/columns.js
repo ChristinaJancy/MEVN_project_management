@@ -25,10 +25,10 @@ router.get("/:id", verifyToken, (req, res) => {
 router.post("/:projectId", verifyToken, async (req, res) => {
     const column = new schema({
         title: req.body.title,
-        tasks: req.body.tasks
+        tasks: []
     })
     try {
-        const savedColumn = column.save().then(savedColumn => {
+        column.save().then(savedColumn => {
             schema.findByIdAndUpdate(req.params.projectId, { $push: { columns: savedColumn._id } })
             .then(updatedProject => {
                 res.json({ message: "New column created.😊 and added to project", newcolumn: savedColumn, project: updatedProject }) 

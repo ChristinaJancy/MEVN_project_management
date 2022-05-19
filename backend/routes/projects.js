@@ -47,7 +47,9 @@ router.post("/", verifyToken, (req, res) => {
                 // Creates columns for project after the project has been saved to DB
                 if (req.body.columns) {
                     const columns = req.body.columns;
-                    columns.forEach((columnName, index) => {
+
+                    const createColumn = (columns, index) => {
+                        const columnName = columns[index];
                         const newColumn = new column({
                             title: columnName,
                             tasks: [],
@@ -62,10 +64,14 @@ router.post("/", verifyToken, (req, res) => {
                                         if (index === columns.length - 1) {
                                             // Send response after all columns have been created
                                             res.status(200).json({ message: "New project created.😊", newproject: project })
+                                        }else{
+                                            createColumn(columns, index + 1)
                                         }
                                     })
                             })
-                    })
+                    }
+
+                    createColumn(columns, 0);
                 } else {
                     res.status(200).json({ message: "Project created successfully 😊", project })
                 }
