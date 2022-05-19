@@ -97,7 +97,7 @@ router.post("/login", async (req, res) => {
         token: token,
         id: user._id,
         initials: user.initials,
-        roles: user.roles,
+        userColor: user.roles[0].color,
 
     });
 })
