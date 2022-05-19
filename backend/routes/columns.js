@@ -22,7 +22,7 @@ router.get("/:id", verifyToken, (req, res) => {
 });
 
 // Create new column
-router.post("/:projectId", verifyToken, async (req, res) => {
+router.post("/:projectId", verifyToken, (req, res) => {
     const column = new schema({
         title: req.body.title,
         tasks: []
