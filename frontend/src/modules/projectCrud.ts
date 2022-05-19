@@ -88,6 +88,33 @@ const projectCrud = () => {
         }
     }
 
+    const updateProjectColumns = async (_id: string, columns: string[]) => {
+        try {
+            const requestOptions = {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    "auth-token": getCookie('token')
+                },
+                body: JSON.stringify({
+                  columns
+                })
+            };
+            await fetch(uri + 'projects/' + _id,
+                requestOptions
+            )
+                .then(response => response.json())
+                .then(data => {
+                    console.log("data:", data);
+                    getSpecificProject()
+                 
+
+                })
+        }
+        catch (error) {
+            console.log(error)
+        }
+    }
     const createProject = async () => {
         const requestOptions = {
             method: 'POST',
@@ -138,7 +165,8 @@ const projectCrud = () => {
         getSpecificProject,
         updateProjectDetails,
         createProject,
-        deleteProject
+        deleteProject,
+        updateProjectColumns
     }
 }
 

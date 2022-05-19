@@ -73,9 +73,21 @@
       <!-- columns in project -->
       <div
         class="lg:col-span-3 md:col-span-auto sm:col-span-12 col-span-12 bg-gray-100 rounded-lg shadow-lg mr-3 mt-3 pl-3 pt-2"
-        v-for="column in project.columns"
+        v-for="(column, index) in project.columns"
         :key="column._id"
       >
+        <button
+          class="mr-2"
+          v-if="project.columns.length > index + 1"
+          @click="moveColumnUp(index)"
+        >
+          move up
+        </button>
+
+        <button v-if="index != 0" @click="moveColumnDown(index)">
+          move down
+        </button>
+
         <h4
           class="text-base font-bold mt-0 text-gray-800"
           style="text-transform: capitalize"
@@ -138,7 +150,12 @@ export default defineComponent({
   },
 
   async setup() {
-    const { projectState, projectId, getSpecificProject } = projectCrud();
+    const {
+      projectState,
+      projectId,
+      getSpecificProject,
+      updateProjectColumns,
+    } = projectCrud();
     const {
       columnState,
       moveTaskToNewColumn,
@@ -157,6 +174,7 @@ export default defineComponent({
       projectId,
       moment,
       // showModal,
+      updateProjectColumns,
       moveTaskToNewColumn,
       moveTaskInsideColumn,
       createColumn,
@@ -206,6 +224,49 @@ export default defineComponent({
       const projectId = this.projectId;
 
       this.createColumn(projectId, columnTitle);
+    },
+
+    moveColumn(columnId: string) {
+      /*This function is called when the user clicks the move column button */
+      const projectId = this.projectId;
+
+      const columns = this.projectState.find(
+        (project: any) => project._id === this.projectId
+      ).columns;
+
+      this.updateProjectColumns(projectId, columns);
+    },
+    moveColumnDown(index: number) {
+      /*This function is called when the user clicks the move column down button */
+      const projectId = this.projectId;
+
+      const columns = this.projectState.find(
+        (project: any) => project._id === this.projectId
+      ).columns;
+
+      //map the columns array to only find the ids of the columns
+      const columnIds = columns.map((column: any) => column._id);
+
+      //splice the columnIds array to add the column at the index - 1
+      columnIds.splice(index - 1, 0, columnIds.splice(index, 1)[0]);
+
+      this.updateProjectColumns(projectId, columnIds);
+    },
+    moveColumnUp(index: number) {
+      /*This function is called when the user clicks the move column down button */
+      const projectId = this.projectId;
+
+      const columns = this.projectState.find(
+        (project: any) => project._id === this.projectId
+      ).columns;
+
+      //map the columns array to only find the ids of the columns
+      const columnIds = columns.map((column: any) => column._id);
+
+      //splice the columnIds array to add the column at the index - 1
+      columnIds.splice(index + 1, 0, columnIds.splice(index, 1)[0]);
+
+      this.updateProjectColumns(projectId, columnIds);
     },
   },
 });
