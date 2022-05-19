@@ -76,17 +76,27 @@
         v-for="(column, index) in project.columns"
         :key="column._id"
       >
-        <button
-          class="mr-2"
-          v-if="project.columns.length > index + 1"
-          @click="moveColumnUp(index)"
-        >
-          move up
-        </button>
-
-        <button v-if="index != 0" @click="moveColumnDown(index)">
-          move down
-        </button>
+        <div class="relative">
+          <div class="absolute -left-4 top-0.5">
+            <a
+              v-if="index != 0"
+              @click="moveColumnDown(index)"
+              class="text-gray-400"
+            >
+              <ChevronLeftIcon class="h-5 w-5" />
+            </a>
+          </div>
+          <!-- move column to the right -->
+          <div class="absolute right-0  top-0.5">
+            <a
+              v-if="project.columns.length > index + 1"
+              @click="moveColumnUp(index)"
+              class="text-gray-400"
+            >
+              <ChevronRightIcon class="h-5 w-5" />
+            </a>
+          </div>
+        </div>
 
         <h4
           class="text-base font-bold mt-0 text-gray-800"
@@ -139,6 +149,7 @@ import draggable from 'vuedraggable';
 import projectCrud from '../modules/projectCrud';
 import columnCrud from '../modules/columnCrud';
 import moment from 'moment';
+import { ChevronRightIcon, ChevronLeftIcon } from '@heroicons/vue/solid';
 import TaskCard from '../components/TaskCard.vue';
 import { defineComponent, ref } from 'vue';
 
@@ -147,6 +158,8 @@ export default defineComponent({
   components: {
     draggable,
     TaskCard,
+    ChevronRightIcon,
+    ChevronLeftIcon,
   },
 
   async setup() {
