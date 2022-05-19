@@ -30,8 +30,8 @@ router.get("/user/:id", verifyToken, (req, res) => {
 
 // Create new project
 router.post("/", verifyToken, (req, res) => {
-
     try {
+        // Creates project template without columns
         const project = new schema({
             title: req.body.title,
             deadline: req.body.deadline,
@@ -41,34 +41,35 @@ router.post("/", verifyToken, (req, res) => {
             assigned: req.body.assigned
         })
         let projectId;
-        project.save().then(data => {
-            projectId = data._id;
-            console.log("saved project")
-        })
-        res.status(200).json({ message: "New project created.😊", newproject: project })
-        
-        // if (req.body.columns) {
-        //     const columns = req.body.columns;
-        //     columns.forEach((columnName, index) => {
-        //         console.log(columnName)
-        //         const newColumn = new column({
-        //             title: columnName,
-        //             tasks: [],
-        //         })
-        //         newColumn.save().then(data => {
-        //             const columnId = data._id
-        //             project.columns.push(columnId)
-        //             console.log("Project columns" + project.columns)
-        //             schema.findByIdAndUpdate(projectId, { $push: { columns: columnId } }, { new: true })
-        //         })
-        //         if(index === columns.length - 1) {
-        //             console.log("Saved column. Index: " + index)
-        //         }
-        //     })
-            
-        // }else{
-        //     res.status(200).json({ message: "Project created successfully 😊", project })
-        // }  
+        project.save()
+            .then(data => {
+                projectId = data._id;
+                // Creates columns for project after the project has been saved to DB
+                if (req.body.columns) {
+                    const columns = req.body.columns;
+                    columns.forEach((columnName, index) => {
+                        const newColumn = new column({
+                            title: columnName,
+                            tasks: [],
+                        })
+                        newColumn.save()
+                            .then(data => {
+                                // Adds column to project after the column has been saved to DB
+                                const columnId = data._id
+                                project.columns.push(columnId)
+                                schema.findByIdAndUpdate(projectId, { $push: { columns: columnId } }, { new: true })
+                                    .then(data => {
+                                        if (index === columns.length - 1) {
+                                            // Send response after all columns have been created
+                                            res.status(200).json({ message: "New project created.😊", newproject: project })
+                                        }
+                                    })
+                            })
+                    })
+                } else {
+                    res.status(200).json({ message: "Project created successfully 😊", project })
+                }
+            })
     } catch (error) {
         res.status(400).json({ message: error.message })
     }
