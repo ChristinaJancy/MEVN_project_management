@@ -50,6 +50,7 @@ router.post("/", verifyToken, (req, res) => {
 
                     const createColumn = (columns, index) => {
                         const columnName = columns[index];
+                        console.log(columnName);
                         const newColumn = new column({
                             title: columnName,
                             tasks: [],
@@ -64,7 +65,7 @@ router.post("/", verifyToken, (req, res) => {
                                         if (index === columns.length - 1) {
                                             // Send response after all columns have been created
                                             res.status(200).json({ message: "New project created.😊", newproject: project })
-                                        }else{
+                                        } else {
                                             createColumn(columns, index + 1)
                                         }
                                     })
