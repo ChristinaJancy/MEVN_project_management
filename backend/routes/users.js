@@ -86,7 +86,8 @@ router.post("/login", async (req, res) => {
         //payload data
         {
             name: user.name,
-            id: user._id
+            id: user._id,
+            initials: user.initials,
         },
         process.env.TOKEN_SECRET,
         { expiresIn: process.env.JWT_EXPIRES_IN },
