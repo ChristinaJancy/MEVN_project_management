@@ -67,7 +67,7 @@ describe('Workflow', () => {
                                     description: 'testtt',
                                     tags: [res.body.newtag._id],
                                     deadline: '01-01-2000',
-                                    columns: []
+                                    columns: ["testtt"]
                                 }
                                 chai.request(server)
                                     .post('/api/projects')
@@ -84,43 +84,27 @@ describe('Workflow', () => {
                                         expect(res.body.newproject).to.have.property('tags');
                                         expect(res.body.newproject).to.have.property('deadline');
 
-                                        const column = {
-                                            title: 'testtt',
-                                            tasks: []
+
+
+                                        const task = {
+                                            name: 'testtt',
+                                            description: 'testtt',
+                                            deadline: '01-01-2000',
+                                            status: 'todo',
                                         }
                                         chai.request(server)
-                                            .post('/api/columns/' + res.body.newproject._id)
+                                            .post('/api/tasks')
                                             .set({ "auth-token": token })
-                                            .send(column)
+                                            .send(task)
                                             .end((err, res) => {
                                                 expect(res).to.have.status(200);
                                                 expect(res.body).to.have.property('message');
-                                                expect(res.body.message).to.equal('New column created.😊 and added to project');
-                                                expect(res.body).to.have.property('newcolumn');
-                                                expect(res.body.newcolumn).to.have.property('_id');
-                                                expect(res.body.newcolumn).to.have.property('title');
-                                                expect(res.body.newcolumn).to.have.property('tasks');
-
-                                                const task = {
-                                                    name: 'testtt',
-                                                    description: 'testtt',
-                                                    deadline: '01-01-2000',
-                                                    status: 'todo',
-                                                }
-                                                chai.request(server)
-                                                    .post('/api/tasks')
-                                                    .set({ "auth-token": token })
-                                                    .send(task)
-                                                    .end((err, res) => {
-                                                        expect(res).to.have.status(200);
-                                                        expect(res.body).to.have.property('message');
-                                                        expect(res.body.message).to.equal('New task created.😊');
-                                                        expect(res.body).to.have.property('newtask');
-                                                        expect(res.body.newtask).to.have.property('_id');
-                                                        expect(res.body.newtask).to.have.property('name');
-                                                        expect(res.body.newtask).to.have.property('description');
-                                                        done();
-                                                    });
+                                                expect(res.body.message).to.equal('New task created.😊');
+                                                expect(res.body).to.have.property('newtask');
+                                                expect(res.body.newtask).to.have.property('_id');
+                                                expect(res.body.newtask).to.have.property('name');
+                                                expect(res.body.newtask).to.have.property('description');
+                                                done();
                                             });
                                     });
                             });
@@ -128,3 +112,4 @@ describe('Workflow', () => {
             });
     });
 });
+
