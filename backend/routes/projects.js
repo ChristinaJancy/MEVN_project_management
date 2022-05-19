@@ -49,27 +49,26 @@ router.post("/", verifyToken, (req, res) => {
                     const columns = req.body.columns;
 
                     const createColumn = (columns, index) => {
-                        const columnName = columns[index];
-                        console.log(columnName);
-                        const newColumn = new column({
-                            title: columnName,
-                            tasks: [],
-                        })
-                        newColumn.save()
-                            .then(data => {
-                                // Adds column to project after the column has been saved to DB
-                                const columnId = data._id
-                                project.columns.push(columnId)
-                                schema.findByIdAndUpdate(projectId, { $push: { columns: columnId } }, { new: true })
-                                    .then(data => {
-                                        if (index === columns.length - 1) {
-                                            // Send response after all columns have been created
-                                            res.status(200).json({ message: "New project created.😊", newproject: project })
-                                        } else {
-                                            createColumn(columns, index + 1)
-                                        }
-                                    })
+                        if (index === columns.columns.length) {
+                            // Send response after all columns have been created
+                            res.status(200).json({ message: "New project created.😊", newproject: project })
+                        } else {
+                            const columnName = columns.columns[index];
+                            const newColumn = new column({
+                                title: columnName,
+                                tasks: [],
                             })
+                            newColumn.save()
+                                .then(data => {
+                                    // Adds column to project after the column has been saved to DB
+                                    const columnId = data._id
+                                    project.columns.push(columnId)
+                                    schema.findByIdAndUpdate(projectId, { $push: { columns: columnId } }, { new: true })
+                                        .then(data => {
+                                            createColumn(columns, index + 1)
+                                        })
+                                })
+                        }
                     }
 
                     createColumn(columns, 0);
