@@ -77,6 +77,15 @@
       <div>
         <label for="about" class="block text-sm font-medium text-gray-700"
           >Project template</label>
+        <VueMultiselect
+        v-model="projectState.columns"
+        :options="templateState.templates"
+        :value="templateState.templates"
+        :multiple="false"
+        :close-on-select="true"
+        label="name"
+        track-by="name"
+        />
       </div>
 
       <!------------ Deadline ------------>
@@ -115,8 +124,7 @@ import VueMultiselect from 'vue-multiselect';
 import projectCrud from '../modules/projectCrud';
 import userCrud from '../modules/userCrud';
 import tagCrud from '../modules/tagCrud';
-import columnCrud from '../modules/columnCrud';
-
+import templateCrud from '../modules/templateCrud';
 // tailwind
 export default defineComponent({
   components: {
@@ -128,27 +136,27 @@ export default defineComponent({
     const { projectState, createProject } = projectCrud();
     const { state, userId, getAllUsers } = userCrud();
     const { tagState, tagId, getAllTags } = tagCrud();
-    const { columnState, columnId, getAllColumns } = columnCrud();
+    const { templateState, getAllTemplates } = templateCrud();
+    // const { columnState, columnId, getAllColumns } = columnCrud();
 
     onMounted(() => {
       getAllTags();
       getAllUsers();
-      getAllColumns();
+      getAllTemplates();
     });
 
     await getAllTags();
     await getAllUsers();
-    await getAllColumns();
+    await getAllTemplates();
 
     return {
       createProject,
       projectState,
       tagState,
       state,
-      columnState,
+      templateState,
       userId,
       tagId,
-      columnId,
     };
   },
   methods: {},

@@ -17,7 +17,7 @@ const projectCrud = () => {
         tags: [] as string[] | any,
         assigned: [] as string[] | any,
         id: '' as string,
-        columns: [] as string[],
+        columns: {} as object | any,
         tasks: [] as string[],
         projectToEdit: {} as any,
     })
@@ -87,11 +87,6 @@ const projectCrud = () => {
             console.log(error)
         }
     }
-
-    // in progess
-
-    // tags: ["627e281e1e7b024e2517e60d", "627e28881e7b024e2517e60f", "627e28bb1e7b024e2517e611"],
-    // assigned: ["6278fcec6b9f24120c8a73d4", "62738fd19ef44f7d4e422250"]
 
     const createProject = async () => {
         const requestOptions = {
