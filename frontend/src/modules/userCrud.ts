@@ -15,7 +15,8 @@ const userCrud = () => {
         img: '' as string | any,
         password: '' as string | any,
         token: '' as string | any,
-        roles: [] as string[],
+        roles: [] as object[],
+        userColor: '' as string | any,
         users: {} as { [key: string]: any },
         id: '' as string,
     })
@@ -129,10 +130,15 @@ const userCrud = () => {
             .then(data => {
                 console.log("json:", data);
                 data.token ? console.log("have Cvookie " + data.token) : console.log("no token");
-
                 data.id ? console.log("id: " + data.id) : console.log("no id");
+                data.initials ? console.log("id: " + data.initials) : console.log("no initials");
+                data.userColor ? console.log("userColor: " + data.userColor) : console.log("no userColor");
+
+
                 state.value.token = data.token
                 state.value.id = data.id;
+                state.value.initials = data.initials
+                state.value.userColor = data.userColor
 
                 setCookies()
                 router.push({ path: "/", replace: true })
@@ -143,6 +149,8 @@ const userCrud = () => {
         deleteCookie('id')
         deleteCookie('email')
         deleteCookie('token')
+        deleteCookie('initials')
+        deleteCookie('userColor')
 
         router.push({ path: "/login", replace: true })
     }
@@ -175,6 +183,8 @@ const userCrud = () => {
         setCookie('id', state.value.id, 1)
         setCookie('email', state.value.email, 1)
         setCookie('token', state.value.token, 1)
+        setCookie('initials', state.value.initials, 1)
+        setCookie('userColor', state.value.userColor, 1)
     }
 
     return {
