@@ -83,11 +83,13 @@
               @click="moveColumnDown(index)"
               class="text-gray-400"
             >
+              <!-- if screen sm show ChevronUpIcon else  ChevronLeftIcon -->
+
               <ChevronLeftIcon class="h-5 w-5" />
             </a>
           </div>
           <!-- move column to the right -->
-          <div class="absolute right-0  top-0.5">
+          <div class="absolute right-0 top-0.5">
             <a
               v-if="project.columns.length > index + 1"
               @click="moveColumnUp(index)"
@@ -149,7 +151,12 @@ import draggable from 'vuedraggable';
 import projectCrud from '../modules/projectCrud';
 import columnCrud from '../modules/columnCrud';
 import moment from 'moment';
-import { ChevronRightIcon, ChevronLeftIcon } from '@heroicons/vue/solid';
+import {
+  ChevronRightIcon,
+  ChevronLeftIcon,
+  ChevronUpIcon,
+  ChevronDownIcon,
+} from '@heroicons/vue/solid';
 import TaskCard from '../components/TaskCard.vue';
 import { defineComponent, ref } from 'vue';
 
@@ -160,6 +167,8 @@ export default defineComponent({
     TaskCard,
     ChevronRightIcon,
     ChevronLeftIcon,
+    ChevronUpIcon,
+    ChevronDownIcon,
   },
 
   async setup() {
@@ -191,7 +200,7 @@ export default defineComponent({
       moveTaskToNewColumn,
       moveTaskInsideColumn,
       createColumn,
-      isCreatingCols,
+      isCreatingCols
     };
   },
 
@@ -200,6 +209,14 @@ export default defineComponent({
   },
 
   methods: {
+    //if screen is small show ChevronUpIcon else  ChevronLeftIcon
+    screenSmall() {
+      if ( window.innerWidth < 768 ) {
+        return true;
+      } else {
+        return false;
+      }
+    },
     toggleCreateCols() {
       this.isCreatingCols = !this.isCreatingCols;
     },
