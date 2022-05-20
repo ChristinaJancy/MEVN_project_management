@@ -14,7 +14,7 @@ const userCrud = () => {
         initials: '' as string,
         password: '' as string,
         token: '' as string,
-        roles: [] as object[],
+        roles: [] as object[] | any,
         userColor: '' as string | any,
         users: {} as { [key: string]: any },
         id: '' as string,
