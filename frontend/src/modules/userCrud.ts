@@ -9,12 +9,11 @@ const userCrud = () => {
     const userId = computed(() => route.params.id);
 
     const state = ref({
-        name: '' as string | string[] | any,
-        email: '' as string | any,
-        initials: '' as string | any,
-        img: '' as string | any,
-        password: '' as string | any,
-        token: '' as string | any,
+        name: '' as string,
+        email: '' as string,
+        initials: '' as string,
+        password: '' as string,
+        token: '' as string,
         roles: [] as object[],
         userColor: '' as string | any,
         users: {} as { [key: string]: any },
@@ -47,14 +46,14 @@ const userCrud = () => {
                     "auth-token": getCookie('token')
                 },
             };
-            fetch(uri + 'users',
+            fetch(uri + 'users/' + userId.value,
                 requestOptions
             )
                 .then(response => response.json())
                 .then(data => {
                     // user.value = data.filter((user: { _id: string | string[]; }) => user._id === userId.value)
-                    state.value = data.filter(((state: { _id: string | string[]; }) => state._id === userId.value)
-                    )
+                    state.value = data
+                    // .filter(((state: { _id: string | string[]; }) => state._id === userId.value))
                 })
         }
         catch (error) {
