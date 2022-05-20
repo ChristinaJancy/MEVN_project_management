@@ -49,7 +49,7 @@
               v-model="state.email"
               autocomplete="email"
               required="true"
-              class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
               placeholder="Email address"
             />
           </div>
@@ -80,6 +80,7 @@
               Remember me
             </label>
           </div>
+          
         </div>
 
         <div>
@@ -106,14 +107,19 @@
 import { LockClosedIcon } from '@heroicons/vue/solid';
 import userCrud from '../modules/userCrud';
 import { defineComponent } from 'vue';
+import vueMultiselect from 'vue-multiselect';
+import roleCrud from '../modules/roleCrud';
 
 export default defineComponent({
   components: {
     LockClosedIcon,
+    vueMultiselect
   },
   setup() {
     const { state, newUser } = userCrud();
-    return { state, newUser };
+    const { roleState, getAllRoles } = roleCrud();
+    getAllRoles()
+    return { state, roleState, newUser };
   },
 });
 </script>

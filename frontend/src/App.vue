@@ -1,6 +1,6 @@
 <template>
   <component :is="layout" class="dark">
-    <router-view :key="currentRoute" />
+    <router-view />
   </component>
 </template>
 

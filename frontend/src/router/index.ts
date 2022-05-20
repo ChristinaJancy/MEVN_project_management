@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import { getCookie } from '../modules/cookie';
+// import userCrud from '../modules/userCrud';
 
 const routes: Array<RouteRecordRaw> = [
     {
@@ -91,7 +92,8 @@ const routes: Array<RouteRecordRaw> = [
         name: 'profile',
         component: () => import(/* webpackChunkName: "Profile" */ '../views/ProfileView.vue'),
         meta: {
-            requiresAuth: true
+            requiresAuth: true,
+            reloadOnParamChange: true
         }
     },
     {
@@ -123,15 +125,28 @@ const router = createRouter({
     routes,
 });
 
+
+
 router.beforeEach((to, from, next) => {
     const requiresAuth = to.matched.some(x => x.meta.requiresAuth);
     const isAuthenticated = getCookie('token'); // check if user is logged in
-
     if (requiresAuth && !isAuthenticated) {
         next('/login');
     } else {
         next();
     }
+
+    
 })
+
+// router.afterEach((to, from) => {
+//     // if params change, reload the page
+//     let { getSpecificUser, userId } = userCrud();
+
+//     if (to.meta.reloadOnParamChange) {
+//         console.log(userId);
+//         getSpecificUser()
+//     }
+// })
 
 export default router;

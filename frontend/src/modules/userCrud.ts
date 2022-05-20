@@ -6,7 +6,7 @@ import { uri } from './uri'
 const userCrud = () => {
     const route = useRoute();
     const router = useRouter();
-    const userId = route.params.id as string;
+    let userId = route.params.id as string;
 
     const state = ref({
         name: '' as string,
