@@ -1,6 +1,6 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <template>
-  <TransitionRoot as="template" :show="open">
+  <TransitionRoot as="template" :show="open" :key="element">
     <Dialog as="div" class="relative z-10">
       <!-- this child makes the background greyed out -->
       <TransitionChild
@@ -38,16 +38,18 @@
             class="relative inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
           >
             <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+              <!---- name and tags ---->
               <div class="px-4 py-5 sm:px-6">
                 <h3 class="mt-0 text-lg leading-6 font-medium text-gray-900">
-                  Task name
+                  {{ name }}
                 </h3>
                 <p class="mt-1 max-w-2xl text-sm text-gray-500">
-                  Tag, Tag, Tag
+                  {{ tags.join(', ') }}
                 </p>
               </div>
               <div class="border-t border-gray-200">
                 <dl>
+                  <!---- description ---->
                   <div
                     class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
                   >
@@ -57,13 +59,10 @@
                     <dd
                       class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
                     >
-                      Fugiat ipsum ipsum deserunt culpa aute sint do nostrud
-                      anim incididunt cillum culpa consequat. Excepteur qui
-                      ipsum aliquip consequat sint. Sit id mollit nulla mollit
-                      nostrud in ea officia proident. Irure nostrud pariatur
-                      mollit ad adipisicing reprehenderit deserunt qui eu.
+                      {{ description }}
                     </dd>
                   </div>
+                  <!---- status ---->
                   <div
                     class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
                   >
@@ -71,9 +70,10 @@
                     <dd
                       class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
                     >
-                      in progress
+                      {{ status }}
                     </dd>
                   </div>
+                  <!---- assigned ---->
                   <div
                     class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
                   >
@@ -81,12 +81,14 @@
                     <dd
                       class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
                     >
-                      sasas
+                      {{ assigned.name }}
                     </dd>
                   </div>
                 </dl>
               </div>
             </div>
+
+            
             <div
               class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse"
             >
@@ -109,12 +111,17 @@
 </template>
 
 <script>
-import { Dialog, DialogTitle, TransitionChild,  TransitionRoot } from '@headlessui/vue';
+import {
+  Dialog,
+  DialogTitle,
+  TransitionChild,
+  TransitionRoot,
+} from '@headlessui/vue';
 import { PaperClipIcon } from '@heroicons/vue/solid';
-import projectCrud from '../modules/projectCrud';
 import { defineComponent, ref } from 'vue';
-
+import columnCrud from '../modules/columnCrud';
 export default defineComponent({
+  props: ['name', 'description', 'status', 'assigned', 'tags'],
   components: {
     PaperClipIcon,
     Dialog,
@@ -123,16 +130,12 @@ export default defineComponent({
     TransitionRoot,
   },
   setup() {
-    const { projectState, projectId, getSpecificProject } = projectCrud();
-
-    getSpecificProject();
-
+    const { columnState } = columnCrud;
     const open = ref(false);
 
     return {
       open,
-      projectState,
-      projectId,
+      columnState,
     };
   },
 });

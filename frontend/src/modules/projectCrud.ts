@@ -97,7 +97,7 @@ const projectCrud = () => {
                     "auth-token": getCookie('token')
                 },
                 body: JSON.stringify({
-                  columns
+                    columns
                 })
             };
             await fetch(uri + 'projects/' + _id,
@@ -107,8 +107,6 @@ const projectCrud = () => {
                 .then(data => {
                     console.log("data:", data);
                     getSpecificProject()
-                 
-
                 })
         }
         catch (error) {

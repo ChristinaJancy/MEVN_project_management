@@ -45,12 +45,48 @@ const columnCrud = () => {
             })
         }
 
-         fetch(uri + 'columns/' + projectId,
+        fetch(uri + 'columns/' + projectId,
             requestOptions
         )
             .then(response => response.json())
             .then(data => {
                 columnState.value.columns.push(data)
+                console.log(data)
+            })
+    }
+    const updateColumn = (columnId: string, title: string) => {
+        const requestOptions = {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                "auth-token": getCookie('token')
+            },
+            body: JSON.stringify({
+                title
+            })
+        }
+
+        fetch(uri + 'columns/' + columnId,
+            requestOptions
+        )
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+            })
+    }
+    const deleteColumn = (columnId: string) => {
+        const requestOptions = {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                "auth-token": getCookie('token')
+            },
+        };
+        fetch(uri + 'columns/' + columnId,
+            requestOptions
+        )
+            .then(response => response.json())
+            .then(data => {
                 console.log(data)
             })
     }
@@ -93,7 +129,7 @@ const columnCrud = () => {
                     columnId, tasks
                 })
             }
-            fetch(uri + 'columns/draggable/internal',
+            await fetch(uri + 'columns/draggable/internal',
                 requestOptions
             )
                 .then(response => response.json())
@@ -110,10 +146,13 @@ const columnCrud = () => {
     return {
         columnState,
         columnId,
+        getAllColumns,
+        createColumn,
+        updateColumn,
+        deleteColumn,
+
         moveTaskToNewColumn,
         moveTaskInsideColumn,
-        getAllColumns,
-        createColumn
     }
 }
 
