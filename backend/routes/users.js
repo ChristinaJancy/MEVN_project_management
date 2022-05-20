@@ -97,7 +97,7 @@ router.post("/login", async (req, res) => {
         token: token,
         id: user._id,
         initials: user.initials,
-        userColor: user.roles[0].color,
+        userColor: user.roles,
 
     });
 })
@@ -126,7 +126,7 @@ router.put("/:id", verifyToken, async (req, res) => {
         if (!user) {
             return res.status(400).json({ error: "Email is wrong" });
         }
-        
+
         if (body.name) {
             let initials = req.body.name.toUpperCase().split(' ').map(name => name[0]);
             console.log(initials)
