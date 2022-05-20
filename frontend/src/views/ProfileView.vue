@@ -15,7 +15,6 @@
       </div>
 
       <div class="mt-8 space-y-6">
-
         <!------ User name ------>
         <div class="rounded-md -space-y-px">
           <label class="font-bold text-sm text-gray-700" for="email-address">Name</label>
@@ -44,7 +43,7 @@
           <router-link :to="{
             name: 'user',
             params: {
-              id: userId
+              id: userId as string
             },
           }">
             <button type="button"

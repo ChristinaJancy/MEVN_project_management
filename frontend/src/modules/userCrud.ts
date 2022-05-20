@@ -6,7 +6,7 @@ import { uri } from './uri'
 const userCrud = () => {
     const route = useRoute();
     const router = useRouter();
-    const userId = computed(() => route.params.id);
+    const userId = route.params.id as string;
 
     const state = ref({
         name: '' as string,
@@ -19,7 +19,6 @@ const userCrud = () => {
         users: {} as { [key: string]: any },
         id: '' as string,
     })
-
     const getAllUsers = async () => {
         const requestOptions = {
             method: 'GET',
@@ -46,14 +45,12 @@ const userCrud = () => {
                     "auth-token": getCookie('token')
                 },
             };
-            fetch(uri + 'users/' + userId.value,
+            fetch(uri + 'users/' + userId,
                 requestOptions
             )
                 .then(response => response.json())
                 .then(data => {
-                    // user.value = data.filter((user: { _id: string | string[]; }) => user._id === userId.value)
                     state.value = data
-                    // .filter(((state: { _id: string | string[]; }) => state._id === userId.value))
                 })
         }
         catch (error) {
@@ -65,7 +62,6 @@ const userCrud = () => {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
-                // "auth-token": state.token
             },
             body: JSON.stringify({
                 email: state.value.email,
@@ -83,7 +79,7 @@ const userCrud = () => {
             })
     }
 
-    const updateUser = (_id: string, name: string, email: string, roles: string[]) => {
+    const updateUser = (_id: string, name: string, email: string, roles: object[]) => {
         try {
             const requestOptions = {
                 method: "PUT",
@@ -121,23 +117,16 @@ const userCrud = () => {
                 password: state.value.password
             })
         }
-        fetch(uri + 'users/login',
+        await fetch(uri + 'users/login',
             requestOptions
         )
             .then(response => response.json())
-
             .then(data => {
                 console.log("json:", data);
-                data.token ? console.log("have Cvookie " + data.token) : console.log("no token");
-                data.id ? console.log("id: " + data.id) : console.log("no id");
-                data.initials ? console.log("id: " + data.initials) : console.log("no initials");
-                data.userColor ? console.log("userColor: " + data.userColor) : console.log("no userColor");
-
-
-                state.value.token = data.token
-                state.value.id = data.id;
-                state.value.initials = data.initials
-                state.value.userColor = data.userColor
+                data.token ? state.value.token = data.token : console.log("no token");
+                data.id ? state.value.id = data.id : console.log("no id");
+                data.initials ? state.value.initials = data.initials : console.log("no initials");
+                data.userColor ? state.value.userColor = data.userColor[0].color : state.value.userColor = "#0046E5" ;
 
                 setCookies()
                 router.push({ path: "/", replace: true })
