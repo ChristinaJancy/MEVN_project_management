@@ -120,6 +120,13 @@ router.get("/:id", verifyToken, (req, res) => {
 router.put("/:id", verifyToken, async (req, res) => {
     try {
         let body = req.body;
+        const user = await User.findOne({ email: req.body.email });
+
+        // Throw error if email is wrong - user does not exist in DB 
+        if (!user) {
+            return res.status(400).json({ error: "Email is wrong" });
+        }
+        
         if (body.name) {
             let initials = req.body.name.toUpperCase().split(' ').map(name => name[0]);
             console.log(initials)
