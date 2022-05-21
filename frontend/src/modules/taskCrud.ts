@@ -11,13 +11,34 @@ const taskCrud = () => {
     const taskState = ref({
         name: '' as string,
         description: '' as string,
+        status: '' as string,
         deadline: '' as string,
         tags: [] as string[],
         assigned: [] as string[],
         id: '' as string,
     })
 
-    const createTask = async () => {
+    const updateTask = async (_id: string, name: string, description: string, status: string, tags: string[], assigned: string[]) => {
+        const requestOptions = {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                "auth-token": getCookie('auth-token')
+            },
+            body: JSON.stringify({
+                name, description, status, tags, assigned
+            })
+        }
+        await fetch(uri + 'tasks/' + _id,
+            requestOptions
+        )
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+            })
+    }
+
+    const createTask = async (columnId: string) => {
         const requestOptions = {
             method: 'POST',
             headers: {
@@ -30,22 +51,25 @@ const taskCrud = () => {
                 deadline: taskState.value.deadline,
                 tags: taskState.value.tags,
                 assigned: taskState.value.assigned,
-
+                status: 'not started'
             })
         };
-        await fetch(uri + 'tasks',
+
+        await fetch(uri + 'tasks/' + columnId,
             requestOptions
         )
             .then(response => response.json())
             .then(data => {
-                router.push('/tasks')
+
+                console.log(data)
             })
     }
 
 
     return {
         taskState,
-        createTask
+        createTask,
+        updateTask
     }
 }
 

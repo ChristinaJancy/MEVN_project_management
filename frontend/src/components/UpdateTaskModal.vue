@@ -36,6 +36,7 @@
           <!-- dialog-panel -->
           <div
             class="relative inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+            style="width: 100%"
           >
             <div class="bg-white shadow overflow-hidden sm:rounded-lg">
               <!---- name and tags ---->
@@ -48,7 +49,7 @@
                   <button
                     v-if="isUpdatingTask"
                     type="button"
-                    class="mt-3 absolute right-0 w-full justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                    class="mt-3 absolute right-0 justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:text-sm"
                     @click="toggleUpdateTask()"
                   >
                     Cancel
@@ -56,18 +57,14 @@
                   <button
                     v-else
                     type="button"
-                    class="mt-3 absolute right-0 w-full justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                    class="mt-3 absolute right-0 justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:text-sm"
                     @click="toggleUpdateTask()"
                   >
                     Edit task
                   </button>
                 </div>
-                <p
-                  class="ml-1 max-w-2xl text-sm text-gray-500 italic"
-                  v-for="tag in tags"
-                  :key="tag._id"
-                >
-                  {{ tag.name }}
+                <p class="mt-1 max-w-2xl text-sm text-gray-500">
+                  {{ tags.join(', ') }}
                 </p>
               </div>
               <div class="border-t border-gray-200">
@@ -85,6 +82,7 @@
                     >
                       {{ description }}
                     </dd>
+
                     <dd
                       v-else
                       class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
@@ -92,8 +90,8 @@
                       <textarea
                         id="about"
                         name="about"
-                        v-model="newDescription"
                         rows="3"
+                        v-model="taskState.description"
                         class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
                         placeholder="Brief description of the task..."
                       />
@@ -114,12 +112,13 @@
                       v-else
                       class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
                     >
-                      <!-- <VueMultiselect
-                        v-model="taskState.status"
-                        options="['Not Started', 'In Progress', 'Done']"
+                      <VueMultiselect
+                        :options="['Open', 'In progress', 'Closed']"
+                        :value="status"
                         :searchable="false"
                         :close-on-select="true"
-                      /> -->
+                        
+                      />
                     </dd>
                   </div>
                   <!---- assigned ---->
@@ -129,21 +128,8 @@
                     <dt class="text-sm font-medium text-gray-500">Assigned</dt>
                     <dd
                       class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
-                      v-for="assigned in assigned"
-                      :key="assigned._id"
                     >
                       {{ assigned.name }}
-                    </dd>
-                  </div>
-                  <!---- Deadline ---->
-                  <div
-                    class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
-                  >
-                    <dt class="text-sm font-medium text-gray-500">Deadline</dt>
-                    <dd
-                      class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
-                    >
-                      {{ moment(deadline).startOf('hour').fromNow() }}
                     </dd>
                   </div>
                 </dl>
@@ -178,14 +164,14 @@ import {
   TransitionRoot,
 } from '@headlessui/vue';
 import { PaperClipIcon } from '@heroicons/vue/solid';
-import { defineComponent, ref, computed } from 'vue';
-import moment from 'moment';
+import { defineComponent, ref } from 'vue';
 import VueMultiselect from 'vue-multiselect';
 import columnCrud from '../modules/columnCrud';
 import taskCrud from '../modules/taskCrud';
 
 export default defineComponent({
   props: ['name', 'description', 'status', 'assigned', 'tags'],
+
   components: {
     PaperClipIcon,
     Dialog,
@@ -194,33 +180,18 @@ export default defineComponent({
     TransitionRoot,
     VueMultiselect,
   },
-  setup(props, { emit }) {
+  setup() {
     const { columnState } = columnCrud;
     const open = ref(false);
     const isUpdatingTask = ref(false);
-    const { taskState } = taskCrud;
-
-    const newDescription = computed({
-      get: () => props.description,
-      set: (value) => emit('update:description', value),
-    });
+    const { taskState } = taskCrud();
 
     return {
       open,
       columnState,
-      isUpdatingTask,
       taskState,
-      moment,
-      newDescription,
     };
   },
-  created: function () {
-    this.moment = moment;
-  },
-  methods: {
-    toggleUpdateTask() {
-      this.isUpdatingTask = !this.isUpdatingTask;
-    },
-  },
+  methods: {},
 });
 </script>

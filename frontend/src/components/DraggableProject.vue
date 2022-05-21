@@ -115,7 +115,7 @@
                   <MenuItem v-slot="{ active }">
                     <a
                       href="#"
-                      @click="createTask()"
+                      @click="openCreateTaskModal(column._id)"
                       :class="[
                         active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                         'block px-4 py-2 text-sm',
@@ -226,6 +226,13 @@
             </div>
           </template>
         </draggable>
+
+        <!-- create task modal -->
+        <CreateTaskModal
+          :show="createTaskModal === column._id"
+          @close-modal="createTaskModal = false"
+          :columnId="column._id"
+        />
       </div>
     </div>
 
@@ -237,7 +244,9 @@
 import draggable from 'vuedraggable';
 import projectCrud from '../modules/projectCrud';
 import columnCrud from '../modules/columnCrud';
+import taskCrud from '../modules/taskCrud';
 import TaskCard from '../components/TaskCard.vue';
+import CreateTaskModal from '../components/CreateTaskModal.vue';
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue';
 import moment from 'moment';
 import {
@@ -263,6 +272,7 @@ export default defineComponent({
     MenuButton,
     MenuItem,
     MenuItems,
+    CreateTaskModal,
   },
 
   async setup() {
@@ -281,11 +291,15 @@ export default defineComponent({
       deleteColumn,
     } = columnCrud();
 
+    const { taskState } = taskCrud();
+    
     await getSpecificProject();
 
     const isUpdatingCols = ref(false);
     const isCreatingCols = ref(false);
     const taskModal = ref(null);
+    const createTaskModal = ref(null);
+
     return {
       projectState,
       columnState,
@@ -300,6 +314,7 @@ export default defineComponent({
       isCreatingCols,
       isUpdatingCols,
       deleteColumn,
+      createTaskModal,
     };
   },
 
@@ -313,6 +328,11 @@ export default defineComponent({
       this.taskModal === index
         ? (this.taskModal = null)
         : (this.taskModal = index);
+    },
+    openCreateTaskModal(columnId) {
+      this.createTaskModal === columnId
+        ? (this.createTaskModal = null)
+        : (this.createTaskModal = columnId);
     },
 
     toggleUpdateCols: function () {
