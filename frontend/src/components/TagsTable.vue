@@ -1,12 +1,14 @@
 <template>
   <div class="flex flex-col mt-8">
     <div>
+      <router-link to="/tags/new-tag">
         <button
           type="button"
           class="button mb-2 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-1 bg-indigo-500 text-base font-medium text-white hover:bg-indigo-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:w-auto sm:text-sm"
         >
           Create tag
-        </button>
+        </button></router-link
+      >
     </div>
     <div class="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
       <div
