@@ -20,7 +20,7 @@ router.get("/:id", verifyToken, (req, res) => {
 });
 
 // Create new task
-router.post("/", verifyToken, async (req,res) => {
+router.post("/:columnId", verifyToken, async (req,res) => {
     const status = "in progress";
     const task = new schema({
         name: req.body.name,
@@ -30,10 +30,15 @@ router.post("/", verifyToken, async (req,res) => {
         assigned: req.body.assigned,
         tags: req.body.tags
     })
-    try { 
-        const savedTask = await task.save(); //save user
-        res.json({ message: "New task created.😊", newtask : savedTask});
-    } catch (error) { //if error, return error
+    try {
+        task.save()
+        .then(savedTask => {
+            projects.findByIdAndUpdate(req.params.columnId, { $push: { tasks: savedTask._id } }, { new: true })
+            .then(updatedColumn => {
+                res.json({ message: "New column task.😊", newtask: savedTask }) 
+            })
+        });
+    } catch (error) {
         res.status(400).json({ error });
     }
 })
