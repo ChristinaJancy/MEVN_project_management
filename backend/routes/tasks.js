@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const schema = require("../models/tasks")
+const columns = require("../models/columns")
 const { verifyToken } = require("../validation")
 
 module.exports = router;
@@ -33,9 +34,9 @@ router.post("/:columnId", verifyToken, async (req,res) => {
     try {
         task.save()
         .then(savedTask => {
-            projects.findByIdAndUpdate(req.params.columnId, { $push: { tasks: savedTask._id } }, { new: true })
+            columns.findByIdAndUpdate(req.params.columnId, { $push: { tasks: savedTask._id } }, { new: true })
             .then(updatedColumn => {
-                res.json({ message: "New column task.😊", newtask: savedTask }) 
+                res.json({ message: "New task created.😊", newtask: savedTask }) 
             })
         });
     } catch (error) {

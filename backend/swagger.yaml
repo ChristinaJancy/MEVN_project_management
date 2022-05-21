@@ -598,7 +598,7 @@ paths:
                 items:
                   $ref: "#/components/schemas/Task"
                   
-  /tasks/{columnId}
+  /tasks/{columnId}:
     post:
       summary: Create a new Task
       description: Create a new Task in the database

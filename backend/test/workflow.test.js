@@ -83,9 +83,8 @@ describe('Workflow', () => {
                                         expect(res.body.newproject).to.have.property('description');
                                         expect(res.body.newproject).to.have.property('tags');
                                         expect(res.body.newproject).to.have.property('deadline');
-
-
-
+                                        expect(res.body.newproject).to.have.property('columns');
+                                        const column = res.body.newproject.columns[0]
                                         const task = {
                                             name: 'testtt',
                                             description: 'testtt',
@@ -93,7 +92,7 @@ describe('Workflow', () => {
                                             status: 'todo',
                                         }
                                         chai.request(server)
-                                            .post('/api/tasks')
+                                            .post('/api/tasks/' + column)
                                             .set({ "auth-token": token })
                                             .send(task)
                                             .end((err, res) => {
