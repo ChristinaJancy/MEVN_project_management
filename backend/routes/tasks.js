@@ -12,14 +12,6 @@ router.get("/", verifyToken, (req, res) => {
         .catch(err => { res.status(500).send({ message: err.message }) })
 });
 
-// Get task with id
-router.get("/:id", verifyToken, (req, res) => {
-    const id = req.params.id
-    schema.findById(id)
-        .then(data => { res.send(data); })
-        .catch(err => { res.status(500).send({ message: err.message }) })
-});
-
 // Create new task
 router.post("/:columnId", verifyToken, async (req,res) => {
     const status = "in progress";
@@ -49,6 +41,14 @@ router.get("/user/:userId", verifyToken, (req, res) => {
     schema.find({ assigned: req.params.userId, deadline: { $gte: new Date() } })
         .limit(10)
         .sort({ deadline: 1 })
+        .then(data => { res.send(data); })
+        .catch(err => { res.status(500).send({ message: err.message }) })
+});
+
+// Get task with id
+router.get("/:id", verifyToken, (req, res) => {
+    const id = req.params.id
+    schema.findById(id)
         .then(data => { res.send(data); })
         .catch(err => { res.status(500).send({ message: err.message }) })
 });
