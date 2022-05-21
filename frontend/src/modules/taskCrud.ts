@@ -16,6 +16,7 @@ const taskCrud = () => {
         tags: [] as string[],
         assigned: [] as string[],
         id: '' as string,
+        userTasks: [] as object[],
     })
 
     const updateTask = async (_id: string, name: string, description: string, status: string, tags: string[], assigned: string[]) => {
@@ -65,12 +66,32 @@ const taskCrud = () => {
             })
     }
 
+    const getTasksFromUser = async () => {
+        const requestOptions = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                "auth-token": getCookie('token')
+            }
+        };
+
+        await fetch(uri + 'tasks/user/' + getCookie('id'),
+            requestOptions
+        )
+            .then(response => response.json())
+            .then(data => {
+                taskState.value.userTasks = data
+            })
+        }
+    
+
 
     return {
         taskState,
         createTask,
-        updateTask
+        updateTask,
+        getTasksFromUser
     }
 }
 
-export default taskCrud 
+export default taskCrud
