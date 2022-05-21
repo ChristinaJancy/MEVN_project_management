@@ -5,12 +5,9 @@
         <h2 class="font-bold my-1 text-3xl text-gray-900">Profile</h2>
         <div :style="'background-color:' + state.roles[0].color"
           class="relative block w-12 h-12 overflow-hidden rounded-full shadow focus:outline-none flex-shrink-0 flex items-center justify-center">
-        <div
-              class="text-center text-lg font-bold text-white"
-              v-if="state.initials"
-            >
-              {{ state.initials }}
-            </div>
+          <div class="text-center text-lg font-bold text-white" v-if="state.initials">
+            {{ state.initials }}
+          </div>
         </div>
       </div>
 
@@ -63,18 +60,36 @@
 <script lang="ts">
 import userCrud from '../modules/userCrud';
 import { defineComponent } from 'vue';
+import { useRouter } from 'vue-router';
 import { LockClosedIcon } from "@heroicons/vue/solid";
+
 
 export default defineComponent({
   components: {
     LockClosedIcon,
   },
+  
   setup() {
     const { state, userId, getSpecificUser } = userCrud();
+    const { currentRoute } = useRouter();
 
     getSpecificUser();
 
-    return { state, userId };
+    return { state, userId, getSpecificUser };
   },
+  // watch: {
+  //   $route: {
+  //     deep: true,
+  //     handler(to, from) {
+  //       const { state, getSpecificUser } = userCrud();
+
+  //       console.log(state)
+  //       this.userId = to.params.id;
+  //       getSpecificUser();
+  //       this.$forceUpdate()
+  //     }
+  //   },
+  // },
+
 });
 </script>

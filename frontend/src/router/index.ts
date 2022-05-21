@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import { getCookie } from '../modules/cookie';
-// import userCrud from '../modules/userCrud';
 
 const routes: Array<RouteRecordRaw> = [
     {
@@ -135,18 +134,6 @@ router.beforeEach((to, from, next) => {
     } else {
         next();
     }
-
-    
 })
-
-// router.afterEach((to, from) => {
-//     // if params change, reload the page
-//     let { getSpecificUser, userId } = userCrud();
-
-//     if (to.meta.reloadOnParamChange) {
-//         console.log(userId);
-//         getSpecificUser()
-//     }
-// })
 
 export default router;
