@@ -85,6 +85,15 @@ const routes: Array<RouteRecordRaw> = [
             requiresAuth: true
         }
     },
+    // tasks
+    {
+        path: '/edit-task/:id',
+        name: 'edit-task',
+        component: () => import(/* webpackChunkName: "edit-task" */ '../views/EditTaskView.vue'),
+        meta: {
+            requiresAuth: true
+        }
+    },
     //user
     {
         path: '/profile/:id',

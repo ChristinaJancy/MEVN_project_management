@@ -44,23 +44,14 @@
                   <h3 class="mt-0 text-lg leading-6 font-medium text-gray-900">
                     {{ name }}
                   </h3>
-
-                  <button
-                    v-if="isUpdatingTask"
+                  <!-- <button
                     type="button"
                     class="mt-3 absolute right-0 w-full justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
-                    @click="toggleUpdateTask()"
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    v-else
-                    type="button"
-                    class="mt-3 absolute right-0 w-full justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
-                    @click="toggleUpdateTask()"
+                    @click="$emit('open-modal')"
+                    ref="updateButtonRef"
                   >
                     Edit task
-                  </button>
+                  </button> -->
                 </div>
                 <p
                   class="ml-1 max-w-2xl text-sm text-gray-500 italic"
@@ -80,23 +71,9 @@
                       Description
                     </dt>
                     <dd
-                      v-if="!isUpdatingTask"
                       class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
                     >
                       {{ description }}
-                    </dd>
-                    <dd
-                      v-else
-                      class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
-                    >
-                      <textarea
-                        id="about"
-                        name="about"
-                        v-model="newDescription"
-                        rows="3"
-                        class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
-                        placeholder="Brief description of the task..."
-                      />
                     </dd>
                   </div>
                   <!---- status ---->
@@ -105,21 +82,9 @@
                   >
                     <dt class="text-sm font-medium text-gray-500">Status</dt>
                     <dd
-                      v-if="!isUpdatingTask"
                       class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
                     >
                       {{ status }}
-                    </dd>
-                    <dd
-                      v-else
-                      class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
-                    >
-                      <!-- <VueMultiselect
-                        v-model="taskState.status"
-                        options="['Not Started', 'In Progress', 'Done']"
-                        :searchable="false"
-                        :close-on-select="true"
-                      /> -->
                     </dd>
                   </div>
                   <!---- assigned ---->
@@ -178,14 +143,22 @@ import {
   TransitionRoot,
 } from '@headlessui/vue';
 import { PaperClipIcon } from '@heroicons/vue/solid';
-import { defineComponent, ref, computed } from 'vue';
 import moment from 'moment';
 import VueMultiselect from 'vue-multiselect';
 import columnCrud from '../modules/columnCrud';
-import taskCrud from '../modules/taskCrud';
+import { defineComponent, ref } from 'vue';
 
 export default defineComponent({
-  props: ['name', 'description', 'status', 'assigned', 'tags'],
+  props: [
+    'name',
+    'description',
+    'status',
+    'assigned',
+    'tags',
+    'deadline',
+    'columnId',
+    'id',
+  ],
   components: {
     PaperClipIcon,
     Dialog,
@@ -194,33 +167,19 @@ export default defineComponent({
     TransitionRoot,
     VueMultiselect,
   },
-  setup(props, { emit }) {
-    const { columnState } = columnCrud;
+  setup() {
+    const columnState = columnCrud;
     const open = ref(false);
-    const isUpdatingTask = ref(false);
-    const { taskState } = taskCrud;
-
-    const newDescription = computed({
-      get: () => props.description,
-      set: (value) => emit('update:description', value),
-    });
-
     return {
       open,
       columnState,
-      isUpdatingTask,
-      taskState,
       moment,
-      newDescription,
     };
   },
   created: function () {
     this.moment = moment;
   },
   methods: {
-    toggleUpdateTask() {
-      this.isUpdatingTask = !this.isUpdatingTask;
-    },
   },
 });
 </script>

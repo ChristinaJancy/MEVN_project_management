@@ -38,34 +38,17 @@
             class="relative inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
             style="width: 100%"
           >
-            <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+            <div
+              class="bg-white shadow overflow-hidden sm:rounded-lg"
+             
+            >
               <!---- name and tags ---->
               <div class="px-4 py-5 sm:px-6">
-                <div class="flex relative">
-                  <h3 class="mt-0 text-lg leading-6 font-medium text-gray-900">
-                    {{ name }}
-                  </h3>
+                <h3 class="mt-0 text-lg leading-6 font-medium text-gray-900">
+                  <input type="text" v-model="name" name="" id="" />
+                </h3>
 
-                  <button
-                    v-if="isUpdatingTask"
-                    type="button"
-                    class="mt-3 absolute right-0 justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:text-sm"
-                    @click="toggleUpdateTask()"
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    v-else
-                    type="button"
-                    class="mt-3 absolute right-0 justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:text-sm"
-                    @click="toggleUpdateTask()"
-                  >
-                    Edit task
-                  </button>
-                </div>
-                <p class="mt-1 max-w-2xl text-sm text-gray-500">
-                  {{ tags.join(', ') }}
-                </p>
+                <p class="mt-1 max-w-2xl text-sm text-gray-500">tags</p>
               </div>
               <div class="border-t border-gray-200">
                 <dl>
@@ -77,24 +60,9 @@
                       Description
                     </dt>
                     <dd
-                      v-if="!isUpdatingTask"
                       class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
                     >
-                      {{ description }}
-                    </dd>
-
-                    <dd
-                      v-else
-                      class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
-                    >
-                      <textarea
-                        id="about"
-                        name="about"
-                        rows="3"
-                        v-model="taskState.description"
-                        class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
-                        placeholder="Brief description of the task..."
-                      />
+                      desc
                     </dd>
                   </div>
                   <!---- status ---->
@@ -103,23 +71,9 @@
                   >
                     <dt class="text-sm font-medium text-gray-500">Status</dt>
                     <dd
-                      v-if="!isUpdatingTask"
                       class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
-                    >
-                      {{ status }}
-                    </dd>
-                    <dd
-                      v-else
-                      class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
-                    >
-                      <VueMultiselect
-                        :options="['Open', 'In progress', 'Closed']"
-                        :value="status"
-                        :searchable="false"
-                        :close-on-select="true"
-                        
-                      />
-                    </dd>
+                    ></dd>
+                    status
                   </div>
                   <!---- assigned ---->
                   <div
@@ -129,7 +83,7 @@
                     <dd
                       class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
                     >
-                      {{ assigned.name }}
+                      assigned
                     </dd>
                   </div>
                 </dl>
@@ -170,7 +124,7 @@ import columnCrud from '../modules/columnCrud';
 import taskCrud from '../modules/taskCrud';
 
 export default defineComponent({
-  props: ['name', 'description', 'status', 'assigned', 'tags'],
+  props: ['id'],
 
   components: {
     PaperClipIcon,
@@ -183,7 +137,6 @@ export default defineComponent({
   setup() {
     const { columnState } = columnCrud;
     const open = ref(false);
-    const isUpdatingTask = ref(false);
     const { taskState } = taskCrud();
 
     return {

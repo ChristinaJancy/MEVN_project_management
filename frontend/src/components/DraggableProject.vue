@@ -212,6 +212,16 @@
               <p class="text-sm" style="position: absolute; bottom: 0">
                 {{ element.assigned.initials }}
               </p>
+
+              <router-link
+                :to="{
+                  name: 'edit-task',
+                  params: {
+                    id: element._id
+                  },
+                }"
+                >Edit
+              </router-link>
               <!-- task modal -->
               <TaskCard
                 :show="taskModal === element._id"
@@ -292,7 +302,7 @@ export default defineComponent({
     } = columnCrud();
 
     const { taskState } = taskCrud();
-    
+
     await getSpecificProject();
 
     const isUpdatingCols = ref(false);
@@ -304,6 +314,7 @@ export default defineComponent({
       projectState,
       columnState,
       projectId,
+      taskState,
       moment,
       taskModal,
       updateProjectColumns,
