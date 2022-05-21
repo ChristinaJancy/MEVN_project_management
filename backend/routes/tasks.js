@@ -44,6 +44,15 @@ router.post("/:columnId", verifyToken, async (req,res) => {
     }
 })
 
+// Get 10 tasks with userId depening on deadline
+router.get("/user/:userId", verifyToken, (req, res) => { 
+    schema.find({ assigned: req.params.userId, deadline: { $gte: new Date() } })
+        .limit(10)
+        .sort({ deadline: 1 })
+        .then(data => { res.send(data); })
+        .catch(err => { res.status(500).send({ message: err.message }) })
+});
+
 // Update task by id
 router.put("/:id", verifyToken, async (req, res) => {
     try {

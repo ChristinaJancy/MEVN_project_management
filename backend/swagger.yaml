@@ -698,6 +698,29 @@ paths:
                   updatedTask:
                     type: string
   
+  /tasks/user/{userId}:
+    get:
+      summary: Get 10 Tasks from a user
+      description: Get 10 Tasks from a user from the database
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: userId
+          in: path
+          description: User id
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Tasks retrieved succesfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Task"
+
   # tags routes
   /tags:
     get:
