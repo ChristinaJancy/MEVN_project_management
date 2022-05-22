@@ -1,15 +1,19 @@
 <template>
-  <div
-    class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
-  >
-    <Suspense>
-      <template #default>
-        <EditTaskForm />
-      </template>
-      <template #fallback> 
-        <LoadingCenter />
-      </template>
-    </Suspense>
+  <h3 class="text-3xl font-medium text-center text-gray-700">
+    Update task info✍️(◔◡◔)
+  </h3>
+  <div class="mt-8"></div>
+  <div class="">
+    <div class="mt-5 md:mt-0 mx-auto" style="max-width: 600px">
+      <Suspense>
+        <template #default>
+          <EditTaskForm />
+        </template>
+        <template #fallback>
+          <LoadingCenter />
+        </template>
+      </Suspense>
+    </div>
   </div>
 </template>
 
