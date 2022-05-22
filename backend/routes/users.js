@@ -50,7 +50,7 @@ router.post("/register", async (req, res) => {
         password: password,
         avatarPicture: req.body.avatarPicture,
         initials: initials,
-        roles: role
+        roles: req.body.roles
     });
     // Try to save user in database (via try-catch)
     try {
