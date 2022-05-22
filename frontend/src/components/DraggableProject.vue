@@ -187,8 +187,10 @@
         <draggable
           v-if="!isUpdatingCols"
           :list="column.tasks"
+          :preventOnFilter= "false"
           delay-on-touch-only="true"
           group="tasks"
+          animation= "200"
           item-key="id"
           @add="onTaskEnd(column._id, $event)"
           @update="onTaskUpdate(column._id)"
