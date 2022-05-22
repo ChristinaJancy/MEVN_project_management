@@ -63,14 +63,6 @@
                       Edit
                     </button>
                   </router-link>
-                  <!-- <button
-                    type="button"
-                    class=""
-                    @click="$emit('open-modal')"
-                    ref="updateButtonRef"
-                  >
-                    Edit task
-                  </button> -->
                 </div>
                 <p
                   class="ml-1 max-w-2xl text-sm text-gray-500 italic"

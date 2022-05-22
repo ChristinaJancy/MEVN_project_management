@@ -90,7 +90,7 @@ const taskCrud = () => {
         )
             .then(response => response.json())
             .then(data => {
-
+                router.go(0)
                 console.log(data)
             })
     }

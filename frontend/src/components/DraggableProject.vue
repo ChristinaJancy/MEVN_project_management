@@ -208,8 +208,15 @@
               <p class="text-sm">
                 {{ element.status }}
               </p>
-              <p class="text-sm" style="position: absolute; bottom: 0">
-                {{ element.assigned.initials }}
+              <p
+                class="text-sm flex inline-flex"
+                v-for="(assigned, index) in element.assigned"
+                :key="index"
+              >
+                <span>{{ assigned.initials }} </span>
+                <span v-if="index != Object.keys(element.assigned).length - 1"
+                  >,&nbsp;
+                </span>
               </p>
               <!-- task modal -->
               <TaskCard

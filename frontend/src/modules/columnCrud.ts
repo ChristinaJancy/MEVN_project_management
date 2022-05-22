@@ -50,7 +50,8 @@ const columnCrud = () => {
         )
             .then(response => response.json())
             .then(data => {
-                columnState.value.columns.push(data)
+                //reload view
+                router.go(0)
                 console.log(data)
             })
     }
@@ -87,6 +88,8 @@ const columnCrud = () => {
         )
             .then(response => response.json())
             .then(data => {
+                //get all columns in the specific project and update the state
+                router.go(0)
                 console.log(data)
             })
     }
