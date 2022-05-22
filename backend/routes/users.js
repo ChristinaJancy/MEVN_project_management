@@ -42,7 +42,6 @@ router.post("/register", async (req, res) => {
     }
 
     // Placeholder role for user ---- Replace when frontend is ready
-    const role = ["6271156a8547fd10454ddf19"]
 
     // Create user object and save it in Mongo (via try-catch)
     const user = new User({
