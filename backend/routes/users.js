@@ -48,7 +48,6 @@ router.post("/register", async (req, res) => {
         name: req.body.name,
         email: req.body.email,
         password: password,
-        avatarPicture: req.body.avatarPicture,
         initials: initials,
         roles: req.body.roles
     });
@@ -57,7 +56,7 @@ router.post("/register", async (req, res) => {
         const savedUser = await user.save(); //save user
         res.json({ message: "New user created.😊", newUser: savedUser });
     } catch (error) { //if error, return error
-        res.status(400).json({ error });
+        res.status(400).json({ error.message });
     }
 });
 
