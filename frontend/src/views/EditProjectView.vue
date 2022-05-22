@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts">
-import EditProject from '../components/EditProject.vue';
+import EditProject from '../components/forms/EditProjectForm.vue';
 import { defineComponent } from 'vue';
 export default defineComponent({
   components: {

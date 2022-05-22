@@ -17,7 +17,7 @@
 
 <script lang="ts">
 import UsersTable from "../components/UsersTable.vue";
-import LoadingTable from "../components/LoadingTable.vue";
+import LoadingTable from "../components/animations/LoadingTable.vue";
 import { defineComponent } from "vue";
 
 export default defineComponent({

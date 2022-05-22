@@ -98,7 +98,7 @@
 
 <script lang="ts">
 import { ref } from 'vue';
-import { useSidebar } from '../hooks/useSidebar';
+import { useSidebar } from '../../hooks/useSidebar';
 import {
   CollectionIcon,
   CubeTransparentIcon,

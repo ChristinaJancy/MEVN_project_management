@@ -37,7 +37,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import ProjectsCard from '../components/ProjectsCard.vue';
-import LoadingCenter from '../components/LoadingCenter.vue';
+import LoadingCenter from '../components/animations/LoadingCenter.vue';
 // tailwind
 
 export default defineComponent({

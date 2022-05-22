@@ -2,10 +2,10 @@
   <div
     class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
   >
-    <div>
+    <div v-for="project in projectState" :key="project._id">
       <div class="max-w-md w-full space-y-8">
         <h2 class="font-bold text-3xl text-gray-900">
-          Update task info✍️(◔◡◔)
+          Update project info✍️(◔◡◔)
         </h2>
 
         <div class="mt-8 space-y-6">
@@ -14,13 +14,13 @@
           <div class="rounded-md shadow-sm -space-y-px">
             <div>
               <label class="font-bold text-sm text-gray-700" for="title"
-                >Name</label
+                >Title</label
               >
               <input
                 id="title"
                 title="title"
                 type="text"
-                v-model="taskState.name"
+                v-model="project.title"
                 required
                 class="relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
               />
@@ -37,7 +37,23 @@
                 id="description"
                 name="description"
                 type="text"
-                v-model="taskState.description"
+                v-model="project.description"
+                required
+                class="relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              />
+            </div>
+          </div>
+          <!-- deadline -->
+          <div class="rounded-md shadow-sm -space-y-px">
+            <div>
+              <label class="font-bold text-sm text-gray-700" for="deadline"
+                >Deadline</label
+              >
+              <input
+                id="deadline"
+                name="deadline"
+                type="date"
+                v-model="project.deadline"
                 required
                 class="relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
               />
@@ -48,10 +64,26 @@
             <label for="about" class="block text-sm font-medium text-gray-700"
               >Tags</label
             >
+            <!-- <div v-for="tag in tagState.tags" :key="tag._id" :value="tag">
+              <input
+                type="checkbox"
+                name=""
+                :value="tag"
+                v-model="project.tags"
+                class="btn-check"
+                :id="tag.id"
+                autocomplete="off"
+              />
+              <label class="btn btn-outline-primary" :for="tag.id">
+                {{ tag.name }}</label
+              >
+            </div> -->
+
+            <!-- tags -->
             <VueMultiselect
-              v-model="taskState.tags"
+              v-model="project.tags"
               :options="tagState.tags"
-              :value="taskState.tags"
+              :value="project.tags"
               :multiple="true"
               :close-on-select="true"
               placeholder="Pick some"
@@ -59,33 +91,16 @@
               track-by="name"
             />
           </div>
-          <!------- deadline ------->
-          <div class="rounded-md shadow-sm -space-y-px">
-            <div>
-              <label class="font-bold text-sm text-gray-700" for="deadline"
-                >Deadline</label
-              >
-              <input
-                id="deadline"
-                name="deadline"
-                type="date"
-                v-model="taskState.deadline"
-                required
-                class="relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-              />
-            </div>
-          </div>
-
-          <!------------ Assigned ------------>
+          <!------------ Tags------------>
           <div>
             <label for="about" class="block text-sm font-medium text-gray-700"
               >Assigned</label
             >
             <!-- assigned -->
             <VueMultiselect
-              v-model="taskState.assigned"
+              v-model="project.assigned"
               :options="state.users"
-              :value="taskState.assigned"
+              :value="project.assigned"
               :multiple="true"
               :close-on-select="true"
               placeholder="Pick some"
@@ -93,37 +108,17 @@
               track-by="name"
             />
           </div>
-
-          <!------------ Status ------------>
-          <div>
-            <label for="status" class="block text-sm font-medium text-gray-700"
-              >Status</label
-            >
-            <select name="status" id="" v-model="taskState.status">
-              <option :value="taskState.status" disabled selected>
-                <span class="text-xs">{{ taskState.status }}</span>
-              </option>
-              <option
-                v-for="status in statusOptions"
-                :key="status"
-                :value="status.status"
-              >
-                <span>{{ status.status }}</span>
-              </option>
-            </select>
-          </div>
           <div>
             <!-- edit button -->
             <button
               @click="
-                updateTask(
-                  taskId,
-                  taskState.name,
-                  taskState.description,
-                  taskState.deadline,
-                  taskState.tags,
-                  taskState.assigned,
-                  taskState.status
+                updateProjectDetails(
+                  project._id,
+                  project.title,
+                  project.description,
+                  project.deadline,
+                  project.tags,
+                  project.assigned
                 )
               "
               type="submit"
@@ -145,9 +140,9 @@
 </template>
 
 <script lang="ts">
-import userCrud from '../modules/userCrud';
-import tagCrud from '../modules/tagCrud';
-import taskCrud from '../modules/taskCrud';
+import projectCrud from '../../modules/projectCrud';
+import userCrud from '../../modules/userCrud';
+import tagCrud from '../../modules/tagCrud';
 import { LockClosedIcon } from '@heroicons/vue/solid';
 import { defineComponent, onMounted } from 'vue';
 import VueMultiselect from 'vue-multiselect';
@@ -157,7 +152,12 @@ export default defineComponent({
     VueMultiselect,
   },
   async setup() {
-    const { taskState, taskId, updateTask, getSpecificTask } = taskCrud();
+    const {
+      projectState,
+      projectId,
+      getSpecificProject,
+      updateProjectDetails,
+    } = projectCrud();
     const { state, userId, getAllUsers } = userCrud();
     const { tagState, tagId, getAllTags } = tagCrud();
 
@@ -165,26 +165,20 @@ export default defineComponent({
       getAllTags();
       getAllUsers();
     });
-
-    await getSpecificTask();
     await getAllTags();
     await getAllUsers();
+    await getSpecificProject();
 
-    const statusOptions = [
-      { status: 'Not started' },
-      { status: 'In Progress' },
-      { status: 'Done' },
-    ];
     return {
+      projectState,
       state,
-      taskState,
       tagState,
-      taskId,
+      projectId,
       tagId,
+      updateProjectDetails,
       userId,
-      updateTask,
-      statusOptions,
     };
   },
 });
 </script>
+<style src="vue-multiselect/dist/vue-multiselect.css"></style>

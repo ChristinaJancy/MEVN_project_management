@@ -18,7 +18,7 @@
 
 <script lang="ts">
 import TagsTable from '../components/TagsTable.vue';
-import LoadingTable from '../components/LoadingTable.vue';
+import LoadingTable from '../components/animations/LoadingTable.vue';
 import { defineComponent } from 'vue';
 
 export default defineComponent({

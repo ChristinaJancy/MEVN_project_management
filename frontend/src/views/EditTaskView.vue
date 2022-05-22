@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts">
-import EditTaskForm from '../components/EditTaskForm.vue';
+import EditTaskForm from '../components/forms/EditTaskForm.vue';
 import { defineComponent } from 'vue';
 export default defineComponent({
   components: {
