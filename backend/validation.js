@@ -1,24 +1,5 @@
-const joi = require('joi'); //joi validation library
 const jwt = require("jsonwebtoken");  //jsonwebtoken library
 
-const registerValidation = (data) => { //validate user inputs (name, email, password)
-    const schema = joi.object(
-        {
-            name: joi.string().min(6).max(255).required(), //name must be string, min 6 chars, max 255 chars
-            email: joi.string().min(6).max(255).required(), //email must be string, min 6 chars, max 255 chars
-            password: joi.string().min(6).max(255).required(), //password must be string, min 6 chars, max 255 chars
-        });
-    return schema.validate(data); //return validated data
-}
-
-const loginValidation = (data) => { //validate user login info (email, password)
-    const schema = joi.object(
-        {
-            email: joi.string().min(6).max(255).required(), //email must be string, min 6 chars, max 255 chars
-            password: joi.string().min(6).max(255).required() //password must be string, min 6 chars, max 255 chars
-        });
-    return schema.validate(data); //return validated data
-}
 
 // middleware to verify token
 const verifyToken = (req, res, next) => { //middleware to verify token 
@@ -37,4 +18,4 @@ const verifyToken = (req, res, next) => { //middleware to verify token
     }
 }
 
-module.exports = { registerValidation, loginValidation, verifyToken }; //export validation functions
+module.exports = { verifyToken }; //export validation functions

@@ -4,18 +4,14 @@ const router = require('express').Router();
 const User = require('../models/users');
 const tasks = require('../models/tasks');
 const projects = require('../models/projects');
-const { registerValidation, loginValidation, verifyToken } = require('../validation');
+const { verifyToken } = require('../validation');
 
 
 // Create new user
 router.post("/register", async (req, res) => {
 
-    // Validate user inputs (name, email, password)
-    const { error } = registerValidation(req.body);
 
-    if (error) {
-        return res.status(400).json({ error: error.details[0].message });
-    }
+   
 
     // Check if email is already registeret
     const emailExist = await User.findOne({ email: req.body.email });
