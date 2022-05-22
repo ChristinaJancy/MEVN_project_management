@@ -62,9 +62,9 @@
 
 <script lang="ts">
 import { ref } from 'vue';
-import { useSidebar } from '../hooks/useSidebar';
-import userCrud from '../modules/userCrud';
-import { getCookie } from '../modules/cookie';
+import { useSidebar } from '../../hooks/useSidebar';
+import userCrud from '../../modules/userCrud';
+import { getCookie } from '../../modules/cookie';
 
 export default {
   setup() {

@@ -13,8 +13,8 @@
 </template>
 
 <script>
-import Sidebar from "../Sidebar.vue";
-import Header from "../Header.vue";
+import Sidebar from "../navigation/Sidebar.vue";
+import Header from "../navigation/Header.vue";
 
 export default {
   components: {

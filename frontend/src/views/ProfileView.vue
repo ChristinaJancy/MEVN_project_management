@@ -12,7 +12,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import ProfileCard from '../components/ProfileCard.vue';
-import LoadingCenter from '../components/LoadingCenter.vue';
+import LoadingCenter from '../components/animations/LoadingCenter.vue';
 
 export default defineComponent({
   components: {
