@@ -14,16 +14,16 @@ router.get("/", verifyToken, (req, res) => {
         .catch(err => { res.status(500).send({ message: err.message }) })
 });
 
-// Get project by id
-router.get("/:id", verifyToken, (req, res) => {
-    schema.findById(req.params.id)
+// Get project by user id
+router.get("/user/:userId", verifyToken, (req, res) => {
+    schema.find({ assigned: req.params.userId })
         .then(data => { res.send(data); })
         .catch(err => { res.status(500).send({ message: err.message }) })
 });
 
-// Get project by user id
-router.get("/user/:id", verifyToken, (req, res) => {
-    schema.find({ assigned: req.params.id })
+// Get project by id
+router.get("/:id", verifyToken, (req, res) => {
+    schema.findById(req.params.id)
         .then(data => { res.send(data); })
         .catch(err => { res.status(500).send({ message: err.message }) })
 });
