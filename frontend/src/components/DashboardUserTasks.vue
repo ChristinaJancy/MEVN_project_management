@@ -16,7 +16,7 @@
                         </div>
                     </div>
                     <p class="italic">Deadline: {{ moment(task.deadline).startOf('hour').fromNow() }}</p>
-                <!-- </router-link> -->
+                <!-- </router-link>  -->
 
             </div>
         </div>
