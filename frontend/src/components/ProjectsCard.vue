@@ -144,14 +144,13 @@ export default defineComponent({
       projectState,
       projectId,
       getAllProjects,
-      getSpecificProject,
       deleteProject,
     } = projectCrud();
 
     onMounted(() => {
       getAllProjects();
     });
-    getSpecificProject();
+
     await getAllProjects();
 
     return {

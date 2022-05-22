@@ -19,7 +19,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import CreateProjectForm from '../components/CreateProjectForm.vue';
+import CreateProjectForm from '../components/forms/CreateProjectForm.vue';
 
 // tailwind
 export default defineComponent({

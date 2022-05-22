@@ -19,7 +19,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import CreateRoleForm from '../components/CreateRoleForm.vue';
+import CreateRoleForm from '../components/forms/CreateRoleForm.vue';
 
 // tailwind
 export default defineComponent({

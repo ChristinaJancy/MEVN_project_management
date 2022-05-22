@@ -121,10 +121,10 @@
 import { defineComponent, onMounted } from 'vue';
 import { CheckIcon, SelectorIcon } from '@heroicons/vue/solid';
 import VueMultiselect from 'vue-multiselect';
-import projectCrud from '../modules/projectCrud';
-import userCrud from '../modules/userCrud';
-import tagCrud from '../modules/tagCrud';
-import templateCrud from '../modules/templateCrud';
+import projectCrud from '../../modules/projectCrud';
+import userCrud from '../../modules/userCrud';
+import tagCrud from '../../modules/tagCrud';
+import templateCrud from '../../modules/templateCrud';
 // tailwind
 export default defineComponent({
   components: {

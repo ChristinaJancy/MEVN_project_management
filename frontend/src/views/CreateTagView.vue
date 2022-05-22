@@ -19,7 +19,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import CreateTagForm from '../components/CreateTagForm.vue';
+import CreateTagForm from '../components/forms/CreateTagForm.vue';
 
 // tailwind
 export default defineComponent({
