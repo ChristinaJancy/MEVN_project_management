@@ -5,7 +5,7 @@
         <DraggableProject />
       </template>
       <template #fallback>
-        Loading... 
+        <LoadingCenter />
       </template>
     </Suspense>
   </div>
@@ -13,12 +13,14 @@
 
 <script lang="ts">
 import DraggableProject from '../components/DraggableProject.vue';
+import LoadingCenter from '../components/animations/LoadingCenter.vue';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
   name: 'project',
   components: {
     DraggableProject,
+    LoadingCenter,
   },
 });
 </script>
