@@ -44,9 +44,9 @@ router.get("/user/:userId", verifyToken, (req, res) => {
         .sort({ deadline: 1 })
         .then(data => {
             const tasks = data
-            tasks.forEach(task => {
+            tasks.forEach((task,index) => {
                 projects.find({ tasks: task._id }).then(project => {
-                    task.project = project
+                    tasks[index].project = project._id
                     res.send(tasks)
                 })
             })
