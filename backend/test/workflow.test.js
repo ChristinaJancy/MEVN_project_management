@@ -31,7 +31,6 @@ describe('Workflow', () => {
                 expect(res.body.newUser).to.have.property('password');
                 expect(res.body.newUser).to.have.property('avatarPicture');
                 expect(res.body.newUser).to.have.property('initials');
-                expect(res.body.newUser).to.have.property('roles');
 
                 chai.request(server)
                     .post('/api/users/login')
