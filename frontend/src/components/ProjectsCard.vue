@@ -5,7 +5,7 @@
     <div
       v-for="project in projectState.projects"
       :key="project._id"
-      class="w-full aspect-w-1 aspect-h-1 px-2 pb-2 rounded-lg xl:aspect-w-7 xl:aspect-h-8 bg-white group"
+      class="w-full aspect-w-1 relative aspect-h-1 px-2 pb-2 rounded-lg xl:aspect-w-7 xl:aspect-h-8 bg-white group"
     >
       <div class="flex relative justify-between mt-1">
         <div>
@@ -106,28 +106,25 @@
           </Menu>
         </div>
       </div>
+      <br />
       <div
-        v-for="tag in project.tags"
-        :key="tag"
-        style="
-          display: inline-flex;
-          justify-content: space-between;
-          float: right;
-        "
+        style="position: absolute; bottom: 10px; right: 0; display: inline-flex"
       >
-        <p
-          class="text-sm font-medium mt-1 px-2 mr-2 py-0.5 rounded-full"
-          :style="{ background: tag.color }"
-        >
-          <span
-            :style="{
-              color: 'white',
-              'mix-blend-mode': 'color-dodge',
-            }"
+        <div v-for="tag in project.tags" :key="tag" class="">
+          <p
+            class="text-sm font-medium mt-1 px-2 mr-2 py-0.5 rounded-full"
+            :style="{ background: tag.color }"
           >
-            {{ tag.name }}
-          </span>
-        </p>
+            <span
+              :style="{
+                color: 'white',
+                'mix-blend-mode': 'color-dodge',
+              }"
+            >
+              {{ tag.name }}
+            </span>
+          </p>
+        </div>
       </div>
     </div>
   </div>
@@ -172,8 +169,7 @@ export default defineComponent({
     MenuItem,
     MenuItems,
   },
-  methods: {
-  },
+  methods: {},
   created: function () {
     this.moment = moment;
   },

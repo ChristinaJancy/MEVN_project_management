@@ -85,9 +85,9 @@ a {
 /* Handle */
 ::-webkit-scrollbar-thumb {
   @apply bg-indigo-700;
-  //on hover change border radius 
+  //on hover change border radius
   :hover {
-   border-radius: 20px;
+    border-radius: 20px;
   }
 }
 

@@ -215,9 +215,10 @@ xl	1280px	@media (min-width: 1280px) { ... }
 @media screen and (max-width: 640px) {
   #dialog-panel {
     min-width: 80vw !important;
-    height: 90vh;
+    height: auto;
     position: absolute;
     top: 0;
+    max-height:90vh;
     transform: translateX(-50%) translateY(2%);
   }
 }
