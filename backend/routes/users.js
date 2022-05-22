@@ -30,7 +30,6 @@ router.post("/register", async (req, res) => {
 
     // Generate initials
     let initials = req.body.name.toUpperCase().split(' ').map(name => name[0]);
-    console.log(initials)
     if (initials.length > 2) {
         for (let i = 1; i < initials.length - 1; i++) {
             console.log(initials[i]);
@@ -55,8 +54,8 @@ router.post("/register", async (req, res) => {
     try {
         const savedUser = await user.save(); //save user
         res.json({ message: "New user created.😊", newUser: savedUser });
-    } catch (error) { //if error, return error
-        res.status(400).json({ error: error.message });
+    } catch (err) { //if error, return error
+        res.status(400).json({ error: err.message });
     }
 });
 

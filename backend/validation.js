@@ -7,7 +7,6 @@ const registerValidation = (data) => { //validate user inputs (name, email, pass
             name: joi.string().min(6).max(255).required(), //name must be string, min 6 chars, max 255 chars
             email: joi.string().min(6).max(255).required(), //email must be string, min 6 chars, max 255 chars
             password: joi.string().min(6).max(255).required(), //password must be string, min 6 chars, max 255 chars
-            avatarPicture: joi.string() //avatarPicture must be string, min 6 chars, max 255 chars
         });
     return schema.validate(data); //return validated data
 }
