@@ -45,7 +45,6 @@ router.get("/user/:userId", verifyToken, (req, res) => {
         .then(data => {
             let projectIds = [];
             let tasksData = data
-
             const getProjectIds = (tasksData, index) => {
                 if (index === tasksData.length) {
                     res.json({tasks: tasksData, projectIds})
@@ -60,10 +59,8 @@ router.get("/user/:userId", verifyToken, (req, res) => {
                 }
             }
             getProjectIds(tasksData, 0)
-
         })
         .catch(err => { res.status(500).send({ message: err.message }) })
-
 });
 
 // Get task with id
