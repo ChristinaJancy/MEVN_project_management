@@ -196,14 +196,11 @@
           <template #item="{ element }">
             <div
               id="taskCard"
-              style="min-height: 80px; position: relative"
+              style="min-height: 80px; position: relative; cursor: pointer"
               class="p-2 mr-4 mb-4 rounded-lg bg-white shadow-md"
+              @click="openTaskModal(element._id)"
             >
-              <h3
-                class="text-sm font-bold text-gray-800 mt-0 mb-0"
-                style="cursor: pointer"
-                @click="openTaskModal(element._id)"
-              >
+              <h3 class="text-sm font-bold text-gray-800 mt-0 mb-0">
                 {{ element.name }}
               </h3>
               <p class="text-sm">
@@ -212,20 +209,11 @@
               <p class="text-sm" style="position: absolute; bottom: 0">
                 {{ element.assigned.initials }}
               </p>
-
-              <router-link
-                :to="{
-                  name: 'edit-task',
-                  params: {
-                    id: element._id
-                  },
-                }"
-                >Edit
-              </router-link>
               <!-- task modal -->
               <TaskCard
                 :show="taskModal === element._id"
                 :name="element.name"
+                :id="element._id"
                 :description="element.description"
                 :tags="element.tags"
                 :status="element.status"
