@@ -6,17 +6,21 @@
       <template #default>
         <EditTaskForm />
       </template>
-      <template #fallback> loading... </template>
+      <template #fallback> 
+        <LoadingCenter />
+      </template>
     </Suspense>
   </div>
 </template>
 
 <script lang="ts">
 import EditTaskForm from '../components/forms/EditTaskForm.vue';
+import LoadingCenter from '../components/animations/LoadingCenter.vue';
 import { defineComponent } from 'vue';
 export default defineComponent({
   components: {
     EditTaskForm,
+    LoadingCenter,
   },
 });
 </script>
