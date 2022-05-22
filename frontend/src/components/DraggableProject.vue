@@ -188,7 +188,7 @@
           v-if="!isUpdatingCols"
           :list="column.tasks"
           group="tasks"
-          fallbackTolerance="10"
+          fallbackTolerance="1"
           animation="200"
           item-key="id"
           @add="onTaskEnd(column._id, $event)"
