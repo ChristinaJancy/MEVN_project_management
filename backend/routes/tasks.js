@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const schema = require("../models/tasks")
 const columns = require("../models/columns")
+const projects = require("../models/projects")
 const { verifyToken } = require("../validation")
 
 module.exports = router;
@@ -41,8 +42,18 @@ router.get("/user/:userId", verifyToken, (req, res) => {
     schema.find({ assigned: req.params.userId, deadline: { $gte: new Date() } })
         .limit(10)
         .sort({ deadline: 1 })
-        .then(data => { res.send(data); })
+        .then(data => {
+            const tasks = data
+            tasks.forEach(task => {
+                projects.find({ tasks: task._id }).then(project => {
+                    task.project = project
+                    res.send(tasks)
+                })
+            })
+             res.send(data)
+            })
         .catch(err => { res.status(500).send({ message: err.message }) })
+
 });
 
 // Get task with id
