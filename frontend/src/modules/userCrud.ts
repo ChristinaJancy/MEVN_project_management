@@ -58,6 +58,8 @@ const userCrud = () => {
         }
     }
     const newUser = () => {
+        const roleIds = state.value.roles.map(role => role._id) as string[]
+        console.log(roleIds)
         const requestOptions = {
             method: "POST",
             headers: {
@@ -67,7 +69,7 @@ const userCrud = () => {
                 email: state.value.email,
                 password: state.value.password,
                 name: state.value.name,
-                avatarPicture: 'img'
+                roles: roleIds
             })
         }
         fetch(uri + 'users/register',

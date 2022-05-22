@@ -42,10 +42,18 @@
                   }"
                 >
                   <div class="flex items-center">
-                    <div
-                      :style="{ 'background-color': user.roles[0].color }"
+                    <div v-if="user.roles[0]"
+                      :style=" 'background-color:'+ user.roles[0].color "
                       class="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center"
                     >
+                      <div
+                        class="text-center text-sm font-bold text-white"
+                        v-if="user.initials"
+                      >
+                        {{ user.initials }}
+                      </div>
+                    </div>
+                    <div v-else class="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center bg-indigo-600" >
                       <div
                         class="text-center text-sm font-bold text-white"
                         v-if="user.initials"
