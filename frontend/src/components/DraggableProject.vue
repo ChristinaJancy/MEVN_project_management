@@ -187,8 +187,7 @@
         <draggable
           v-if="!isUpdatingCols"
           :list="column.tasks"
-          @start="isDragging = true"
-          @end="isDragging = false"
+          delay-on-touch-only="true"
           group="tasks"
           item-key="id"
           @add="onTaskEnd(column._id, $event)"
@@ -294,7 +293,6 @@ export default defineComponent({
     const { taskState } = taskCrud();
 
     await getSpecificProject();
-    const isDragging = ref(false);
     const isUpdatingCols = ref(false);
     const isCreatingCols = ref(false);
     const taskModal = ref(null);
@@ -315,8 +313,7 @@ export default defineComponent({
       isCreatingCols,
       isUpdatingCols,
       deleteColumn,
-      createTaskModal,
-      isDragging,
+      createTaskModal
     };
   },
 
