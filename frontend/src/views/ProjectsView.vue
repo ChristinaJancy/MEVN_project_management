@@ -24,7 +24,9 @@
             <template #default>
               <ProjectsCard />
             </template>
-            <template #fallback> Loading... </template>
+            <template #fallback> 
+              <LoadingCenter/>
+            </template>
           </Suspense>
         </div>
       </div>
@@ -35,7 +37,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import ProjectsCard from '../components/ProjectsCard.vue';
-
+import LoadingCenter from '../components/LoadingCenter.vue';
 // tailwind
 
 export default defineComponent({
@@ -44,6 +46,7 @@ export default defineComponent({
   },
   components: {
     ProjectsCard,
+    LoadingCenter,
   },
 });
 </script>

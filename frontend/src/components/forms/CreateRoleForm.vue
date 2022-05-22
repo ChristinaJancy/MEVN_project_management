@@ -55,7 +55,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { CheckIcon, SelectorIcon } from '@heroicons/vue/solid';
-import roleCrud from '../modules/roleCrud';
+import roleCrud from '../../modules/roleCrud';
 
 // tailwind
 export default defineComponent({
