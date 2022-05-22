@@ -6,7 +6,7 @@ const { verifyToken } = require("../validation")
 module.exports = router;
 
 // Get all roles
-router.get("/", verifyToken, (req, res) => {
+router.get("/", (req, res) => {
     schema.find()
         .then(data => { res.send(data); })
         .catch(err => { res.status(500).send({ message: err.message }) })
