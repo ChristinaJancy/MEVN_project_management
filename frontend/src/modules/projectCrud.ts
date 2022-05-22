@@ -20,6 +20,7 @@ const projectCrud = () => {
         columns: {} as object | any,
         tasks: [] as string[],
         projectToEdit: {} as any,
+        userProjects: [] as object[],
     })
 
     const getAllProjects = async () => {
@@ -55,6 +56,24 @@ const projectCrud = () => {
                 // user.value = data.filter((user: { _id: string | string[]; }) => user._id === userId.value)
                 projectState.value = data.filter(((projectState: { _id: string | string[]; }) => projectState._id === projectId.value)
                 )
+            })
+    }
+
+    const getProjectsFromUser = async () => {
+        const requestOptions = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                "auth-token": getCookie('token')
+            }
+        };
+
+        await fetch(uri + 'projects/user/' + getCookie('id'),
+            requestOptions
+        )
+            .then(response => response.json())
+            .then(data => {
+                projectState.value.userProjects = data
             })
     }
 
@@ -164,7 +183,8 @@ const projectCrud = () => {
         updateProjectDetails,
         createProject,
         deleteProject,
-        updateProjectColumns
+        updateProjectColumns,
+        getProjectsFromUser
     }
 }
 

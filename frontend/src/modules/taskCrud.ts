@@ -17,6 +17,7 @@ const taskCrud = () => {
         assigned: [] as string[],
         id: '' as string,
         userTasks: [] as object[],
+        projectIds: [] as string[],
     })
 
     const getSpecificTask = async () => {
@@ -108,7 +109,8 @@ const taskCrud = () => {
         )
             .then(response => response.json())
             .then(data => {
-                taskState.value.userTasks = data
+                taskState.value.userTasks = data.tasks
+                taskState.value.projectIds = data.projectIds
             })
     }
 

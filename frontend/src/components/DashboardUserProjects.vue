@@ -1,38 +1,57 @@
 <template>
-    <div class="bg-gray-100 max-w-full w-full md:w-1/2 p-4 rounded-lg space-y-3 shadow-lg">
-        <h3 class="m-1">Your tasks</h3>
-
+    <div class="bg-gray-100 max-w-full w-full md:w-5/12 md:max-w-2xl p-4 rounded-lg space-y-3 shadow-lg">
+        <h3 class="m-1">Your projects</h3>
         <div class="max-h-96 overflow-y-scroll space-y-3 w-full">
-            <div v-for="task in taskState.userTasks" :key="task" class="bg-white rounded max-w-full shadow-sm p-4 mr-2 space-y-2">
-                <p class="font-medium text-xl">{{ task.name }}</p>
-                <!-- <p class="font-bold text-md">Description:</p> -->
-                <p>{{  task.description }}</p>
-                <div class="font-bold text-sm inline-flex"
-                 v-for="(user,index) in task.assigned" :key="user">
-                    <p>{{ user.name }}</p>
-                    <div v-if="index < task.assigned.length - 1">
-                    , &nbsp;
-                    </div>
-                </div>
-                <p class="italic">Deadline: {{ moment(task.deadline).startOf('hour').fromNow() }}</p>
 
+            <div v-for="project in projectState.userProjects" :key="project"
+                class="bg-white rounded max-w-full shadow-sm p-4 mr-2 space-y-2 ">
+                <router-link :to="{ name: 'project', params: { id: project._id } }">
+                    <p class="font-medium text-xl">{{ project.title }}</p>
+                    <!-- <p class="font-bold text-md">Description:</p> -->
+                    <p class="font-light">{{ project.description }}</p>
+                    <!-- <div class="font-bold text-sm inline-flex" v-for="(user, index) in project.assigned" :key="user">
+                        <p>{{ user.initials }}</p>
+                        <div v-if="index < project.assigned.length - 1">
+                            , &nbsp;
+                        </div>
+                    </div> -->
+                    <p class="italic font-normal">Deadline: {{ moment(project.deadline).startOf('hour').fromNow() }}</p>
+                    <div class="flex w-full justify-end flex-wrap">
+                        <div v-for="tag in project.tags" :key="tag" style="
+                    display: flex;
+                    justify-content: space-between;
+                    flex-direction: row-reverse;
+                    align-items: flex-end;
+                ">
+                            <p class="text-sm font-medium px-2 mt-1 mr-2 py-0.5 rounded-full"
+                                :style="{ background: tag.color }">
+                                <span :style="{
+                                    color: 'white',
+                                    'mix-blend-mode': 'color-dodge',
+                                }">
+                                    {{ tag.name }}
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                </router-link>
             </div>
+
         </div>
     </div>
 </template>
 <script lang="ts">
-import taskCrud from "../modules/taskCrud";
+import projectCrud from "../modules/projectCrud";
 import moment from "moment";
 
 export default {
     setup() {
-        const { taskState, getTasksFromUser } = taskCrud();
+        const { projectState, getProjectsFromUser } = projectCrud();
 
-        getTasksFromUser();
-        console.log(taskState.value.userTasks);
+        getProjectsFromUser();
         return {
             moment,
-            taskState
+            projectState
         };
     }
 }

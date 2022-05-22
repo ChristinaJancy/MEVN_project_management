@@ -43,16 +43,22 @@ router.get("/user/:userId", verifyToken, (req, res) => {
         .limit(10)
         .sort({ deadline: 1 })
         .then(data => {
-            const tasks = data
-            tasks.forEach((task, index) => {
-                columns.findOne({ tasks: task._id }).then(column => {
-                    projects.findOne({ columns: column._id }).then(project => {
-                        tasks[index].project = project._id
-                        res.send(tasks)
-                    })
-                })
-            })
-            res.send(data)
+            let projectIds = [];
+            let tasksData = data
+            // tasksData.forEach(async (task, index) => {
+            //     await columns.find({ tasks: task._id }).then(column => {
+            //         projects.find({ columns: column[0]._id }).then(project => {
+            //             projectIds.push(project[0]._id)
+            //             console.log("ProjecIds: " + projectIds[index])
+            //             console.log("TasksData: " + tasksData[index]._id)
+            //             if (index === tasksData.length - 1) {
+            //                 res.status(200).json({ tasks: tasksData, projectIds })
+            //             }
+            //         })
+            //     })
+            // })
+            res.json({ tasks: tasksData })
+
         })
         .catch(err => { res.status(500).send({ message: err.message }) })
 

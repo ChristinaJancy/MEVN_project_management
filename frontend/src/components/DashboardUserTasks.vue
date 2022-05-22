@@ -1,20 +1,22 @@
 <template>
-    <div class="bg-gray-100 max-w-md p-4 rounded-lg space-y-3 shadow-lg">
+    <div class="bg-gray-100 max-w-full w-full md:w-5/12 md:max-w-2xl p-4 rounded-lg space-y-3 shadow-lg">
         <h3 class="m-1">Your tasks</h3>
 
         <div class="max-h-96 overflow-y-scroll space-y-3 w-full">
-            <div v-for="task in taskState.userTasks" :key="task" class="bg-white rounded max-w-md shadow-sm p-4 mr-2 space-y-2">
-                <p class="font-medium text-xl">{{ task.name }}</p>
-                <!-- <p class="font-bold text-md">Description:</p> -->
-                <p>{{  task.description }}</p>
-                <div class="font-bold text-sm inline-flex"
-                 v-for="(user,index) in task.assigned" :key="user">
-                    <p>{{ user.name }}</p>
-                    <div v-if="index < task.assigned.length - 1">
-                    , &nbsp;
+            <div v-for="(task, index) in taskState.userTasks" :key="task"
+                class="bg-white rounded max-w-full shadow-sm p-4 mr-2 space-y-2">
+                <!-- <router-link :to="{ name: 'project', params: { id: taskState.projectIds[index] } }"> -->
+                    <p class="font-medium text-xl">{{ task.name }}</p>
+                    <!-- <p class="font-bold text-md">Description:</p> -->
+                    <p>{{ task.description }}</p>
+                    <div class="font-bold text-sm inline-flex" v-for="(user, index) in task.assigned" :key="user">
+                        <p>{{ user.name }}</p>
+                        <div v-if="index < task.assigned.length - 1">
+                            , &nbsp;
+                        </div>
                     </div>
-                </div>
-                <p class="italic">Deadline: {{ moment(task.deadline).startOf('hour').fromNow() }}</p>
+                    <p class="italic">Deadline: {{ moment(task.deadline).startOf('hour').fromNow() }}</p>
+                <!-- </router-link> -->
 
             </div>
         </div>
@@ -29,7 +31,6 @@ export default {
         const { taskState, getTasksFromUser } = taskCrud();
 
         getTasksFromUser();
-        console.log(taskState.value.userTasks);
         return {
             moment,
             taskState
