@@ -187,13 +187,15 @@
         <draggable
           v-if="!isUpdatingCols"
           :list="column.tasks"
+          @start="isDragging = true"
+          @end="isDragging = false"
           group="tasks"
           item-key="id"
           @add="onTaskEnd(column._id, $event)"
           @update="onTaskUpdate(column._id)"
         >
           <!-- tasks -->
-          <template #item="{ element }">
+          <template #item="{ element }" type="transition">
             <div
               id="taskCard"
               style="min-height: 80px; position: relative; cursor: pointer"
@@ -292,7 +294,7 @@ export default defineComponent({
     const { taskState } = taskCrud();
 
     await getSpecificProject();
-
+    const isDragging = ref(false);
     const isUpdatingCols = ref(false);
     const isCreatingCols = ref(false);
     const taskModal = ref(null);
@@ -314,6 +316,7 @@ export default defineComponent({
       isUpdatingCols,
       deleteColumn,
       createTaskModal,
+      isDragging,
     };
   },
 
