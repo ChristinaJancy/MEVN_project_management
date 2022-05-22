@@ -45,7 +45,7 @@ router.get("/user/:userId", verifyToken, (req, res) => {
         .then(data => {
             const tasks = data
             tasks.forEach((task,index) => {
-                projects.find({ tasks: task._id }).then(project => {
+                projects.findOne({ columns: { tasks: task._id} }).then(project => {
                     tasks[index].project = project._id
                     res.send(tasks)
                 })
