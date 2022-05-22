@@ -72,3 +72,26 @@ a {
     cursor: pointer;
   }
 }
+
+//html scrollbar
+/* width */
+::-webkit-scrollbar {
+  width: 6px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+  overflow: hidden;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+  @apply bg-indigo-700;
+  //on hover change border radius 
+  :hover {
+   border-radius: 20px;
+  }
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-indigo-600;
+}

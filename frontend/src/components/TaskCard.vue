@@ -1,7 +1,7 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <template>
   <TransitionRoot as="template" :show="open" :key="element">
-    <Dialog as="div" class="relative z-10">
+    <Dialog as="div" class="relative z-10" id="dialog">
       <!-- this child makes the background greyed out -->
       <TransitionChild
         enter="ease-out duration-300"
@@ -23,7 +23,7 @@
         >&#8203;</span
       >
       <div
-        class="fixed z-10 inset-0 overflow-y-auto flex items-end justify-center min-h-screen px-4 text-center sm:block sm:p-0"
+        class="fixed z-10 inset-0 overflow-y-auto flex items-end justify-center min-h-screen px-4 text-center sm:block"
       >
         <TransitionChild
           enter="ease-out duration-300"
@@ -35,18 +35,37 @@
         >
           <!-- dialog-panel -->
           <div
-            class="relative inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+            class="relative inline-block align-bottom bg-white rounded-lg text-left shadow-xl transform transition-all sm:my-8 sm:align-top sm:max-w-lg sm:w-full"
+            id="dialog-panel"
           >
-            <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+            <div class="bg-white shadow rounded-lg">
               <!---- name and tags ---->
               <div class="px-4 py-5 sm:px-6">
-                <div class="flex relative">
-                  <h3 class="mt-0 text-lg leading-6 font-medium text-gray-900">
+                <div class="flex relative mb-10">
+                  <h3
+                    class="mt-0 absolute left-0 top-0 text-lg leading-6 font-medium text-gray-900"
+                  >
                     {{ name }}
                   </h3>
+                  <!-- edit -->
+                  <router-link
+                    :to="{
+                      name: 'edit-task',
+                      params: {
+                        id: id,
+                      },
+                    }"
+                  >
+                    <button
+                      type="button"
+                      class="absolute right-0 -top-2 justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-indigo-500 text-base font-medium text-white hover:bg-indigo-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
+                    >
+                      Edit
+                    </button>
+                  </router-link>
                   <!-- <button
                     type="button"
-                    class="mt-3 absolute right-0 w-full justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                    class=""
                     @click="$emit('open-modal')"
                     ref="updateButtonRef"
                   >
@@ -115,9 +134,7 @@
               </div>
             </div>
 
-            <div
-              class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse"
-            >
+            <div class="bg-gray-50 px-4 py-4 sm:px-6 sm:flex flex-row-reverse">
               <!-- close -->
               <button
                 type="button"
@@ -127,22 +144,6 @@
               >
                 Close
               </button>
-              <!-- edit -->
-              <router-link
-                :to="{
-                  name: 'edit-task',
-                  params: {
-                    id: id,
-                  },
-                }"
-              >
-                <button
-                  type="button"
-                  class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
-                >
-                  Edit
-                </button>
-              </router-link>
             </div>
           </div>
           <!-- /dialog-panel -->
@@ -199,3 +200,43 @@ export default defineComponent({
   methods: {},
 });
 </script>
+
+<style lang="scss" scoped>
+/*  https://tailwindcss.com/docs/responsive-design
+Breakpoint prefix	Minimum width	CSS
+sm	640px	@media (min-width: 640px) { ... }
+md	768px	@media (min-width: 768px) { ... }
+lg	1024px	@media (min-width: 1024px) { ... }
+xl	1280px	@media (min-width: 1280px) { ... }
+2xl	1536px	@media (min-width: 1536px) { ... }
+*/
+
+// sm breakpoint and below
+@media screen and (max-width: 640px) {
+  #dialog-panel {
+    min-width: 80vw !important;
+    height: 90vh;
+    position: absolute;
+    top: 0;
+    transform: translateX(-50%) translateY(2%);
+  }
+}
+
+#dialog-panel {
+  overflow: scroll;
+}
+//html scrollbar
+/* width */
+::-webkit-scrollbar {
+  border-radius: 50%;
+  height: 80%;
+}
+/* Track */
+::-webkit-scrollbar-track {
+  overflow: hidden;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+}
+</style>
