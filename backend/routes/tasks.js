@@ -14,7 +14,7 @@ router.get("/", verifyToken, (req, res) => {
 });
 
 // Create new task
-router.post("/:columnId", verifyToken, async (req,res) => {
+router.post("/:columnId", verifyToken, async (req, res) => {
     const status = "in progress";
     const task = new schema({
         name: req.body.name,
@@ -26,32 +26,34 @@ router.post("/:columnId", verifyToken, async (req,res) => {
     })
     try {
         task.save()
-        .then(savedTask => {
-            columns.findByIdAndUpdate(req.params.columnId, { $push: { tasks: savedTask._id } }, { new: true })
-            .then(updatedColumn => {
-                res.json({ message: "New task created.😊", newtask: savedTask }) 
-            })
-        });
+            .then(savedTask => {
+                columns.findByIdAndUpdate(req.params.columnId, { $push: { tasks: savedTask._id } }, { new: true })
+                    .then(updatedColumn => {
+                        res.json({ message: "New task created.😊", newtask: savedTask })
+                    })
+            });
     } catch (error) {
         res.status(400).json({ error });
     }
 })
 
 // Get 10 tasks with userId depening on deadline
-router.get("/user/:userId", verifyToken, (req, res) => { 
+router.get("/user/:userId", verifyToken, (req, res) => {
     schema.find({ assigned: req.params.userId, deadline: { $gte: new Date() } })
         .limit(10)
         .sort({ deadline: 1 })
         .then(data => {
             const tasks = data
-            tasks.forEach((task,index) => {
-                projects.findOne({ columns: { tasks: task._id} }).then(project => {
-                    tasks[index].project = project._id
-                    res.send(tasks)
+            tasks.forEach((task, index) => {
+                columns.findOne({ tasks: task._id }).then(column => {
+                    projects.findOne({ columns: column._id }).then(project => {
+                        tasks[index].project = project._id
+                        res.send(tasks)
+                    })
                 })
             })
-             res.send(data)
-            })
+            res.send(data)
+        })
         .catch(err => { res.status(500).send({ message: err.message }) })
 
 });
