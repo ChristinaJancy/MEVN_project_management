@@ -13,7 +13,6 @@ describe('Workflow', () => {
             name: 'testtt',
             password: 'testtt',
             email: 'testttt',
-            avatarPicture: 'test'
         }
 
         chai.request(server)
