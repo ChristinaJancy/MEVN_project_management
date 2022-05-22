@@ -63,13 +63,14 @@ export default defineComponent({
     CheckIcon,
     SelectorIcon,
   },
-  setup() {
+
+ setup() {
     const { roleState, roleId, createRole } = roleCrud();
 
     return {
       roleState,
       roleId,
-      createRole
+      createRole,
     };
   },
   methods: {},
