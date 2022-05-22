@@ -56,7 +56,7 @@ router.post("/register", async (req, res) => {
         const savedUser = await user.save(); //save user
         res.json({ message: "New user created.😊", newUser: savedUser });
     } catch (error) { //if error, return error
-        res.status(400).json({ error.message });
+        res.status(400).json({ error: error.message });
     }
 });
 
