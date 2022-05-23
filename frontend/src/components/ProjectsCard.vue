@@ -5,9 +5,9 @@
     <div
       v-for="project in projectState.projects"
       :key="project._id"
-      class="w-full aspect-w-1 relative aspect-h-1 px-2 pb-2 rounded-lg xl:aspect-w-7 xl:aspect-h-8 bg-white group"
+      class="w-full aspect-w-1 relative aspect-h-1 py-2 rounded-lg xl:aspect-w-7 xl:aspect-h-8 bg-white group"
     >
-      <div class="flex relative justify-between mt-1">
+      <div class="flex relative justify-between mt-1 px-4">
         <div>
           <router-link
             :to="{
@@ -17,7 +17,7 @@
               },
             }"
           >
-            <h5 class="mt-1 text-gray-700 mb-0 font-bold">
+            <h5 class="mt-1 text-gray-700 mb-0 font-bold w-11/12">
               {{ project.title }} <br />
             </h5>
           </router-link>
@@ -57,7 +57,7 @@
           <br />
         </div>
 
-        <div class="absolute right-0 mt-1">
+        <div class="absolute right-1 mt-1">
           <Menu as="div" class="relative inline-block text-left">
             <MenuButton class="text-blue-500">
               <DotsVerticalIcon class="h-5 w-5" aria-hidden="true" />
@@ -106,9 +106,8 @@
           </Menu>
         </div>
       </div>
-      <br />
       <div
-        class="flex justify-end items-center flex-wrap"
+        class="flex justify-end items-center flex-wrap pb-2 px-2"
       >
         <div v-for="tag in project.tags" :key="tag" class="">
           <p
