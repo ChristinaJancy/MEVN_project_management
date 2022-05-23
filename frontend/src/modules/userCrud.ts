@@ -127,8 +127,8 @@ const userCrud = () => {
                 data.token ? state.value.token = data.token : console.log("no token");
                 data.id ? state.value.id = data.id : console.log("no id");
                 data.initials ? state.value.initials = data.initials : console.log("no initials");
-                data.userColor ? state.value.userColor = data.userColor[0].color : state.value.userColor = "#0046E5" ;
-
+                data.userColor[0].color ? state.value.userColor = data.userColor[0].color : state.value.userColor = "#0046E5" ;
+                
                 setCookies()
                 router.push({ path: "/", replace: true })
             })
