@@ -95,35 +95,43 @@
                     <dd
                       class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
                     >
-                    <div>
-                      <label for="status" class="block text-sm font-medium text-gray-700"
-                        >Status</label
-                      >
-                      <select name="status" id="" v-model="currentStatus" @change="changeStatus()">
-                        <option :value="currentStatus" disabled selected>
-                          <span class="text-xs">{{ currentStatus }}</span>
-                        </option>
-                        <option
-                          v-for="(status,index) in statusOptions"
-                          :key="status"
-                          :value="statusOptions[index]"
+                      <div>
+                        <label
+                          for="status"
+                          class="block text-sm font-medium text-gray-700"
+                          >Status</label
                         >
-                          <span>{{ statusOptions[index] }}</span>
-                        </option>
-                      </select>
-                    </div>
+                        <select
+                          name="status"
+                          id=""
+                          v-model="currentStatus"
+                          @change="changeStatus()"
+                        >
+                          <option :value="currentStatus" disabled selected>
+                            <span class="text-xs">{{ currentStatus }}</span>
+                          </option>
+                          <option
+                            v-for="(status, index) in statusOptions"
+                            :key="status"
+                            :value="statusOptions[index]"
+                          >
+                            <span>{{ statusOptions[index] }}</span>
+                          </option>
+                        </select>
+                      </div>
+                    </dd>
                   </div>
                   <!---- assigned ---->
                   <div
-                    class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6"
+                    class="bg-gray-50 px-4 py-5 grid sm:grid-cols-3 sm:gap-4 sm:px-6"
                   >
                     <dt class="text-sm font-medium text-gray-500">Assigned</dt>
                     <dd
                       class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
-                      v-for="assignee in assigned"
-                      :key="assignee._id"
                     >
-                      {{ assignee.title }}
+                      <div v-for="assignee in assigned" :key="assignee._id">
+                        {{ assignee.name  }} 
+                      </div>
                     </dd>
                   </div>
                   <!---- Deadline ---->
@@ -146,7 +154,9 @@
               <button
                 type="button"
                 class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
-                @click="$emit('close-modal', currentStatus), $emit('update-status')"
+                @click="
+                  $emit('close-modal', currentStatus), $emit('update-status')
+                "
                 ref="cancelButtonRef"
               >
                 Close
@@ -200,8 +210,7 @@ export default defineComponent({
     const { updateTask, statusOptions } = taskCrud();
     let currentStatus = props.status;
     const { getSpecificProject } = projectCrud();
-    
-    
+
     return {
       statusOptions,
       updateTask,
@@ -209,7 +218,7 @@ export default defineComponent({
       columnState,
       moment,
       currentStatus,
-      getSpecificProject
+      getSpecificProject,
     };
   },
   created: function () {
@@ -217,15 +226,15 @@ export default defineComponent({
   },
   methods: {
     changeStatus: function () {
-        this.updateTask(
-          this.id,
-          this.title,
-          this.description,
-          this.deadline,
-          this.tags,
-          this.assigned,
-          this.currentStatus,
-        );
+      this.updateTask(
+        this.id,
+        this.title,
+        this.description,
+        this.deadline,
+        this.tags,
+        this.assigned,
+        this.currentStatus
+      );
     },
   },
 });
@@ -248,7 +257,7 @@ xl	1280px	@media (min-width: 1280px) { ... }
     height: auto;
     position: absolute;
     top: 0;
-    max-height:90vh;
+    max-height: 90vh;
     transform: translateX(-50%) translateY(2%);
   }
 }
