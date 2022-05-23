@@ -97,11 +97,11 @@
               <span class="text-xs">{{ taskState.status }}</span>
             </option>
             <option
-              v-for="status in statusOptions"
+              v-for="(status,index) in statusOptions"
               :key="status"
-              :value="status.status"
+              :value="statusOptions[index]"
             >
-              <span>{{ status.status }}</span>
+              <span>{{ statusOptions[index] }}</span>
             </option>
           </select>
         </div>
@@ -149,7 +149,7 @@ export default defineComponent({
     VueMultiselect,
   },
   async setup() {
-    const { taskState, taskId, updateTask, getSpecificTask } = taskCrud();
+    const { taskState, taskId, updateTask, getSpecificTask, statusOptions } = taskCrud();
     const { state, userId, getAllUsers } = userCrud();
     const { tagState, tagId, getAllTags } = tagCrud();
 
@@ -162,11 +162,7 @@ export default defineComponent({
     await getAllTags();
     await getAllUsers();
 
-    const statusOptions = [
-      { status: 'Not started' },
-      { status: 'In Progress' },
-      { status: 'Done' },
-    ];
+    
     return {
       state,
       taskState,

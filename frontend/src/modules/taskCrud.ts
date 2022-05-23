@@ -7,6 +7,11 @@ const taskCrud = () => {
     const route = useRoute();
     const router = useRouter();
     let taskId = route.params.id as string;
+    const statusOptions = [
+        'Not started' ,
+        'In Progress' ,
+        'Done' ,
+    ];
 
     const taskState = ref({
         name: '' as string,
@@ -54,13 +59,18 @@ const taskCrud = () => {
                     name, description, deadline, tags, assigned, status
                 })
             }
+            console.log(_id)
             await fetch(uri + 'tasks/' + _id,
                 requestOptions
             )
                 .then(response => response.json())
                 .then(data => {
                     console.log(data)
-                    router.go(-1)
+                    if(router.currentRoute.value.name === 'project'){
+                        //does nothing
+                    }else{
+                        router.go(-1)
+                    }
                 })
         }
         catch (error) {
@@ -81,7 +91,7 @@ const taskCrud = () => {
                 deadline: taskState.value.deadline,
                 tags: taskState.value.tags,
                 assigned: taskState.value.assigned,
-                status: 'not started'
+                status: 'Not started',
             })
         };
 
@@ -117,6 +127,7 @@ const taskCrud = () => {
 
 
     return {
+        statusOptions,
         taskState,
         taskId,
         createTask,

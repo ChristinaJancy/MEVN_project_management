@@ -1,6 +1,6 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <template>
-  <TransitionRoot as="template" :show="open" :key="element">
+  <TransitionRoot as="template" :show="open">
     <Dialog as="div" class="relative z-10" id="dialog">
       <!-- this child makes the background greyed out -->
       <TransitionChild
@@ -95,7 +95,27 @@
                     <dd
                       class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
                     >
-                      {{ status }}
+                    <div>
+                      <label for="status" class="block text-sm font-medium text-gray-700"
+                        >Status</label
+                      >
+                      <select name="status" id="" v-model="currentStatus" @change="changeStatus()">
+                        <option :value="currentStatus" disabled selected>
+                          <span class="text-xs">{{ currentStatus }}</span>
+                        </option>
+                        <option
+                          v-for="(status,index) in statusOptions"
+                          :key="status"
+                          :value="statusOptions[index]"
+                        >
+                          <span>{{ statusOptions[index] }}</span>
+                        </option>
+                      </select>
+                    </div>
+                    <!-- <button type="button" class=" rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-indigo-500 text-base font-medium text-white hover:bg-indigo-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
+                    @click="changeStatus(currentStatus)">
+                      {{ currentStatus }}
+                    </button> -->
                     </dd>
                   </div>
                   <!---- assigned ---->
@@ -105,10 +125,10 @@
                     <dt class="text-sm font-medium text-gray-500">Assigned</dt>
                     <dd
                       class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2"
-                      v-for="assigned in assigned"
-                      :key="assigned._id"
+                      v-for="assignee in assigned"
+                      :key="assignee._id"
                     >
-                      {{ assigned.name }}
+                      {{ assignee.name }}
                     </dd>
                   </div>
                   <!---- Deadline ---->
@@ -131,7 +151,7 @@
               <button
                 type="button"
                 class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
-                @click="$emit('close-modal')"
+                @click="$emit('close-modal', currentStatus), $emit('update-status')"
                 ref="cancelButtonRef"
               >
                 Close
@@ -145,7 +165,7 @@
   </TransitionRoot>
 </template>
 
-<script>
+<script lang="ts">
 import {
   Dialog,
   DialogTitle,
@@ -157,6 +177,8 @@ import moment from 'moment';
 import VueMultiselect from 'vue-multiselect';
 import columnCrud from '../modules/columnCrud';
 import { defineComponent, ref } from 'vue';
+import taskCrud from '../modules/taskCrud';
+import projectCrud from '../modules/projectCrud';
 
 export default defineComponent({
   props: [
@@ -177,19 +199,40 @@ export default defineComponent({
     TransitionRoot,
     VueMultiselect,
   },
-  setup() {
+  setup(props) {
     const columnState = columnCrud;
     const open = ref(false);
+    const { updateTask, statusOptions } = taskCrud();
+    let currentStatus = props.status;
+    const { getSpecificProject } = projectCrud();
+    
+    
     return {
+      statusOptions,
+      updateTask,
       open,
       columnState,
       moment,
+      currentStatus,
+      getSpecificProject
     };
   },
   created: function () {
     this.moment = moment;
   },
-  methods: {},
+  methods: {
+    changeStatus: function () {
+        this.updateTask(
+          this.id,
+          this.name,
+          this.description,
+          this.deadline,
+          this.tags,
+          this.assigned,
+          this.currentStatus,
+        );
+    },
+  },
 });
 </script>
 

@@ -228,7 +228,8 @@
                 :status="element.status"
                 :assigned="element.assigned"
                 :deadline="element.deadline"
-                @close-modal="taskModal = false"
+                @close-modal="closeTaskModal"
+                @update-status="element.status = newStatus"
               />
             </div>
           </template>
@@ -251,7 +252,6 @@
 import draggable from 'vuedraggable';
 import projectCrud from '../modules/projectCrud';
 import columnCrud from '../modules/columnCrud';
-import taskCrud from '../modules/taskCrud';
 import TaskCard from '../components/TaskCard.vue';
 import CreateTaskModal from '../components/CreateTaskModal.vue';
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue';
@@ -298,19 +298,17 @@ export default defineComponent({
       deleteColumn,
     } = columnCrud();
 
-    const { taskState } = taskCrud();
-
     await getSpecificProject();
     const isUpdatingCols = ref(false);
     const isCreatingCols = ref(false);
     const taskModal = ref(null);
     const createTaskModal = ref(null);
+    let newStatus = ref('');
 
     return {
       projectState,
       columnState,
       projectId,
-      taskState,
       moment,
       taskModal,
       updateProjectColumns,
@@ -322,6 +320,7 @@ export default defineComponent({
       isUpdatingCols,
       deleteColumn,
       createTaskModal,
+      newStatus
     };
   },
 
@@ -335,6 +334,11 @@ export default defineComponent({
       this.taskModal === index
         ? (this.taskModal = null)
         : (this.taskModal = index);
+    },
+    closeTaskModal(newStatus: string){
+      this.newStatus = newStatus;
+      console.log('New Status: '+ this.newStatus);
+      this.taskModal = null
     },
     openCreateTaskModal(columnId) {
       this.createTaskModal === columnId
