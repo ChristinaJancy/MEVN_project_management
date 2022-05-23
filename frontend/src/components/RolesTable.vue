@@ -99,12 +99,21 @@
                 >
                 <br />
                 <br />
-                <a
-                  href="#"
-                  class="text-red-600 hover:text-indigo-900"
-                  @click="deleteRole(role._id)"
-                  >Delete</a
-                >
+                <!-- if the role is the first in array, hide delete button -->
+                <div v-if="roleState.roles.indexOf(role) !== 0">
+                  <a
+                    href="#"
+                    class="text-red-600 hover:text-indigo-900"
+                    @click="deleteRole(role._id)"
+                    >Delete</a
+                  >
+                </div>
+                <div v-else>
+                  <span
+                    class="text-gray-400 font-light leading-5"
+                    >Default role</span
+                  >
+                </div>
               </td>
             </tr>
           </tbody>
