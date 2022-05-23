@@ -21,7 +21,7 @@
               <th
                 class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50"
               >
-               Role
+                Role
               </th>
               <!-- delete/edit -->
               <th class="px-6 py-3 border-b border-gray-200 bg-gray-50"></th>
@@ -57,9 +57,11 @@
                   >
                     <input
                       class="w-20 h-20 absolute -bottom-4 -left-4"
+                      :style="isEditing ? 'cursor: pointer' : ''"
                       type="color"
                       id="head"
                       name="head"
+                      :disabled="!isEditing"
                       v-model="role.color"
                     />
                   </div>
