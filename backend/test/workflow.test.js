@@ -43,7 +43,7 @@ describe('Workflow', () => {
                         expect(res.body).to.have.property('token');
                         let token = res.body.token;
                         const tag = {
-                            name: 'testtt',
+                            title: 'testtt',
                             color: '#fff'
                         }
                         chai.request(server)
@@ -56,7 +56,7 @@ describe('Workflow', () => {
                                 expect(res.body.message).to.equal('New tag created.😊');
                                 expect(res.body).to.have.property('newtag');
                                 expect(res.body.newtag).to.have.property('_id');
-                                expect(res.body.newtag).to.have.property('name');
+                                expect(res.body.newtag).to.have.property('title');
                                 expect(res.body.newtag).to.have.property('color');
 
                                 const project = {
@@ -83,7 +83,7 @@ describe('Workflow', () => {
                                         expect(res.body.newproject).to.have.property('columns');
                                         const column = res.body.newproject.columns[0]
                                         const task = {
-                                            name: 'testtt',
+                                            title: 'testtt',
                                             description: 'testtt',
                                             deadline: '01-01-2000',
                                             status: 'todo',
@@ -98,7 +98,7 @@ describe('Workflow', () => {
                                                 expect(res.body.message).to.equal('New task created.😊');
                                                 expect(res.body).to.have.property('newtask');
                                                 expect(res.body.newtask).to.have.property('_id');
-                                                expect(res.body.newtask).to.have.property('name');
+                                                expect(res.body.newtask).to.have.property('title');
                                                 expect(res.body.newtask).to.have.property('description');
                                                 done();
                                             });
