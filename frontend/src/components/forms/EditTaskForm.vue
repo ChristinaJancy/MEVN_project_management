@@ -7,13 +7,13 @@
         <div class="rounded-md shadow-sm -space-y-px">
           <div>
             <label class="font-bold text-sm text-gray-700" for="title"
-              >Name</label
+              >Title</label
             >
             <input
               id="title"
               title="title"
               type="text"
-              v-model="taskState.name"
+              v-model="taskState.title"
               required
               class="relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
             />
@@ -48,8 +48,8 @@
             :multiple="true"
             :close-on-select="true"
             placeholder="Pick some"
-            label="name"
-            track-by="name"
+            label="title"
+            track-by="title"
           />
         </div>
         <!------- deadline ------->
@@ -111,7 +111,7 @@
             @click="
               updateTask(
                 taskId,
-                taskState.name,
+                taskState.title,
                 taskState.description,
                 taskState.deadline,
                 taskState.tags,

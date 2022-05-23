@@ -5,16 +5,16 @@
       <div class="grid grid-cols-3 gap-6">
         <div class="col-span-3 sm:col-span-2">
           <label for="title" class="block text-sm font-medium text-gray-700"
-            >Name</label
+            >Title</label
           >
           <div class="mt-1 flex rounded-md shadow-sm">
             <input
               type="text"
-              name="tag-name"
-              v-model="tagState.name"
-              id="tag-name"
+              name="tag-title"
+              v-model="tagState.title"
+              id="tag-title"
               class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-md sm:text-sm border-gray-300"
-              placeholder="Tag name"
+              placeholder="Tag title"
             />
           </div>
         </div>

@@ -69,14 +69,14 @@
                       class="text-sm font-medium leading-5 text-gray-900"
                       v-if="!isEditing"
                     >
-                      {{ tag.name }}
+                      {{ tag.title }}
                     </div>
 
                     <div
                       class="text-sm font-medium leading-5 text-gray-900"
                       v-else
                     >
-                      <input type="text" v-model="tag.name" />
+                      <input type="text" v-model="tag.title" />
                     </div>
 
                     <div class="text-sm leading-5 text-gray-500">
@@ -92,7 +92,7 @@
                   href="#"
                   class="text-indigo-600 hover:text-indigo-900"
                   v-if="isEditing"
-                  @click="updateTag(tag._id, tag.name, tag.color)"
+                  @click="updateTag(tag._id, tag.title, tag.color)"
                   >Save</a
                 >
                 <br />

@@ -14,14 +14,14 @@ const taskCrud = () => {
     ];
 
     const taskState = ref({
-        name: '' as string,
+        title: '' as string,
         description: '' as string,
         status: '' as string,
         deadline: '' as string | any,
         tags: [] as string[],
         assigned: [] as string[],
         id: '' as string,
-        userTasks: [] as object[],
+        userTasks: [] as object[] | any,
         projectIds: [] as string[],
     })
 
@@ -47,7 +47,7 @@ const taskCrud = () => {
         }
     }
 
-    const updateTask = async (_id: string, name: string, description: string, deadline: any, tags: string[], assigned: string[], status: string) => {
+    const updateTask = async (_id: string, title: string, description: string, deadline: any, tags: string[], assigned: string[], status: string) => {
         try {
             const requestOptions = {
                 method: 'PUT',
@@ -56,7 +56,7 @@ const taskCrud = () => {
                     "auth-token": getCookie('token')
                 },
                 body: JSON.stringify({
-                    name, description, deadline, tags, assigned, status
+                    title, description, deadline, tags, assigned, status
                 })
             }
             console.log(_id)
@@ -86,7 +86,7 @@ const taskCrud = () => {
                 "auth-token": getCookie('token')
             },
             body: JSON.stringify({
-                name: taskState.value.name,
+                title: taskState.value.title,
                 description: taskState.value.description,
                 deadline: taskState.value.deadline,
                 tags: taskState.value.tags,

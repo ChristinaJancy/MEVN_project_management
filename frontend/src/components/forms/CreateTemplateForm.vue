@@ -4,15 +4,15 @@
     <div class="grid grid-cols-3 gap-6">
       <div class="col-span-12">
         <label for="title" class="block text-sm font-medium text-gray-700"
-          >Name</label
+          >Title</label
         >
         <div class="mt-1 flex rounded-md shadow-sm">
           <input
             type="text"
-            name="template-name"
-            v-model="templateState.name"
-            id="template-name"
-            placeholder="Template name"
+            name="template-title"
+            v-model="templateState.title"
+            id="template-title"
+            placeholder="Template title"
           />
         </div>
       </div>

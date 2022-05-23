@@ -5,13 +5,13 @@
     <div class="max-h-96 overflow-y-scroll space-y-3 w-full">
       <div
         v-for="(task, index) in taskState.userTasks"
-        :key="task"
+        :key="index"
         class="bg-white rounded max-w-full shadow-sm p-4 mr-2 space-y-2"
       >
         <router-link
           :to="{ name: 'project', params: { id: taskState.projectIds[index] } }"
         >
-          <p class="font-medium text-xl">{{ task.name }}</p>
+          <p class="font-medium text-xl">{{ task.title }}</p>
           <!-- <p class="font-bold text-md">Description:</p> -->
           <p class="font-light">{{ task.description }}</p>
           <p class="italic font-normal">

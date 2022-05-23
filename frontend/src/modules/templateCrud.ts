@@ -5,7 +5,7 @@ import { uri } from './uri'
 const templateCrud = () => {
 
     const templateState = ref({
-        name: '' as string,
+        title: '' as string,
         description: '' as string,
         id: '' as string,
         templates: [] as object[],
@@ -30,7 +30,7 @@ const templateCrud = () => {
 
     }
 
-    const updateTemplate = async (_id: string, name: string, description: string, columns: string[]) => {
+    const updateTemplate = async (_id: string, title: string, description: string, columns: string[]) => {
         const requestOptions = {
             method: 'PUT',
             headers: {
@@ -38,7 +38,7 @@ const templateCrud = () => {
                 "auth-token": getCookie('token')
             },
             body: JSON.stringify({
-                name,
+                title,
                 description,
                 columns
             })
@@ -61,7 +61,7 @@ const templateCrud = () => {
                 "auth-token": getCookie('token')
             },
             body: JSON.stringify({
-                name: templateState.value.name,
+                title: templateState.value.title,
                 description: templateState.value.description,
                 columns: templateState.value.columns
             })

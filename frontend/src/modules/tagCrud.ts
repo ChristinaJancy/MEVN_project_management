@@ -10,10 +10,10 @@ const tagCrud = () => {
     const tagId = computed(() => route.params.id);
 
     const tagState = ref({
-        name: '' as string,
+        title: '' as string,
         color: '' as string,
         id: '' as string,
-        tags: [] as string[]
+        tags: [] as object[] | any
     })
 
 
@@ -42,7 +42,7 @@ const tagCrud = () => {
                 "auth-token": getCookie('token')
             },
             body: JSON.stringify({
-                name: tagState.value.name,
+                title: tagState.value.title,
                 color: tagState.value.color
             })
         };
@@ -56,7 +56,7 @@ const tagCrud = () => {
             })
     }
 
-    const updateTag = (_id: string, name: string, color: string) => {
+    const updateTag = (_id: string, title: string, color: string) => {
         try {
             const requestOptions = {
                 method: "PUT",
@@ -65,7 +65,7 @@ const tagCrud = () => {
                     "auth-token": getCookie('token')
                 },
                 body: JSON.stringify({
-                    name, color
+                    title, color
                 })
             }
             fetch(uri + 'tags/' + _id,

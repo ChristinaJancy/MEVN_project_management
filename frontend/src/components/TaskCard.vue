@@ -39,13 +39,13 @@
             id="dialog-panel"
           >
             <div class="bg-white shadow rounded-lg">
-              <!---- name and tags ---->
+              <!---- title and tags ---->
               <div class="px-4 py-5 sm:px-6">
                 <div class="flex relative mb-10">
                   <h3
                     class="mt-0 absolute left-0 top-0 text-lg leading-6 font-medium text-gray-900"
                   >
-                    {{ name }}
+                    {{ title }}
                   </h3>
                   <!-- edit -->
                   <router-link
@@ -69,7 +69,7 @@
                   v-for="tag in tags"
                   :key="tag._id"
                 >
-                  {{ tag.name }}
+                  {{ tag.title }}
                 </p>
               </div>
               <div class="border-t border-gray-200">
@@ -128,7 +128,7 @@
                       v-for="assignee in assigned"
                       :key="assignee._id"
                     >
-                      {{ assignee.name }}
+                      {{ assignee.title }}
                     </dd>
                   </div>
                   <!---- Deadline ---->
@@ -182,7 +182,7 @@ import projectCrud from '../modules/projectCrud';
 
 export default defineComponent({
   props: [
-    'name',
+    'title',
     'description',
     'status',
     'assigned',
@@ -224,7 +224,7 @@ export default defineComponent({
     changeStatus: function () {
         this.updateTask(
           this.id,
-          this.name,
+          this.title,
           this.description,
           this.deadline,
           this.tags,
