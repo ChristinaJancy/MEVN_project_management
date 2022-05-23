@@ -9,7 +9,7 @@
           <CreateRoleForm />
         </template>
         <template #fallback>
-          Loading...
+          <LoadingCenter />
         </template>
       </Suspense>
       <!-- /form end -->
@@ -20,11 +20,13 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import CreateRoleForm from '../components/forms/CreateRoleForm.vue';
+import LoadingCenter from '../components/animations/LoadingCenter.vue';
 
 // tailwind
 export default defineComponent({
   components: {
-    CreateRoleForm
+    CreateRoleForm,
+    LoadingCenter
   },
 });
 </script>

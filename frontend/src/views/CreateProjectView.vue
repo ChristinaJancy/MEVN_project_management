@@ -9,7 +9,7 @@
           <CreateProjectForm />
         </template>
         <template #fallback>
-          <LoadingCard />
+          <LoadingCard :title="''" />
         </template>
       </Suspense>
       <!-- /form end -->

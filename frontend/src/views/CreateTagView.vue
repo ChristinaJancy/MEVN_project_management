@@ -9,7 +9,9 @@
           <template #default>
             <CreateTagForm />
           </template>
-          <template #fallback> loading... </template>
+          <template #fallback> 
+            <LoadingCenter />
+          </template>
         </Suspense>
         <!-- /form end -->
       </div>
@@ -20,11 +22,14 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import CreateTagForm from '../components/forms/CreateTagForm.vue';
+import LoadingCenter from '../components/animations/LoadingCenter.vue';
+
 
 // tailwind
 export default defineComponent({
   components: {
     CreateTagForm,
+    LoadingCenter
   },
   setup() {},
   methods: {},
