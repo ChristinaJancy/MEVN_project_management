@@ -53,11 +53,11 @@
                   class="text-sm font-medium leading-5 text-gray-900"
                   v-if="!isEditing"
                 >
-                  {{ template.name }}
+                  {{ template.title }}
                 </div>
 
                 <div class="text-sm font-medium leading-5 text-gray-900" v-else>
-                  <input type="text" v-model="template.name" />
+                  <input type="text" v-model="template.title" />
                 </div>
 
                 <div class="text-sm leading-5 text-gray-500" v-if="!isEditing">
@@ -118,7 +118,7 @@
                   @click="
                     updateTemplate(
                       template._id,
-                      template.name,
+                      template.title,
                       template.description,
                       template.columns
                     )

@@ -43,7 +43,7 @@
       <label for="about" class="block text-sm font-medium text-gray-700"
         >Tags</label
       >
-      <!-- :options="tagState.tags.map((tag ) => tag.name)" -->
+      <!-- :options="tagState.tags.map((tag ) => tag.title)" -->
       <VueMultiselect
         v-model="projectState.tags"
         :options="tagState.tags"
@@ -51,8 +51,8 @@
         :multiple="true"
         :close-on-select="true"
         placeholder="Pick some"
-        label="name"
-        track-by="name"
+        label="title"
+        track-by="title"
       />
     </div>
 
@@ -84,8 +84,8 @@
         :value="templateState.templates"
         :multiple="false"
         :close-on-select="true"
-        label="name"
-        track-by="name"
+        label="title"
+        track-by="title"
       />
     </div>
 

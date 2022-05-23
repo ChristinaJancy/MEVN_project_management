@@ -82,8 +82,8 @@
             :multiple="true"
             :close-on-select="true"
             placeholder="Pick some"
-            label="name"
-            track-by="name"
+            label="title"
+            track-by="title"
           />
         </div>
 

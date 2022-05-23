@@ -10,9 +10,9 @@
           <div class="mt-1 flex rounded-md shadow-sm">
             <input
               type="text"
-              name="role-name"
+              name="role-title"
               v-model="roleState.title"
-              id="role-name"
+              id="role-title"
               class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-md sm:text-sm border-gray-300"
               placeholder="Role title"
             />

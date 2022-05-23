@@ -12,7 +12,7 @@ const roleCrud = () => {
         title: '' as string,
         color: '' as string,
         id: '' as string,
-        roles: [] as string[]
+        roles: [] as string[] | any
     })
 
     const getAllRoles = async () => {

@@ -4,7 +4,7 @@
     <h1 class="text-4xl tracking-tight font-extrabold text-blue-900 block">
       {{ project.title }}
       <span class="text-sm inline" v-for="tag in project.tags" :key="tag">
-        {{ tag.name }}
+        {{ tag.title }} &nbsp;
       </span>
     </h1>
     <!-- description -->
@@ -70,9 +70,9 @@
         <div class="flex rounded-md shadow-sm">
           <input
             type="text"
-            name="column-name"
+            name="column-title"
             v-model="columnState.title"
-            id="column-name"
+            id="column-title"
             class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-md sm:text-sm border-gray-300"
           />
         </div>
@@ -145,9 +145,9 @@
         >
           <input
             type="text"
-            name="column-name"
+            name="column-title"
             v-model="column.title"
-            id="column-name"
+            id="column-title"
             class="focus:ring-indigo-500 focus:border-indigo-500 w-full rounded-md sm:text-sm border-gray-300"
           />
           <button
@@ -203,7 +203,7 @@
               @click="openTaskModal(element._id)"
             >
               <h3 class="text-sm font-bold text-gray-800 mt-0 mb-0">
-                {{ element.name }}
+                {{ element.title }}
               </h3>
               <p class="text-sm">
                 {{ element.status }}
@@ -221,7 +221,7 @@
               <!-- task modal -->
               <TaskCard
                 :show="taskModal === element._id"
-                :name="element.name"
+                :title="element.title"
                 :id="element._id"
                 :description="element.description"
                 :tags="element.tags"

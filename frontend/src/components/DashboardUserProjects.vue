@@ -4,7 +4,7 @@
     <div class="max-h-96 overflow-y-scroll space-y-3 w-full">
       <div
         v-for="project in projectState.userProjects"
-        :key="project"
+        :key="project._id"
         class="bg-white rounded max-w-full shadow-sm p-4 mr-2 space-y-2"
       >
         <router-link :to="{ name: 'project', params: { id: project._id } }">
@@ -41,7 +41,7 @@
                     'mix-blend-mode': 'color-dodge',
                   }"
                 >
-                  {{ tag.name }}
+                  {{ tag.title }}
                 </span>
               </p>
             </div>

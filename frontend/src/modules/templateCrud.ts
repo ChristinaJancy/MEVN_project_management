@@ -8,7 +8,7 @@ const templateCrud = () => {
         title: '' as string,
         description: '' as string,
         id: '' as string,
-        templates: [] as object[],
+        templates: [] as object[] | any,
         columns: [] as object[] | undefined | any,
     })
 

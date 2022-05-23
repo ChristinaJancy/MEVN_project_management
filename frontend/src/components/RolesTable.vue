@@ -100,7 +100,7 @@
                 <a
                   href="#"
                   class="text-red-600 hover:text-indigo-900"
-                  @click="deleteTag(role._id)"
+                  @click="deleteRole(role._id)"
                   >Delete</a
                 >
               </td>

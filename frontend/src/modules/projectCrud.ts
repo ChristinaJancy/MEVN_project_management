@@ -20,7 +20,7 @@ const projectCrud = () => {
         columns: {} as object | any,
         tasks: [] as string[],
         projectToEdit: {} as any,
-        userProjects: [] as object[],
+        userProjects: [] as object[] | any,
     })
 
     const getAllProjects = async () => {

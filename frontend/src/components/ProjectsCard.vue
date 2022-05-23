@@ -121,7 +121,7 @@
                 'mix-blend-mode': 'color-dodge',
               }"
             >
-              {{ tag.name }}
+              {{ tag.title }}
             </span>
           </p>
         </div>

@@ -44,8 +44,8 @@
           :close-on-select="false"
           placeholder="Name of columns..."
           :showNoOptions="false"
-          :label="title"
-          :track-by="title"
+          label="title"
+          track-by="title"
           @remove="removeTag"
           @tag="addTag"
         />
