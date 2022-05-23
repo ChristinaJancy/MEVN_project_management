@@ -1,7 +1,7 @@
 <template>
   <h5 class="m-1 text-1xl text-gray-700">Your tasks</h5>
   <div class="max-h-96 overflow-y-scroll space-y-3 w-full">
-    <div
+    <div v-if="taskState.userTasks.length != 0"
       v-for="(task, index) in taskState.userTasks"
       :key="index"
       class="bg-white rounded max-w-full shadow-sm p-4 mr-2 space-y-2"
@@ -24,6 +24,9 @@
           <div v-if="index < task.assigned.length - 1">, &nbsp;</div>
         </div>
       </router-link>
+    </div>
+    <div v-else class="bg-white rounded max-w-full shadow-sm p-4 mr-2 space-y-2">
+      <p class="text-center text-xl">You have no tasks</p>
     </div>
   </div>
 </template>

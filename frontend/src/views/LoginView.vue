@@ -71,6 +71,8 @@
               v-model="state.password"
               autocomplete="current-password"
               required="true"
+              v-on:keydown.enter="loginUser()"
+
               class="
                 appearance-none
                 rounded-none
@@ -94,7 +96,7 @@
           </div>
         </div>
 
-        <div class="flex items-center justify-between">
+        <!-- <div class="flex items-center justify-between">
           <div class="flex items-center">
             <input
               id="remember-me"
@@ -122,7 +124,7 @@
               Forgot your password?
             </a>
           </div>
-        </div>
+        </div> -->
 
         <div>
           <button

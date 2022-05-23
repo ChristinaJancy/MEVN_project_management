@@ -1,7 +1,7 @@
 <template>
   <h5 class="m-1 text-1xl font-bold text-gray-700">Your projects</h5>
   <div class="max-h-96 overflow-y-scroll space-y-3 w-full">
-    <div
+    <div v-if="projectState.userProjects.length != 0"
       v-for="project in projectState.userProjects"
       :key="project._id"
       class="bg-white rounded max-w-full shadow-sm p-4 mr-2 space-y-2"
@@ -39,6 +39,9 @@
           </div>
         </div>
       </router-link>
+    </div>
+    <div v-else class="bg-white rounded max-w-full shadow-sm p-4 mr-2 space-y-2">
+      <p class="text-center text-xl">You have no projects</p>
     </div>
   </div>
 </template>
