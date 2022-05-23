@@ -4,6 +4,18 @@ import { uri } from '../modules/uri';
 
 const routes: Array<RouteRecordRaw> = [
     {
+        path: '/login',
+        name: 'Login',
+        component: () => import(/* webpackChunkName: "Login" */ '../views/LoginView.vue'),
+        meta: { layout: "empty" }
+    },
+    {
+        path: '/register',
+        name: 'Register',
+        component: () => import(/* webpackChunkName: "Register" */ '../views/RegisterView.vue'),
+        meta: { layout: "empty" }
+    },
+    {
         path: '/',
         name: 'Dashboard',
         component: () => import(/* webpackChunkName: "Dashboard" */ '../views/DashboardView.vue'),
@@ -130,18 +142,6 @@ const routes: Array<RouteRecordRaw> = [
             requiresAuth: true
         }
     },
-    {
-        path: '/register',
-        name: 'Register',
-        component: () => import(/* webpackChunkName: "Register" */ '../views/RegisterView.vue'),
-        meta: { layout: "empty" }
-    },
-    {
-        path: '/login',
-        name: 'Login',
-        component: () => import(/* webpackChunkName: "Login" */ '../views/LoginView.vue'),
-        meta: { layout: "empty" }
-    }
 ];
 
 // navigation guard to check for logged in users
