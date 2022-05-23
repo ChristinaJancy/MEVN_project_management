@@ -15,12 +15,11 @@ router.get("/", verifyToken, (req, res) => {
 
 // Create new task
 router.post("/:columnId", verifyToken, async (req, res) => {
-    const status = "in progress";
     const task = new schema({
         name: req.body.name,
         description: req.body.description,
         deadline: req.body.deadline,
-        status: status,
+        status: req.body.status,
         assigned: req.body.assigned,
         tags: req.body.tags
     })
