@@ -14,7 +14,6 @@
         </h2>
         <p class="mt-2 text-center text-sm text-gray-600">
           Or
-          {{ ' ' }}
           <router-link
             to="/login"
             class="font-medium text-indigo-600 hover:text-indigo-500"

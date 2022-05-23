@@ -2,7 +2,6 @@
   <div>
     <h3 class="text-3xl font-medium text-gray-700">Tags</h3>
     <div class="mt-8"></div>
-    <h4 class="text-1xl font-bold text-gray-700">All tags</h4>
 
     <!-- All users table -->
     <Suspense>

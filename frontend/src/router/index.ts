@@ -156,25 +156,27 @@ router.beforeEach((to, from, next) => {
             token: getCookie('token')
         })
     };
-
+    
     // check if user is logged in and redirects accordingly
     fetch(uri + 'users/verify-token', requestOptions)
-    .then(respone => respone.json())
-    .then(data => {
-        if (data.decoded.id == getCookie('id')) {
-            isAuthenticated = true;
-        } else {
-            isAuthenticated = false;
-        }
-    }).then(() => {
-        if (requiresAuth && !isAuthenticated) {
-            next('/login');
-        } else if(!requiresAuth && isAuthenticated) {
-            next('/');
-        } else {
-            next();
-        }
-    })
+        .then(respone => respone.json())
+        .then(data => {
+            if (getCookie('id')) {
+                if (data.decoded.id === getCookie('id')) {
+                    isAuthenticated = true;
+                }
+            } else {
+                isAuthenticated = false;
+            }
+        }).then(() => {
+            if (requiresAuth && !isAuthenticated) {
+                next('/login');
+            } else if (!requiresAuth && isAuthenticated) {
+                next('/');
+            } else {
+                next();
+            }
+        })
 })
 
 export default router;
