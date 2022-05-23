@@ -108,7 +108,7 @@
       </div>
       <br />
       <div
-        style="position: absolute; bottom: 10px; right: 0; display: inline-flex"
+        class="flex justify-end items-center flex-wrap"
       >
         <div v-for="tag in project.tags" :key="tag" class="">
           <p

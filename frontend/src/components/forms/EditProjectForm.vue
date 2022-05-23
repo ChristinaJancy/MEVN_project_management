@@ -2,7 +2,7 @@
   <div
     class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
   >
-    <div v-for="project in projectState" :key="project._id">
+    <div>
       <div class="max-w-md w-full space-y-8">
         <h2 class="font-bold text-3xl text-gray-900">
           Update project info✍️(◔◡◔)
@@ -20,7 +20,7 @@
                 id="title"
                 title="title"
                 type="text"
-                v-model="project.title"
+                v-model="projectState.title"
                 required
                 class="relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
               />
@@ -37,7 +37,7 @@
                 id="description"
                 name="description"
                 type="text"
-                v-model="project.description"
+                v-model="projectState.description"
                 required
                 class="relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
               />
@@ -53,7 +53,7 @@
                 id="deadline"
                 name="deadline"
                 type="date"
-                v-model="project.deadline"
+                v-model="projectState.deadline"
                 required
                 class="relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
               />
@@ -81,9 +81,9 @@
 
             <!-- tags -->
             <VueMultiselect
-              v-model="project.tags"
+              v-model="projectState.tags"
               :options="tagState.tags"
-              :value="project.tags"
+              :value="projectState.tags"
               :multiple="true"
               :close-on-select="true"
               placeholder="Pick some"
@@ -98,14 +98,14 @@
             >
             <!-- assigned -->
             <VueMultiselect
-              v-model="project.assigned"
+              v-model="projectState.assigned"
               :options="state.users"
-              :value="project.assigned"
+              :value="projectState.assigned"
               :multiple="true"
               :close-on-select="true"
               placeholder="Pick some"
-              label="title"
-              track-by="title"
+              label="name"
+              track-by="name"
             />
           </div>
           <div>
@@ -113,12 +113,12 @@
             <button
               @click="
                 updateProjectDetails(
-                  project._id,
-                  project.title,
-                  project.description,
-                  project.deadline,
-                  project.tags,
-                  project.assigned
+                  projectState._id,
+                  projectState.title,
+                  projectState.description,
+                  projectState.deadline,
+                  projectState.tags,
+                  projectState.assigned
                 )
               "
               type="submit"
@@ -146,6 +146,8 @@ import tagCrud from '../../modules/tagCrud';
 import { LockClosedIcon } from '@heroicons/vue/solid';
 import { defineComponent, onMounted } from 'vue';
 import VueMultiselect from 'vue-multiselect';
+import moment from 'moment';
+
 export default defineComponent({
   components: {
     LockClosedIcon,
@@ -177,6 +179,7 @@ export default defineComponent({
       tagId,
       updateProjectDetails,
       userId,
+      moment
     };
   },
 });

@@ -2,6 +2,7 @@ import { ref, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { getCookie } from './cookie'
 import { uri } from './uri'
+import moment from 'moment'
 
 const taskCrud = () => {
     const route = useRoute();
@@ -40,6 +41,7 @@ const taskCrud = () => {
                 .then(response => response.json())
                 .then(data => {
                     taskState.value = data
+                    taskState.value.deadline = moment(data.deadline).format('YYYY-MM-DD')
                 })
         }
         catch (error) {
