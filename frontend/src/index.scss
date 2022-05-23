@@ -95,3 +95,33 @@ a {
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-indigo-600;
 }
+
+// buttons
+.button {
+  cursor: pointer;
+}
+
+// input fields
+textarea {
+  width: 100%;
+  height: 150px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 1px solid #ccc !important;
+  border-radius: 4px !important;
+  font-size: 16px;
+}
+input[type='text'],
+select {
+  padding: 12px 20px;
+  margin: 8px 0;
+  @apply focus:ring-indigo-500;
+  @apply focus:border-indigo-500;
+  @apply flex-1;
+  @apply block;
+  @apply border-gray-300;
+  @apply w-full;
+  @apply rounded-md;
+  @apply sm:text-sm;
+}
+

@@ -95,6 +95,14 @@ const routes: Array<RouteRecordRaw> = [
             requiresAuth: true
         }
     },
+    {
+        path: '/templates/new-template',
+        name: 'new-template',
+        component: () => import(/* webpackChunkName: "new-template" */ '../views/CreateTemplateView.vue'),
+        meta: {
+            requiresAuth: true
+        }
+    },
     // tasks
     {
         path: '/edit-task/:id',
@@ -156,7 +164,7 @@ router.beforeEach((to, from, next) => {
             token: getCookie('token')
         })
     };
-    
+
     // check if user is logged in and redirects accordingly
     fetch(uri + 'users/verify-token', requestOptions)
         .then(respone => respone.json())

@@ -91,6 +91,16 @@
           <TagIcon class="w-5 h-5" />
           <span class="mx-4">Tags</span>
         </router-link>
+
+        <!-- Templates -->
+        <router-link
+          class="flex items-center px-6 py-2 mt-4 duration-200 border-l-4"
+          :class="[$route.name === 'Templates' ? activeClass : inactiveClass]"
+          to="/templates"
+        >
+          <CollectionIcon class="w-5 h-5" />
+          <span class="mx-4">Templates</span>
+        </router-link>
       </nav>
     </div>
   </div>
@@ -104,7 +114,7 @@ import {
   CubeTransparentIcon,
   UsersIcon,
   SparklesIcon,
-  TagIcon
+  TagIcon,
 } from '@heroicons/vue/solid';
 import { defineComponent } from 'vue';
 export default defineComponent({
@@ -113,7 +123,7 @@ export default defineComponent({
     CubeTransparentIcon,
     UsersIcon,
     SparklesIcon,
-    TagIcon
+    TagIcon,
   },
   setup() {
     const { isOpen } = useSidebar();

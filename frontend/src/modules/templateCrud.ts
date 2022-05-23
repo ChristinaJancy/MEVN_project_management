@@ -5,10 +5,11 @@ import { uri } from './uri'
 const templateCrud = () => {
 
     const templateState = ref({
-        title: '' as string,
+        name: '' as string,
         description: '' as string,
         id: '' as string,
-        templates: [] as object[]
+        templates: [] as object[],
+        columns: [] as object[] | undefined | any,
     })
 
     const getAllTemplates = async () => {
@@ -28,9 +29,76 @@ const templateCrud = () => {
             })
 
     }
+
+    const updateTemplate = async (_id: string, name: string, description: string, columns: string[]) => {
+        const requestOptions = {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                "auth-token": getCookie('token')
+            },
+            body: JSON.stringify({
+                name,
+                description,
+                columns
+            })
+        };
+        await fetch(uri + 'project-templates/' + _id,
+            requestOptions
+        )
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+            })
+    }
+
+    const createTemplate = async () => {
+        console.log (templateState.value, 'somegid')
+        const requestOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                "auth-token": getCookie('token')
+            },
+            body: JSON.stringify({
+                name: templateState.value.name,
+                description: templateState.value.description,
+                columns: templateState.value.columns
+            })
+        };
+        await fetch(uri + 'project-templates',
+
+            requestOptions
+        )
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+            })
+    }
+
+    const deleteTemplate = async (_id: string) => {
+        const requestOptions = {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                "auth-token": getCookie('token')
+            },
+        };
+        await fetch(uri + 'project-templates/' + _id,
+            requestOptions
+        )
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+            })
+    }
+
     return {
         templateState,
-        getAllTemplates
+        getAllTemplates,
+        updateTemplate,
+        deleteTemplate,
+        createTemplate
     }
 }
 
