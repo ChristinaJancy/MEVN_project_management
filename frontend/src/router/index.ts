@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import { getCookie } from '../modules/cookie';
+import { uri } from '../modules/uri';
 
 const routes: Array<RouteRecordRaw> = [
     {
@@ -142,16 +143,40 @@ const router = createRouter({
     routes,
 });
 
-
-
 router.beforeEach((to, from, next) => {
     const requiresAuth = to.matched.some(x => x.meta.requiresAuth);
-    const isAuthenticated = getCookie('token'); // check if user is logged in
-    if (requiresAuth && !isAuthenticated) {
-        next('/login');
-    } else {
-        next();
-    }
+    let isAuthenticated = false;
+
+    const requestOptions = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            token: getCookie('token')
+        })
+    };
+
+    // check if user is logged in and redirects accordingly
+    fetch(uri + 'users/verify-token', requestOptions)
+    .then(respone => respone.json())
+    .then(data => {
+        if (data.decoded.id == getCookie('id')) {
+            isAuthenticated = true;
+            console.log("id verified")
+        } else {
+            isAuthenticated = false;
+            console.log("id not verified")
+        }
+    }).then(() => {
+        if (requiresAuth && !isAuthenticated) {
+            next('/login');
+        } else if(!requiresAuth && isAuthenticated) {
+            next('/');
+        } else {
+            next();
+        }
+    })
 })
 
 export default router;
