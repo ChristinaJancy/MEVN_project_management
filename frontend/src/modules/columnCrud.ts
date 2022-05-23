@@ -153,7 +153,6 @@ const columnCrud = () => {
         createColumn,
         updateColumn,
         deleteColumn,
-
         moveTaskToNewColumn,
         moveTaskInsideColumn,
     }

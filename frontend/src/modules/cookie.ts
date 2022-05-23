@@ -22,22 +22,10 @@ function getCookie(cname: string) {
   return "";
 }
 
-//set type of user 
-function checkCookie() {
-  let user: string[] | any = getCookie("user");
-  if (user != "") {
-    alert("Welcome again " + user);
-  } else {
-    user = prompt("Please enter your name:", "");
-    if (user != "" && user != null) {
-      setCookie("user", user, 365);
-    }
-  }
-}
 function deleteCookie(cname: string) {
   document.cookie = cname + '=' + '; ' + 'expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
 }
 
-export { setCookie, getCookie, checkCookie, deleteCookie }
+export { setCookie, getCookie, deleteCookie }
 
 

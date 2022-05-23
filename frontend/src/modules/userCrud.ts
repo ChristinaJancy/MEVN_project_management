@@ -99,7 +99,6 @@ const userCrud = () => {
                 .then(response => response.json())
                 .then(data => {
                     console.log("data:", data);
-                    // debugger
                     router.go(-1)
                 })
         }
@@ -141,7 +140,6 @@ const userCrud = () => {
         deleteCookie('token')
         deleteCookie('initials')
         deleteCookie('userColor')
-
         router.push({ path: "/login", replace: true })
     }
 
