@@ -50,12 +50,12 @@ const templateCrud = () => {
             .then(response => response.json())
             .then(data => {
                 console.log(data)
-               alert ('Template updated')
+                alert('Template updated')
             })
     }
 
     const createTemplate = async () => {
-        console.log (templateState.value, 'somegid')
+        console.log(templateState.value, 'somegid')
         const requestOptions = {
             method: 'POST',
             headers: {
@@ -92,6 +92,7 @@ const templateCrud = () => {
             .then(response => response.json())
             .then(data => {
                 console.log(data)
+                getAllTemplates()
             })
     }
 
