@@ -163,10 +163,8 @@ router.beforeEach((to, from, next) => {
     .then(data => {
         if (data.decoded.id == getCookie('id')) {
             isAuthenticated = true;
-            console.log("id verified")
         } else {
             isAuthenticated = false;
-            console.log("id not verified")
         }
     }).then(() => {
         if (requiresAuth && !isAuthenticated) {
