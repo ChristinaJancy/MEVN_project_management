@@ -25,7 +25,7 @@ router.get("/:id", verifyToken, (req, res) => {
 // Create new tag
 router.post("/", verifyToken, async (req,res) => {
     const tag = new schema({
-        name: req.body.name,
+        title: req.body.title,
         color: req.body.color
     })
     try { 

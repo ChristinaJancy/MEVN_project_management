@@ -16,7 +16,7 @@ router.get("/", verifyToken, (req, res) => {
 // Create new task
 router.post("/:columnId", verifyToken, async (req, res) => {
     const task = new schema({
-        name: req.body.name,
+        title: req.body.title,
         description: req.body.description,
         deadline: req.body.deadline,
         status: req.body.status,

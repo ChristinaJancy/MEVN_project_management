@@ -5,7 +5,7 @@ const autopopulate = require("mongoose-autopopulate");
 
 let objectSchema = new Schema(
     {
-        name: { type: String, required: true, min: 2, max: 255 },
+        title: { type: String, required: true, min: 2, max: 255 },
         description: { type: String, required: true, min: 6, max: 255 },
         deadline: { type: Date, required: true },
         status: { type: String, required: true },

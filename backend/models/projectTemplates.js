@@ -4,7 +4,7 @@ const schema = mongoose.Schema;
 
 //Mongoose schema for structuring data
 let objectSchema = new schema({
-    name: {type: String, required: true },
+    title: {type: String, required: true },
     description: {type: String, required: true }, 
     columns: [{type: String, required: true }], //array of column names
 });

@@ -22,7 +22,7 @@ router.get("/:id", verifyToken, (req, res) => {
 // Create new project template
 router.post("/", verifyToken, async (req, res) => {
     const template = new schema({
-        name: req.body.name,
+        title: req.body.title,
         description: req.body.description,
         columns: req.body.columns
     })
