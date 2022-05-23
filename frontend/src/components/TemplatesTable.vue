@@ -30,19 +30,6 @@
               </th>
               <!-- delete/edit -->
               <th class="px-6 py-3 border-b border-gray-200 bg-gray-50"></th>
-
-              <div
-                class="absolute right-0 top-0 px-6 py-3 text-xs font-medium leading-4 tracking-wider uppercase"
-              >
-                <a
-                  href="#"
-                  class="text-indigo-600 hover:text-indigo-900"
-                  @click="toggleEditing()"
-                >
-                  <span v-if="!isEditing">Edit templates</span>
-                  <span v-else>Stop editing</span>
-                </a>
-              </div>
             </tr>
           </thead>
 
@@ -51,7 +38,7 @@
               <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
                 <div
                   class="text-sm font-medium leading-5 text-gray-900"
-                  v-if="!isEditing"
+                  v-if="template._id !== templateState.selectedTemplateId"
                 >
                   {{ template.title }}
                 </div>
@@ -60,7 +47,10 @@
                   <input type="text" v-model="template.title" />
                 </div>
 
-                <div class="text-sm leading-5 text-gray-500" v-if="!isEditing">
+                <div
+                  class="text-sm leading-5 text-gray-500"
+                  v-if="template._id !== templateState.selectedTemplateId"
+                >
                   {{ template.description }}
                 </div>
                 <div class="text-sm font-medium leading-5 text-gray-900" v-else>
@@ -69,7 +59,7 @@
               </td>
 
               <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
-                <div v-if="!isEditing">
+                <div v-if="template._id !== templateState.selectedTemplateId">
                   {{ template.columns.join(', ') }}
                 </div>
                 <div v-else>
@@ -91,7 +81,7 @@
                     class="button h-5 w-5 my-auto ml-2 text-sm font-medium leading-5 text-indigo-800 hover:text-indigo-700 focus:outline-none focus:text-gray-900"
                     id="blue-button"
                     type="button"
-                    @click="addColumn()"
+                    @click="addColumn(template._id)"
                   >
                     <span class="inline-flex">
                       <PlusIcon class="h-5 w-5" />Add column</span
@@ -100,21 +90,12 @@
                 </div>
               </td>
               <td
-                class="px-6 py-4 text-sm font-medium leading-5 text-right border-b border-gray-200 whitespace-nowrap"
+                class="relative px-4 py-4 text-right border-b border-gray-200 whitespace-nowrap"
               >
-                <!-- <a
-                  href="#"
-                  class="text-indigo-600 hover:text-indigo-900 text-xs font-medium leading-4 tracking-wider uppercase"
-                  @click="toggleEditing()"
-                >
-                  <span v-if="!isEditing">Edit</span>
-                  <span v-else>Cancel</span>
-                </a> -->
-                <!-- " -->
                 <a
                   href="#"
-                  class="text-indigo-600 hover:text-indigo-900"
-                  v-if="isEditing"
+                  class="absolute top-2 right-4 text-xs font-bold leading-4 tracking-wider uppercase"
+                  v-if="template._id == templateState.selectedTemplateId"
                   @click="
                     updateTemplate(
                       template._id,
@@ -123,13 +104,30 @@
                       template.columns
                     )
                   "
-                  >Save</a
-                >
-                <br />
-                <br />
+                  ><span class="text-green-700 hover:text-green-600">Save</span>
+                </a>
+                <!-- cancel/edit  -->
                 <a
                   href="#"
-                  class="text-red-600 hover:text-indigo-900"
+                  class="text-xs tracking-wider uppercase"
+                  @click="editTemplateInfo(template._id)"
+                >
+                  <span
+                    class="absolute bottom-2 right-4 text-gray-400 hover:text-gray-700 font-medium"
+                    v-if="template._id === templateState.selectedTemplateId"
+                  >
+                    Cancel
+                  </span>
+                  <span
+                    class="absolute top-2 right-4 text-indigo-600 hover:text-indigo-500"
+                    v-else
+                    >Edit</span
+                  >
+                </a>
+                <a
+                  v-if="template._id !== templateState.selectedTemplateId"
+                  href="#"
+                  class="absolute bottom-2 right-4 text-red-700 hover:text-red-500 text-xs font-bold leading-4 tracking-wider uppercase"
                   @click="deleteTemplate(template._id)"
                   >Delete</a
                 >
@@ -154,15 +152,12 @@ export default defineComponent({
       getAllTemplates();
     });
 
-    const isEditing = ref(false);
-
     await getAllTemplates();
 
     return {
       templateState,
       updateTemplate,
       deleteTemplate,
-      isEditing,
     };
   },
   components: {
@@ -170,11 +165,28 @@ export default defineComponent({
     PlusIcon,
   },
   methods: {
-    toggleEditing() {
-      this.isEditing = !this.isEditing;
+    editTemplateInfo(id: string) {
+      // this method checks if the template id is the same as the being selected.
+      // if it is, it will set the selectedTemplateId to null.
+      // if it is not, it will set the selectedTemplateId to the id of the template being clicked.
+
+      if (this.templateState.selectedTemplateId === id) {
+        this.templateState.selectedTemplateId = '';
+        return true;
+      } else {
+        this.templateState.selectedTemplateId = id;
+        return false;
+      }
     },
-    addColumn() {
-      this.templateState.templates[0].columns.push('');
+
+    addColumn(templateId: string) {
+      // this method adds a column to the template with the id of the template being clicked.
+      // it will add a new column to the template with the id of the template being clicked.
+      this.templateState.templates.forEach((template) => {
+        if (template._id === templateId) {
+          template.columns.push('');
+        }
+      });
     },
     removeColumn(index) {
       this.templateState.templates[0].columns.splice(index, 1);
