@@ -26,7 +26,8 @@ const routes: Array<RouteRecordRaw> = [
         name: 'Dashboard',
         component: () => import(/* webpackChunkName: "Dashboard" */ '../views/DashboardView.vue'),
         meta: {
-            requiresAuth: true
+            requiresAuth: true,
+            layout: "default"
         }
     },
     {
@@ -161,41 +162,38 @@ router.beforeEach((to, from, next) => {
     const requiresAuth = to.matched.some(x => x.meta.requiresAuth);
     let isAuthenticated = false;
 
-    if (requiresAuth) {
-        const requestOptions = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                token: getCookie('token')
-            })
-        };
+    const requestOptions = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            token: getCookie('token')
+        })
+    };
 
-        // check if user is logged in and redirects accordingly
-        fetch(uri + 'users/verify-token', requestOptions)
-            .then(respone => respone.json())
-            .then(data => {
-                if (getCookie('id')) {
-                    if (data.decoded.id === getCookie('id')) {
-                        isAuthenticated = true;
-                    }
-                } else {
-                    isAuthenticated = false;
+    // check if user is logged in and redirects accordingly
+    fetch(uri + 'users/verify-token', requestOptions)
+        .then(respone => respone.json())
+        .then(data => {
+            if (getCookie('id')) {
+                if (data.decoded.id === getCookie('id')) {
+                    isAuthenticated = true;
                 }
-            }).then(() => {
-                if (requiresAuth && !isAuthenticated) {
-                    next('/login');
-                } else if (!requiresAuth && isAuthenticated) {
-                    next('/');
-                } else {
-                    next();
+            } else {
+                isAuthenticated = false;
+            }
+        }).then(() => {
+            if (requiresAuth && !isAuthenticated) {
+                next('/login');
+            } else if (!requiresAuth && isAuthenticated) {
+                next('/');
+            } else {
+                next();
 
-                }
-            })
-    } else {
-        next();
-    }
+            }
+        })
+
 });
 
 export default router;

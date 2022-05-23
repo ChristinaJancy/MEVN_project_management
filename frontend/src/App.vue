@@ -1,21 +1,16 @@
 <template>
-  <Suspense>
-    <template #default>
-      <component :is="layout">
-        <router-view />
-      </component>
-    </template>
-    <template #fallback></template>
-  </Suspense>
+  <component :is="layout" v-cloak>
+    <router-view />
+  </component>
 </template>
 
-<script async setup lang="ts">
+<script setup lang="ts">
 import { computed } from 'vue';
 import { useRouter } from 'vue-router';
-
 const defaultLayout = 'default';
+
 const { currentRoute } = useRouter();
-const layout = computed(
+const layout = computed( 
   () => `${currentRoute.value.meta.layout || defaultLayout}-layout`
 );
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex h-screen bg-gray-200 font-roboto">
+  <div class="flex h-screen bg-gray-200 font-roboto" v-cloak>
     <Sidebar />
     <div class="flex-1 flex flex-col overflow-hidden">
       <Header />

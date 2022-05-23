@@ -48,7 +48,6 @@
 
   h3 {
     font-size: 1.728rem;
-
   }
 
   h4 {
@@ -64,7 +63,9 @@
     font-size: 0.833rem;
   }
 }
-
+[v-cloak] {
+  display: none;
+}
 a {
   &.router-link-exact-active {
     @apply text-blue-600;
@@ -125,4 +126,3 @@ select {
   @apply rounded-md;
   @apply sm:text-sm;
 }
-
