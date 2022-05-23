@@ -57,9 +57,11 @@
                   >
                     <input
                       class="w-20 h-20 absolute -bottom-4 -left-4"
+                      :style="isEditing ? 'cursor: pointer' : ''"
                       type="color"
                       id="head"
                       name="head"
+                      :disabled="!isEditing"
                       v-model="tag.color"
                     />
                   </div>
