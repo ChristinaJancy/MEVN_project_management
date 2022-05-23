@@ -35,6 +35,7 @@
 
           <tbody class="bg-white">
             <tr v-for="template in templateState.templates" :key="template._id">
+              <!-- title and description -->
               <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
                 <div
                   class="text-sm font-medium leading-5 text-gray-900"
@@ -58,7 +59,8 @@
                 </div>
               </td>
 
-              <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
+              <!-- columns -->
+              <td class="px-6 py-4 text-sm font-medium leading-5 text-gray-900 border-b border-gray-200 whitespace-nowrap">
                 <div v-if="template._id !== templateState.selectedTemplateId">
                   {{ template.columns.join(', ') }}
                 </div>
@@ -102,7 +104,7 @@
                       template.title,
                       template.description,
                       template.columns
-                    )
+                    ) && (templateState.selectedTemplateId = '')
                   "
                   ><span class="text-green-700 hover:text-green-600">Save</span>
                 </a>

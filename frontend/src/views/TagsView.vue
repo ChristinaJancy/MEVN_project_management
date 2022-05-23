@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3 class="text-3xl font-medium text-gray-700">Tags</h3>
+    <h3 class="text-3xl text-gray-700">All tags</h3>
     <div class="mt-8"></div>
 
     <!-- All users table -->

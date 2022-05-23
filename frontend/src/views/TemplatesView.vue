@@ -1,7 +1,6 @@
 <template>
-  <h3 class="text-3xl font-medium text-gray-700">Templates</h3>
-  <div class="mt-8"></div>
-  <h4 class="text-1xl font-bold text-gray-700">All templates</h4>
+  <h3 class="text-3xl text-gray-700">Templates</h3>
+
   <Suspense>
     <template #default>
       <!-- All roles table -->

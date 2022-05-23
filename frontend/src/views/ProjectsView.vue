@@ -1,8 +1,7 @@
 <template>
   <div>
-    <h3 class="text-3xl font-medium text-gray-700">Projects</h3>
+    <h3 class="text-3xl font-bold text-gray-700">All projects</h3>
     <div class="mt-8"></div>
-    <h4 class="text-1xl font-bold text-gray-700">All projects</h4>
 
     <router-link to="/projects/new-project">
       <button
@@ -24,8 +23,8 @@
             <template #default>
               <ProjectsCard />
             </template>
-            <template #fallback> 
-              <LoadingCenter/>
+            <template #fallback>
+              <LoadingCenter />
             </template>
           </Suspense>
         </div>

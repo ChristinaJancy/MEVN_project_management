@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3 class="text-3xl font-medium text-gray-700">Dashboard</h3>
+    <h3 class="text-3xl font-bold text-gray-700">Dashboard</h3>
     <div class="mt-8 flex flex-wrap space-y-10 md:space-y-0 md:space-x-5">
       <!-- Projects -->
       <div

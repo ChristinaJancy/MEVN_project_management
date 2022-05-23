@@ -1,4 +1,5 @@
 import { ref } from 'vue'
+import router from '../router'
 import { getCookie } from './cookie'
 import { uri } from './uri'
 
@@ -49,6 +50,7 @@ const templateCrud = () => {
             .then(response => response.json())
             .then(data => {
                 console.log(data)
+               alert ('Template updated')
             })
     }
 
@@ -67,12 +69,12 @@ const templateCrud = () => {
             })
         };
         await fetch(uri + 'project-templates',
-
             requestOptions
         )
             .then(response => response.json())
             .then(data => {
                 console.log(data)
+                router.go(-1)
             })
     }
 

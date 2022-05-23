@@ -1,5 +1,5 @@
 <template>
-    <h3 class="m-1" v-text="title"></h3>
+   <h5 class="m-1 text-1xl font-bold text-gray-700" v-text="title"></h5>
     <div class="max-h-96 overflow-y-scroll space-y-3 w-full">
       <div class="bg-white rounded max-w-full shadow-sm p-4 mr-2 space-y-2">
         <p class="font-medium text-xl"></p>

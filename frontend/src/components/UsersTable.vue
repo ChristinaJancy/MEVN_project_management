@@ -11,19 +11,19 @@
               <th
                 class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50"
               >
-                Name
+                Members
               </th>
               <!-- title -->
-              <th
+              <!-- <th
                 class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50"
               >
                 Title
-              </th>
+              </th> -->
               <!-- role -->
               <th
                 class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase border-b border-gray-200 bg-gray-50"
               >
-                Role
+                Role(s)
               </th>
               <th class="px-6 py-3 border-b border-gray-200 bg-gray-50"></th>
             </tr>
@@ -42,8 +42,9 @@
                   }"
                 >
                   <div class="flex items-center">
-                    <div v-if="user.roles[0]"
-                      :style=" 'background-color:'+ user.roles[0].color "
+                    <div
+                      v-if="user.roles[0]"
+                      :style="'background-color:' + user.roles[0].color"
                       class="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center"
                     >
                       <div
@@ -53,7 +54,10 @@
                         {{ user.initials }}
                       </div>
                     </div>
-                    <div v-else class="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center bg-indigo-600" >
+                    <div
+                      v-else
+                      class="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center bg-indigo-600"
+                    >
                       <div
                         class="text-center text-sm font-bold text-white"
                         v-if="user.initials"
@@ -74,11 +78,11 @@
                 </router-link>
               </td>
 
-              <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
+              <!-- <td class="px-6 py-4 border-b border-gray-200 whitespace-nowrap">
                 <div class="text-sm leading-5 text-gray-900">
-                  {{ user.title }}
+                  title
                 </div>
-              </td>
+              </td> -->
 
               <td
                 class="px-6 py-4 text-sm leading-5 text-gray-500 border-b border-gray-200 whitespace-nowrap"
