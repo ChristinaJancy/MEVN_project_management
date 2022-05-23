@@ -1,10 +1,15 @@
 <template>
-  <component :is="layout" class="dark">
-    <router-view />
-  </component>
+  <Suspense>
+    <template #default>
+      <component :is="layout">
+        <router-view />
+      </component>
+    </template>
+    <template #fallback></template>
+  </Suspense>
 </template>
 
-<script setup lang="ts">
+<script async setup lang="ts">
 import { computed } from 'vue';
 import { useRouter } from 'vue-router';
 
