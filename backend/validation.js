@@ -14,7 +14,7 @@ const verifyToken = (req, res, next) => { //middleware to verify token
         req.user = verified;
         next();
     } catch (error) {
-        res.status(400).json({ error: "Token is not valid" }); //400 - bad request
+        res.status(401).json({ error: "Token is not valid" }); //400 - bad request
     }
 }
 

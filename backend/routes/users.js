@@ -6,13 +6,22 @@ const tasks = require('../models/tasks');
 const projects = require('../models/projects');
 const { verifyToken } = require('../validation');
 
+// Verify JWT 
+router.post("/verify-token", (req, res) => {
+    const token = req.body.token;
+    jwt.verify(token, process.env.TOKEN_SECRET, (err, decoded) => {
+        if (err) {
+            return res.status(401).json({ error: "Failed to authenticate" });
+        }
+        return res.json({
+            message: "Token is valid",
+            decoded: decoded
+        });
+    });
+});
 
 // Create new user
-router.post("/register", async (req, res) => {
-
-
-   
-
+router.post("/register", async (req, res) => {   
     // Check if email is already registeret
     const emailExist = await User.findOne({ email: req.body.email });
 
@@ -54,6 +63,8 @@ router.post("/register", async (req, res) => {
         res.status(400).json({ error: err.message });
     }
 });
+
+
 
 // Login user and send JWT token
 router.post("/login", async (req, res) => {
