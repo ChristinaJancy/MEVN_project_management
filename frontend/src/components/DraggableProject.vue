@@ -1,9 +1,9 @@
 <template>
-  <div v-for="project in projectState" :key="project._id">
+  <div projectState>
     <!-- title + tags -->
     <h1 class="text-4xl tracking-tight font-extrabold text-blue-900 block">
-      {{ project.title }}
-      <span class="text-sm inline" v-for="tag in project.tags" :key="tag">
+      {{ projectState.title }}
+      <span class="text-sm inline" v-for="tag in projectState.tags" :key="tag">
         {{ tag.title }} &nbsp;
       </span>
     </h1>
@@ -12,7 +12,7 @@
       <h4 class="mt-0 text-sm font-extrabold inline">Description</h4>
       {{ ' ' }}
       <p class="text-base -mt-5 inline">
-        {{ project.description }}
+        {{ projectState.description }}
       </p>
     </div>
     <!-- deadline -->
@@ -21,7 +21,7 @@
       {{ ' ' }}
       <p class="inline">
         <!--https://momentjs.com/-->
-        {{ moment(project.deadline).startOf('hour').fromNow() }}
+        {{ moment(projectState.deadline).startOf('hour').fromNow() }}
       </p>
     </div>
 
@@ -81,7 +81,7 @@
       <!------------ columns in project ----------------->
       <div
         class="relative xl:col-span-3 lg:col-span-4 md:col-span-4 sm:col-span-12 col-span-12 bg-gray-100 rounded-lg shadow-lg mr-3 mt-3 pl-3 pt-2"
-        v-for="(column, index) in project.columns"
+        v-for="(column, index) in projectState.columns"
         :key="column._id"
       >
         <div class="absolute right-0 mt-1" style="z-index: 5">
@@ -173,7 +173,7 @@
           <!-- move column to the right -->
           <div class="absolute bottom-2 right-0">
             <a
-              v-if="project.columns.length > index + 1"
+              v-if="projectState.columns.length > index + 1"
               @click="moveColumnUp(index)"
               class="text-gray-400 flex"
             >

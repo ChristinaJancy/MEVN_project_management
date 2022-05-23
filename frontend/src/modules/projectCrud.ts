@@ -2,6 +2,7 @@ import { ref, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { getCookie } from './cookie'
 import { uri } from './uri'
+import moment from 'moment'
 
 const projectCrud = () => {
     const route = useRoute();
@@ -16,7 +17,7 @@ const projectCrud = () => {
         description: '' as string | any,
         tags: [] as string[] | any,
         assigned: [] as string[] | any,
-        id: '' as string,
+        _id: '' as string,
         columns: {} as object | any,
         tasks: [] as string[],
         projectToEdit: {} as any,
@@ -48,14 +49,14 @@ const projectCrud = () => {
                 "auth-token": getCookie('token')
             },
         };
-        await fetch(uri + 'projects',
+        await fetch(uri + 'projects/' + projectId.value,
             requestOptions
         )
             .then(response => response.json())
             .then(data => {
-                // user.value = data.filter((user: { _id: string | string[]; }) => user._id === userId.value)
-                projectState.value = data.filter(((projectState: { _id: string | string[]; }) => projectState._id === projectId.value)
-                )
+                projectState.value = data
+                projectState.value.deadline = moment(data.deadline).format('YYYY-MM-DD')
+                
             })
     }
 
