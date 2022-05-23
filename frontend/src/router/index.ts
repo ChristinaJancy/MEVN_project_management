@@ -85,6 +85,15 @@ const routes: Array<RouteRecordRaw> = [
             requiresAuth: true
         }
     },
+    // templates
+    {
+        path: '/templates',
+        name: 'templates',
+        component: () => import(/* webpackChunkName: "templates" */ '../views/TemplatesView.vue'),
+        meta: {
+            requiresAuth: true
+        }
+    },
     // tasks
     {
         path: '/edit-task/:id',
