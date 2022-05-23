@@ -68,8 +68,6 @@
         </div>
         <VueMultiselect v-model="state.roles" :options="roleState.roles" :value="state.roles" :multiple="true"
             :close-on-select="false" placeholder="What roles do you have?" label="title" track-by="title"/>
-        
-
         <div>
           <button
             type="submit"
