@@ -106,7 +106,9 @@
           </Menu>
         </div>
       </div>
-      <div class="flex justify-end items-center flex-wrap pb-2 px-2">
+      <br />
+      <br>
+      <div class="absolute bottom-2 flex justify-end flex-wrap right-0">
         <div v-for="tag in project.tags" :key="tag" class="">
           <p
             class="text-sm font-medium mt-1 px-2 mr-2 py-0.5 rounded-full"
@@ -136,7 +138,6 @@
         type="button"
         class="self-center mr-4 pagination-previous button px-5 inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-1 bg-indigo-500 text-base font-medium text-white hover:bg-indigo-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:w-50 sm:text-sm"
         @click="previousPage()"
-  
       >
         <!-- Previous -->
         <ChevronLeftIcon class="h-5 w-5" aria-hidden="true" />

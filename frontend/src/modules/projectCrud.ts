@@ -52,7 +52,7 @@ const projectCrud = () => {
                 "auth-token": getCookie('token')
             },
         };
-        const numOfItems = 1;
+        const numOfItems = 2;
         const page = projectState.value.page;
 
         await fetch(uri + 'projects/page/' + page + '/' + numOfItems,
