@@ -292,6 +292,35 @@ paths:
                   newProject:
                     type: string
   
+  /projects/page/{pageNum}/{numOfItems}:
+    get:
+      summary: Get projects based on page number
+      description: Get projects based on page number. 10 projects per page.
+      security:
+        - ApiKeyAuth: []
+      parameters:
+        - name: pageNum
+          in: path
+          description: Page number
+          required: true
+          schema:
+            type: number
+        - name: numOfItems
+          in: path
+          description: Number of items per page
+          required: true
+          schema:
+            type: number
+      responses:
+        200:
+          description: Projects retrieved succesfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Project"
+
   /projects/{id}:
     get:
       summary: Get a Project by id
