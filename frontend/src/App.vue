@@ -1,6 +1,6 @@
 <template>
   <component :is="layout">
-    <router-view v-cloak />
+    <router-view />
   </component>
 </template>
 
