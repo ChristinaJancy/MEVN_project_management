@@ -292,6 +292,25 @@ paths:
                   newProject:
                     type: string
   
+  /projects/total: 
+    get:
+      summary: Get total number of projects
+      description: Get total number of projects from the database
+      security:
+        - ApiKeyAuth: []
+      responses:
+        200:
+          description: Total number of projects retrieved succesfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  total:
+                    type: string
+
   /projects/page/{pageNum}/{numOfItems}:
     get:
       summary: Get projects based on page number
