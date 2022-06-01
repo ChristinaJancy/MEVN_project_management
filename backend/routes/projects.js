@@ -14,6 +14,20 @@ router.get("/", verifyToken, (req, res) => {
         .catch(err => { res.status(500).send({ message: err.message }) })
 });
 
+// Get project by page number and number of items per page
+router.get("/page/:pageNum/:numOfItems", verifyToken, (req, res) => {
+    schema.find().limit(req.params.numOfItems).skip(req.params.numOfItems * (req.params.pageNum - 1))
+        .then(data => { res.status(200).json(data); })
+        .catch(err => { res.status(500).send({ message: err.message }) })
+});
+
+//Get total number of projects
+router.get("/total", verifyToken, (req, res) => {
+    schema.countDocuments() 
+        .then(data => { res.status(200).json(data); })
+        .catch(err => { res.status(500).send({ message: err.message }) })
+});
+
 // Get project by user id
 router.get("/user/:userId", verifyToken, (req, res) => {
     schema.find({ assigned: req.params.userId })

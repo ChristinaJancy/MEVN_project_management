@@ -22,6 +22,8 @@ const projectCrud = () => {
         tasks: [] as string[],
         projectToEdit: {} as any,
         userProjects: [] as object[] | any,
+        page: 1 as number,
+        totalPages: 1 as number,
     })
 
     const getAllProjects = async () => {
@@ -41,6 +43,33 @@ const projectCrud = () => {
             })
     }
 
+    //pagination
+    const getProjects = async () => {
+        const requestOptions = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                "auth-token": getCookie('token')
+            },
+        };
+        const numOfItems = 2;
+        const page = projectState.value.page;
+
+        await fetch(uri + 'projects/page/' + page + '/' + numOfItems,
+            requestOptions
+        )
+            .then(response => response.json())
+            .then(data => {
+                projectState.value.projects = data
+            })
+        await fetch(uri + 'projects/total',
+            requestOptions)
+            .then(response => response.json())
+            .then(data => {
+                projectState.value.totalPages = Math.ceil(data / numOfItems)
+            })
+    }
+
     const getSpecificProject = async () => {
         const requestOptions = {
             method: 'GET',
@@ -56,7 +85,7 @@ const projectCrud = () => {
             .then(data => {
                 projectState.value = data
                 projectState.value.deadline = moment(data.deadline).format('YYYY-MM-DD')
-                
+
             })
     }
 
@@ -185,7 +214,8 @@ const projectCrud = () => {
         createProject,
         deleteProject,
         updateProjectColumns,
-        getProjectsFromUser
+        getProjectsFromUser,
+        getProjects
     }
 }
 
